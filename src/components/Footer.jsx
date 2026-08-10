@@ -12,8 +12,9 @@ export default function Footer() {
         <p>Servicio técnico para celulares, tablets y relojes inteligentes, con diagnóstico claro y garantía por escrito.</p>
       </div>
       <div className="footer-contact" aria-label="Datos de contacto">
-        <strong>Contacto</strong>
-        <a href={whatsappUrl("Hola DoctorCell, necesito ayuda con mi equipo.")} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} /> WhatsApp: {contactInfo.whatsappDisplay}</a>
+        <strong>{contactInfo.businessName}</strong>
+        <span><MapPin size={16} /> {contactInfo.address}</span>
+        <a href={whatsappUrl("Hola DoctorCell Quito, necesito ayuda con mi equipo.")} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} /> WhatsApp: {contactInfo.whatsappDisplay}</a>
         <a href={`tel:${contactInfo.phoneHref}`}><Phone size={16} /> Teléfono: {contactInfo.phoneDisplay}</a>
         <a href={`mailto:${contactInfo.email}`}><Mail size={16} /> {contactInfo.email}</a>
       </div>

@@ -25,6 +25,10 @@
 @media(max-width:760px){.store-heading>div>p:last-of-type{font-size:16px}.store-cart-button{position:static;min-height:56px}.product-copy>small{font-size:12px}.product-copy h3{min-height:46px;font-size:17px}.product-price{font-size:23px}.product-copy button,.product-buy{font-size:13px}.product-flirt{display:none}.zoom-kicker{font-size:11px}.zoom-card .zoom-model{font-size:12px}.zoom-rating{font-size:12px}.zoom-card .zoom-price{font-size:34px}.zoom-benefits>span{min-height:50px;font-size:12px}.zoom-info>a{font-size:14px}.zoom-reassurance{font-size:10px}}
 
 /* Keep the playful message clean: nested spans must not inherit product badge styles */
+.store-heading h1 { margin:0; font-size:clamp(36px,5vw,68px); line-height:.98; letter-spacing:-.055em; }
+.store-heading h1 em { font-style:normal; color:var(--dc-blue); background:linear-gradient(90deg,var(--dc-blue),#7357e8); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+@media(max-width:760px){.store-heading h1 br{display:none}}
+
 .product-image .product-flirt{min-width:230px;border-color:rgba(255,255,255,.18);color:#fff;background:linear-gradient(135deg,#062b50,#174e80);box-shadow:0 16px 34px rgba(6,43,80,.3)}
 .product-image .product-flirt:after{display:none}
 .product-image .product-flirt>span{position:static;inset:auto;padding:0;border-radius:0;color:inherit;background:transparent;box-shadow:none;font-size:inherit;text-transform:none}

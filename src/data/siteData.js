@@ -22,15 +22,18 @@ import {
 export const whatsappNumber = "593983222100";
 
 export const contactInfo = {
+  businessName: "DoctorCell Quito",
+  address: "Prensa y Río Arajuno, Quito, Ecuador",
   whatsappDisplay: "+593 98 322 2100",
-  phoneDisplay: "098 322 2100",
+  phoneDisplay: "+593 98 322 2100",
   phoneHref: "+593983222100",
   email: "dc.infouio@gmail.com",
   hours: "Lunes a sábado, 09:00–18:00"
 };
 
 export const navItems = [
-  { label: "Tienda", href: "#tienda" },
+  { label: "Inicio", href: "/" },
+  { label: "Tienda", href: "/tienda" },
   { label: "Servicios", href: "#servicios" },
   { label: "Cotizar", href: "#cotizador" },
   { label: "Agendar", href: "#agendar" },
@@ -64,7 +67,9 @@ export const services = [
     text: "Pantallas compatibles y originales según disponibilidad, instalación técnica y prueba final.",
     time: "Tiempo estimado: confirmar por modelo",
     price: "Desde $35",
-    problem: "Pantalla rota"
+    problem: "Pantalla rota",
+    guideHref: "/guias/cambio-pantalla-iphone-quito/",
+    guideLabel: "Guía de pantallas"
   },
   {
     icon: Zap,
@@ -72,7 +77,9 @@ export const services = [
     text: "Reemplazo de baterías, pines de carga, diagnóstico de consumo y carga rápida.",
     time: "Tiempo estimado: confirmar por modelo",
     price: "Desde $20",
-    problem: "Batería"
+    problem: "Batería",
+    guideHref: "/guias/cambio-bateria-celular-quito/",
+    guideLabel: "Guía de batería"
   },
   {
     icon: Camera,
@@ -80,15 +87,19 @@ export const services = [
     text: "Revisión de cámaras, parlantes, micrófonos, sensores y conectores internos.",
     time: "Tiempo estimado después del diagnóstico",
     price: "Desde $25",
-    problem: "Cámara o audio"
+    problem: "Cámara o audio",
+    guideHref: "/guias/reparacion-xiaomi-quito/",
+    guideLabel: "Guía de diagnóstico"
   },
   {
     icon: MonitorSmartphone,
     title: "Software y desbloqueo",
     text: "Restauración, optimización, actualización y desbloqueo legítimo del equipo.",
     time: "Tiempo estimado según el proceso",
-    price: "Desde $20",
-    problem: "Software"
+    price: "Desde $15",
+    problem: "Software",
+    guideHref: "/guias/reparacion-xiaomi-quito/",
+    guideLabel: "Guía de software"
   },
   {
     icon: Wrench,
@@ -96,7 +107,9 @@ export const services = [
     text: "Intervenciones avanzadas para fallas de placa, humedad y componentes críticos.",
     time: "Tiempo estimado después del diagnóstico",
     price: "Desde $30",
-    problem: "Otro problema"
+    problem: "Otro problema",
+    guideHref: "/guias/celular-mojado-que-hacer/",
+    guideLabel: "Guía sobre humedad"
   },
   {
     icon: TabletSmartphone,
@@ -104,7 +117,9 @@ export const services = [
     text: "Soporte técnico para iPad, tablets Android, iWatch y relojes inteligentes.",
     time: "Tiempo estimado: confirmar por modelo",
     price: "Desde $30",
-    problem: "Tablet / iWatch"
+    problem: "Tablet / iWatch",
+    guideHref: "/guias/celular-no-carga-quito/",
+    guideLabel: "Guía de diagnóstico"
   }
 ];
 
@@ -150,12 +165,12 @@ export const testimonials = [
   {
     name: "Jhoana Colina",
     text: "La atención fue excelente, muy amables y profesionales. Los recomiendo.",
-    branch: "Cliente de DoctorCell"
+    branch: "Cliente de DoctorCell Quito"
   },
   {
     name: "Juan Morejon",
     text: "Mi pantalla quedó impecable, con garantía y atención muy amable.",
-    branch: "Cliente de DoctorCell"
+    branch: "Cliente de DoctorCell Quito"
   }
 ];
 

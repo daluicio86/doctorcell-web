@@ -28,11 +28,11 @@ export default function Hero() {
           qué le pasa a tu equipo y recibe una cotización sin compromiso.
         </p>
 
-        <div className="hero-price"><strong>Desde $20</strong><span>según servicio y modelo</span></div>
+        <div className="hero-price"><strong>Desde $15</strong><span>en servicios seleccionados; precio referencial según modelo, diagnóstico y repuesto</span></div>
 
         <div className="hero-actions">
           <ButtonLink
-            href={whatsappUrl("Hola DoctorCell, quiero un diagnóstico gratis para mi equipo.")}
+            href={whatsappUrl("Hola DoctorCell Quito, quiero un diagnóstico gratis para mi equipo.")}
             icon={MessageCircle}
             target="_blank"
             rel="noopener noreferrer"
@@ -67,12 +67,12 @@ export default function Hero() {
         </a>
       </div>
 
-      <div className="hero-media" aria-label="Diagnóstico DoctorCell por WhatsApp">
+      <div className="hero-media" aria-label="Diagnóstico DoctorCell Quito por WhatsApp">
         <div className="hero-glow" />
         <div className="diagnosis-card">
           <div className="diagnosis-head">
             <span className="doctor-avatar"><Wrench size={23} /></span>
-            <span><strong>DoctorCell</strong><small>En línea</small></span>
+            <span><strong>DoctorCell Quito</strong><small>En línea</small></span>
             <ShieldCheck size={24} />
           </div>
           <div className="chat-bubble chat-in">¡Hola! 👋 ¿Qué equipo necesitas reparar?</div>
@@ -82,7 +82,7 @@ export default function Hero() {
           </div>
           <a
             className="mini-whatsapp"
-            href={whatsappUrl("Hola DoctorCell, quiero un diagnóstico gratis para mi equipo.")}
+            href={whatsappUrl("Hola DoctorCell Quito, quiero un diagnóstico gratis para mi equipo.")}
             target="_blank"
             rel="noopener noreferrer"
           >

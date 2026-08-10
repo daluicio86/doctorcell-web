@@ -7,6 +7,7 @@ import Brand from "./Brand.jsx";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => setIsOpen(false);
+  const isStorePage = window.location.pathname.replace(/\/+$/, "") === "/tienda";
 
   return (
     <header className="site-header">
@@ -32,13 +33,13 @@ export default function Header() {
         </button>
         <nav className={`site-nav ${isOpen ? "is-open" : ""}`} id="site-nav">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={closeMenu}>
+            <a key={item.href} href={isStorePage && item.href.startsWith("#") ? `/${item.href}` : item.href} onClick={closeMenu}>
               {item.label}
             </a>
           ))}
           <a
             className="nav-cta"
-            href={whatsappUrl("Hola DoctorCell, quiero cotizar una reparación.")}
+            href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")}
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}

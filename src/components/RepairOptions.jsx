@@ -15,7 +15,7 @@ const options = [
       "Garantía por escrito según el repuesto"
     ],
     cta: "Cotizar compatible",
-    message: "Hola DoctorCell, quiero cotizar una reparación con repuesto compatible. ¿Qué opciones tienen para mi modelo?"
+    message: "Hola DoctorCell Quito, quiero cotizar una reparación con repuesto compatible. ¿Qué opciones tienen para mi modelo?"
   },
   {
     name: "Opción premium",
@@ -28,7 +28,7 @@ const options = [
       "Cobertura y condiciones informadas antes de reparar"
     ],
     cta: "Comparar opción premium",
-    message: "Hola DoctorCell, quiero comparar la opción premium u original para mi reparación. ¿Cuál recomiendan para mi modelo?",
+    message: "Hola DoctorCell Quito, quiero comparar la opción premium u original para mi reparación. ¿Cuál recomiendan para mi modelo?",
     featured: true
   }
 ];
@@ -65,4 +65,3 @@ export default function RepairOptions() {
     </section>
   );
 }
-

@@ -6,7 +6,7 @@ export default function FloatingWhatsApp() {
   return (
     <a
       className="floating-whatsapp"
-      href={whatsappUrl("Hola DoctorCell, quiero cotizar una reparación.")}
+      href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"

@@ -31,7 +31,7 @@ export default function BeforeAfter() {
       </div>
       <div className="case-cta">
         <span><ShieldCheck size={23} /> ¿Tu equipo tiene un problema parecido?</span>
-        <a href={whatsappUrl("Hola DoctorCell, vi sus casos reales y quiero cotizar mi reparación.")} target="_blank" rel="noopener noreferrer">
+        <a href={whatsappUrl("Hola DoctorCell Quito, vi sus casos reales y quiero cotizar mi reparación.")} target="_blank" rel="noopener noreferrer">
           <MessageCircle size={18} /> Cotizar mi reparación
         </a>
       </div>

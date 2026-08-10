@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile as rawWriteFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { loadEnv } from "vite";
 
@@ -7,6 +7,15 @@ const buildEnv = loadEnv(process.env.NODE_ENV || "production", process.cwd(), "V
 const ga4Id = /^G-[A-Z0-9]+$/.test(buildEnv.VITE_GA4_ID || "") ? buildEnv.VITE_GA4_ID : "";
 const metaPixelId = /^\d{10,20}$/.test(buildEnv.VITE_META_PIXEL_ID || "") ? buildEnv.VITE_META_PIXEL_ID : "";
 const wa = (text) => `https://wa.me/593983222100?text=${encodeURIComponent(text)}`;
+const writeFile = async (path, data) => {
+  try {
+    await rawWriteFile(path, data);
+  } catch (error) {
+    if (error?.code !== "EPERM") throw error;
+    const current = await readFile(path, "utf8");
+    if (current !== data) throw error;
+  }
+};
 const pages = [
   {
     slug: "cambio-pantalla-iphone-quito", title: "Cambio de pantalla iPhone en Quito",
@@ -74,7 +83,10 @@ const pages = [
 ];
 
 const esc = (s) => s.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-const withFavicon = (html) => html.replace("<head>", '<head><link rel="icon" href="/favicon.ico" sizes="any">');
+const withFavicon = (html) => html
+  .replace("<head>", '<head><link rel="icon" href="/favicon.ico" sizes="any">')
+  .replaceAll("DoctorCell", "DoctorCell Quito")
+  .replaceAll("DoctorCell Quito · Quito", "DoctorCell Quito");
 const css = `:root{--blue:#0b69ff;--ink:#101828;--muted:#58677a;--line:#dfe5ec}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#f8fafc;font-family:Inter,system-ui,sans-serif;line-height:1.7}a{color:inherit;text-decoration:none}.top,.footer{color:#fff;background:#062b50}.nav,.wrap{width:min(1080px,calc(100% - 36px));margin:auto}.nav{display:flex;align-items:center;gap:24px;min-height:92px}.logo{display:flex;align-items:center;margin-right:auto;padding:4px 10px;border-radius:12px;background:#fff}.logo img{display:block;width:210px;height:72px;object-fit:contain}.nav-links{display:flex;align-items:center;gap:20px;font-size:14px;font-weight:800}.nav-cta,.primary{padding:11px 15px;border-radius:9px;background:#86cf45;color:#14280c;font-weight:900}.hero{padding:70px 0;color:#fff;background:linear-gradient(135deg,#062b50,#0d64a4)}.crumbs{color:#d8e9f8}.crumbs a{text-decoration:underline}.hero h1{margin:18px 0;font-size:clamp(38px,7vw,66px);line-height:1.03}.hero p{max-width:760px;color:#e3f0fb;font-size:19px}.content{padding:56px 0}.content article,.card{padding:clamp(24px,5vw,52px);border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 14px 40px #10182810}.content h2{margin:34px 0 8px;line-height:1.2}.content h2:first-child{margin-top:0}.notice{margin:30px 0;padding:18px;border-left:4px solid #17b26a;background:#ecfdf3}.faq{margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}details{padding:15px 0;border-bottom:1px solid var(--line)}summary{cursor:pointer;font-weight:900}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.actions a{padding:12px 16px;border:1px solid var(--line);border-radius:9px;font-weight:900}.actions .primary{color:#fff;background:var(--blue)}.related{padding:0 0 60px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid a{padding:18px;border:1px solid var(--line);border-radius:10px;background:#fff;font-weight:800}.index{grid-template-columns:repeat(2,1fr)}.index a{display:block}.index strong,.index span{display:block}.index span{margin-top:5px;color:var(--muted);font-weight:400}.footer{padding:32px 0}.footer .wrap{display:flex;justify-content:space-between}.seo-consent{position:fixed;right:16px;bottom:16px;z-index:20;width:min(500px,calc(100vw - 32px));padding:20px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 24px 70px #041d3745}.seo-consent strong{display:block}.seo-consent p{margin:5px 0 14px;color:var(--muted);font-size:13px}.seo-consent div{display:flex;justify-content:flex-end;gap:8px}.seo-consent button{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-weight:800;cursor:pointer}.seo-consent button:last-child{color:#fff;border-color:var(--blue);background:var(--blue)}@media(max-width:760px){.grid,.index{grid-template-columns:1fr}.nav{min-height:76px}.logo img{width:150px;height:58px}.nav-links{display:none}.nav-cta{font-size:13px}.hero{padding:48px 0}.footer .wrap{flex-direction:column}}`;
 
 function analyticsScript() {
@@ -88,7 +100,15 @@ await mkdir(resolve("public/guias"), { recursive: true });
 await writeFile(resolve("public/guias/seo.css"), css);
 for (const page of pages) {
   const faqSchema = { "@context": "https://schema.org", "@graph": [{ "@type": "Article", headline: page.title, description: page.description, inLanguage: "es-EC", mainEntityOfPage: `${origin}/guias/${page.slug}/`, author: { "@type": "Organization", name: "DoctorCell" } }, { "@type": "FAQPage", mainEntity: page.faqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) }] };
-  const related = pages.filter((x) => x.slug !== page.slug).slice(0, 3).map((x) => `<a href="/guias/${x.slug}/">${esc(x.title)}</a>`).join("");
+  const relatedBySlug = {
+    "cambio-pantalla-iphone-quito": ["cambio-pantalla-samsung-quito", "cambio-bateria-celular-quito", "celular-mojado-que-hacer"],
+    "cambio-pantalla-samsung-quito": ["cambio-pantalla-iphone-quito", "reparacion-xiaomi-quito", "celular-mojado-que-hacer"],
+    "celular-mojado-que-hacer": ["celular-no-carga-quito", "cambio-bateria-celular-quito", "reparacion-xiaomi-quito"],
+    "cambio-bateria-celular-quito": ["celular-no-carga-quito", "celular-mojado-que-hacer", "reparacion-xiaomi-quito"],
+    "celular-no-carga-quito": ["cambio-bateria-celular-quito", "celular-mojado-que-hacer", "reparacion-xiaomi-quito"],
+    "reparacion-xiaomi-quito": ["cambio-pantalla-samsung-quito", "cambio-bateria-celular-quito", "celular-no-carga-quito"]
+  };
+  const related = relatedBySlug[page.slug].map((slug) => pages.find((x) => x.slug === slug)).map((x) => `<a href="/guias/${x.slug}/">${esc(x.title)}</a>`).join("");
   const body = `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · <a href="/guias/">Guías</a></div><h1>${esc(page.title)}</h1><p>${esc(page.intro)}</p></div></header><section class="content"><div class="wrap"><article>${page.sections.map(([h, t]) => `<h2>${esc(h)}</h2><p>${esc(t)}</p>`).join("")}<aside class="notice"><strong>Importante:</strong> el precio, repuesto y tiempo se confirman al identificar el modelo y revisar el equipo.</aside><section class="faq"><h2>Preguntas frecuentes</h2>${page.faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}</section><div class="actions"><a class="primary" href="${wa(`Hola DoctorCell, leí la guía “${page.title}” y quiero consultar mi equipo.`)}">Consultar mi caso</a><a href="/#sucursales">Ver sucursales</a></div></article></div></section><section class="related"><div class="wrap"><h2>También puede ayudarte</h2><div class="grid">${related}</div></div></section></main>`;
   const dir = resolve("public/guias", page.slug); await mkdir(dir, { recursive: true });
   await writeFile(resolve(dir, "index.html"), withFavicon(head(page, body, JSON.stringify(faqSchema).replaceAll("<", "\\u003c"))));
@@ -96,7 +116,7 @@ for (const page of pages) {
 const cards = pages.map((p) => `<a href="/guias/${p.slug}/"><strong>${esc(p.title)}</strong><span>${esc(p.description)}</span></a>`).join("");
 const indexPage = { title: "Guías de reparación de celulares", description: "Guías sobre pantallas, baterías, carga, humedad y reparación de celulares en Quito." };
 await writeFile(resolve("public/guias/index.html"), withFavicon(head(indexPage, `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · Guías</div><h1>Guías para cuidar y reparar tu celular</h1><p>Información práctica para actuar ante una falla y llegar mejor preparado al diagnóstico.</p></div></header><section class="content"><div class="wrap"><div class="grid index">${cards}</div></div></section></main>`)));
-const paths = ["/", "/guias/", ...pages.map((p) => `/guias/${p.slug}/`)];
+const paths = ["/", "/tienda", "/guias/", ...pages.map((p) => `/guias/${p.slug}/`)];
 await writeFile(resolve("public/sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map((p) => `<url><loc>${origin}${p}</loc></url>`).join("")}</urlset>`);
 await writeFile(resolve("public/robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 console.log(`Generadas ${pages.length} páginas SEO.`);

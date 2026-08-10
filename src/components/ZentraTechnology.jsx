@@ -27,7 +27,7 @@ export default function ZentraTechnology() {
         <p className="eyebrow">Tecnología detrás de cada reparación</p>
         <h2 id="zentra-title">Tu equipo en buenas manos. Y cada detalle, bajo control.</h2>
         <p className="zentra-lead">
-          En DoctorCell utilizamos Zentra para organizar cada servicio y acompañar el trabajo
+          En DoctorCell Quito utilizamos Zentra para organizar cada servicio y acompañar el trabajo
           de nuestros técnicos, desde el ingreso del equipo hasta su entrega.
         </p>
 

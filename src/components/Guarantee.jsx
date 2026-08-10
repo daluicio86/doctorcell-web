@@ -13,13 +13,13 @@ export default function Guarantee() {
   return (
     <section className="guarantee" id="garantia">
       <div className="guarantee-content">
-        <p className="eyebrow">Garantía DoctorCell</p>
+        <p className="eyebrow">Garantía DoctorCell Quito</p>
         <h2>Condiciones claras, antes de autorizar.</h2>
         <p>
           Antes de reparar recibirás el diagnóstico, el precio, el tiempo estimado y el plazo de garantía.
           La cobertura depende del servicio y del repuesto elegido y queda registrada en tu orden.
         </p>
-        <a className="guarantee-link" href={whatsappUrl("Hola DoctorCell, quiero conocer la garantía para mi reparación.")} target="_blank" rel="noopener noreferrer">
+        <a className="guarantee-link" href={whatsappUrl("Hola DoctorCell Quito, quiero conocer la garantía para mi reparación.")} target="_blank" rel="noopener noreferrer">
           <MessageCircle size={18} /> Consultar la garantía de mi equipo
         </a>
       </div>

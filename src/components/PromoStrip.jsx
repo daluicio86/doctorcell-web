@@ -7,7 +7,7 @@ export default function PromoStrip() {
       <div className="promo-icon promo-zentra-mark" aria-hidden="true">Z</div>
       <div>
         <span><Sparkles size={14} /> Tecnología detrás de cada reparación</span>
-        <strong>DoctorCell potencia su servicio con Zentra</strong>
+        <strong>DoctorCell Quito potencia su servicio con Zentra</strong>
         <small>Gestión inteligente desarrollada por Blue Window Studio · BWS.</small>
       </div>
       <a

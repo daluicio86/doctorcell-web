@@ -13,7 +13,7 @@ import "../styles/chatbot.css";
 const STORAGE_KEY = "doctorcell-diagnostic-v2";
 const initialAnswers = { device: "", brand: "", model: "", problem: "", detail: "", service: "", location: "", schedule: "", contact: "", consent: false };
 const welcome = [
-  { id: 1, from: "bot", text: "¡Hola! Soy el asistente de DoctorCell. Haré un diagnóstico preliminar de tu equipo." },
+  { id: 1, from: "bot", text: "¡Hola! Soy el asistente de DoctorCell Quito. Haré un diagnóstico preliminar de tu equipo." },
   { id: 2, from: "bot", text: "¿Qué tipo de equipo necesitas revisar?" }
 ];
 const flow = ["device", "brand", "model", "problem", "detail", "diagnosis", "service", "location", "schedule", "contact", "consent", "complete"];
@@ -154,14 +154,14 @@ export default function Chatbot() {
     add({ from: "user", text: `${files.length} foto(s) adjunta(s) al diagnóstico.` }); event.target.value = "";
   };
 
-  const summary = `Hola DoctorCell. Caso: ${answers.caseId || "por crear"}. Equipo: ${answers.device} ${answers.brand} ${answers.model}. Problema: ${diagnosis.problem}. Detalle: ${answers.detail}. Diagnóstico preliminar (${diagnosis.confidence}%): ${diagnosis.service}. Estimado: ${diagnosis.price}, ${diagnosis.time}. Atención: ${answers.location || "por definir"}. Fecha: ${answers.schedule || "por definir"}. Contacto: ${answers.contact || "por definir"}.`;
+  const summary = `Hola DoctorCell Quito. Caso: ${answers.caseId || "por crear"}. Equipo: ${answers.device} ${answers.brand} ${answers.model}. Problema: ${diagnosis.problem}. Detalle: ${answers.detail}. Diagnóstico preliminar (${diagnosis.confidence}%): ${diagnosis.service}. Estimado: ${diagnosis.price}, ${diagnosis.time}. Atención: ${answers.location || "por definir"}. Fecha: ${answers.schedule || "por definir"}. Contacto: ${answers.contact || "por definir"}.`;
   const progress = `${Math.max(8, Math.round(((flow.indexOf(step) + 1) / flow.length) * 100))}%`;
 
   return <>
     <button className="chatbot-launcher" type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="doctorcell-chatbot"><Sparkles size={22} /><span>Diagnosticar mi equipo</span></button>
     {open && <aside className="chatbot-panel" id="doctorcell-chatbot" aria-label="Asistente de diagnóstico">
       <header className="chatbot-header">
-        <span className="chatbot-avatar"><Bot size={22} /></span><div><strong>Asistente DoctorCell</strong><small><i /> En línea · diagnóstico guiado</small></div>
+        <span className="chatbot-avatar"><Bot size={22} /></span><div><strong>Asistente DoctorCell Quito</strong><small><i /> En línea · diagnóstico guiado</small></div>
         <button type="button" onClick={() => setOpen(false)} aria-label="Cerrar y conservar conversación"><X size={21} /></button>
       </header>
       <div className="chatbot-toolbar">

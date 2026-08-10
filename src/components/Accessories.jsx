@@ -36,7 +36,7 @@ export default function Accessories() {
             <div>
               <h3>{title}</h3>
               <p>{text}</p>
-              <a href={whatsappUrl(`Hola DoctorCell, quiero consultar disponibilidad de ${title}.`)} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl(`Hola DoctorCell Quito, quiero consultar disponibilidad de ${title}.`)} target="_blank" rel="noopener noreferrer">
                 Consultar disponibilidad
               </a>
             </div>
@@ -46,7 +46,7 @@ export default function Accessories() {
       {filteredAccessories.length === 0 && (
         <div className="empty-state">
           <strong>No encontramos ese accesorio en el catálogo.</strong>
-          <a href={whatsappUrl(`Hola DoctorCell, busco este accesorio: ${query}. ¿Tienen disponibilidad?`)} target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
+          <a href={whatsappUrl(`Hola DoctorCell Quito, busco este accesorio: ${query}. ¿Tienen disponibilidad?`)} target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
         </div>
       )}
     </section>

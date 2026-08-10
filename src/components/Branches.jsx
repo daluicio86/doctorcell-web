@@ -8,7 +8,7 @@ export default function Branches() {
   const [activeBranch, setActiveBranch] = useState(0);
   const selected = branches[activeBranch];
   const mapSrc = useMemo(
-    () => `https://www.google.com/maps?q=${encodeURIComponent(`DoctorCell ${selected.address} Quito Ecuador`)}&output=embed`,
+    () => `https://www.google.com/maps?q=${encodeURIComponent(`DoctorCell Quito ${selected.address} Quito Ecuador`)}&output=embed`,
     [selected.address]
   );
 
@@ -30,7 +30,7 @@ export default function Branches() {
           <span>Sucursal seleccionada</span>
           <strong>{selected.name}</strong>
           <p>{selected.address} · {selected.reference}</p>
-          <a href={mapsUrl(`DoctorCell ${selected.address} Quito Ecuador`)} target="_blank" rel="noopener noreferrer">
+          <a href={mapsUrl(`DoctorCell Quito ${selected.address} Quito Ecuador`)} target="_blank" rel="noopener noreferrer">
             <Navigation size={16} /> Abrir ruta en Google Maps
           </a>
         </div>
@@ -45,11 +45,11 @@ export default function Branches() {
             <p className="branch-meta"><Landmark size={15} /> {reference}</p>
             <p className="branch-meta"><Clock3 size={15} /> {hours}</p>
             <div className="branch-actions">
-              <a href={mapsUrl(`DoctorCell ${address} Quito Ecuador`)} target="_blank" rel="noopener noreferrer">
+              <a href={mapsUrl(`DoctorCell Quito ${address} Quito Ecuador`)} target="_blank" rel="noopener noreferrer">
                 <Navigation size={15} />
                 Cómo llegar
               </a>
-              <a href={whatsappUrl(`Hola DoctorCell, quiero atención en ${name} (${address}).`)} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl(`Hola DoctorCell Quito, quiero atención en ${name} (${address}).`)} target="_blank" rel="noopener noreferrer">
                 <MessageCircle size={15} />
                 WhatsApp
               </a>

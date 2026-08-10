@@ -16,7 +16,7 @@ export default function QuoteFinder() {
   const isReady = brand && model.trim() && problem && branch;
 
   const message = [
-    "Hola DoctorCell, quiero cotizar una reparación.",
+    "Hola DoctorCell Quito, quiero cotizar una reparación.",
     `Equipo: ${brand} ${model.trim()}.`,
     `Problema: ${problem}.`,
     `Sucursal preferida: ${branch}.`,

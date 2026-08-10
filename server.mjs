@@ -57,7 +57,7 @@ createServer((request, response) => {
   if (eventMatch) return void handleLeadEvent(request, response, eventMatch[1]);
   if (request.url?.startsWith("/api/leads")) return void handleLead(request, response);
   return void serveStatic(request, response);
-}).listen(PORT, "0.0.0.0", () => console.log(`DoctorCell listo en http://localhost:${PORT}`));
+}).listen(PORT, "0.0.0.0", () => console.log(`DoctorCell Quito listo en http://localhost:${PORT}`));
 
 const followupTimer = setInterval(() => dispatchDueFollowups().catch((error) => console.error("Error en seguimientos:", error.message)), 60_000);
 followupTimer.unref();

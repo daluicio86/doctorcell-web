@@ -19,7 +19,7 @@ export default function Diagnostic() {
 
   const handleProblem = (problem) => {
     const detail = query.trim() ? ` Búsqueda: ${query.trim()}.` : "";
-    const message = `Hola DoctorCell, quiero cotizar una reparación. Problema: ${problem}.${detail} Mi equipo es:`;
+    const message = `Hola DoctorCell Quito, quiero cotizar una reparación. Problema: ${problem}.${detail} Mi equipo es:`;
     window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
   };
 
@@ -60,7 +60,7 @@ export default function Diagnostic() {
       {filteredDiagnostics.length === 0 && (
         <div className="diagnostic-empty">
           <p>No encontramos una coincidencia exacta. Cuéntanos la falla y te orientamos.</p>
-          <a href={whatsappUrl(`Hola DoctorCell, busco una reparación para: ${query}. ¿Me ayudan con una cotización?`)} target="_blank" rel="noopener noreferrer">
+          <a href={whatsappUrl(`Hola DoctorCell Quito, busco una reparación para: ${query}. ¿Me ayudan con una cotización?`)} target="_blank" rel="noopener noreferrer">
             <MessageCircle size={17} /> Consultar por WhatsApp
           </a>
         </div>

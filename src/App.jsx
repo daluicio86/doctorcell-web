@@ -16,30 +16,47 @@ import RepairTracking from "./components/RepairTracking.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Footer from "./components/Footer.jsx";
 import Chatbot from "./components/Chatbot.jsx";
-import FloatingWhatsApp from "./components/FloatingWhatsApp.jsx";
 import AppointmentBooking from "./components/AppointmentBooking.jsx";
 import Gallery from "./components/Gallery.jsx";
 import Faq from "./components/Faq.jsx";
 import SeoGuides from "./components/SeoGuides.jsx";
-import RepairOptions from "./components/RepairOptions.jsx";
 import AnalyticsConsent from "./components/AnalyticsConsent.jsx";
-import Store from "./components/Store.jsx";
 import ZentraTechnology from "./components/ZentraTechnology.jsx";
+import Store from "./components/Store.jsx";
+
+function StorePage() {
+  React.useEffect(() => {
+    const previousTitle = document.title;
+    document.title = "Tienda de accesorios | DoctorCell Quito";
+    return () => { document.title = previousTitle; };
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <main id="tienda"><Store standalone /></main>
+      <AnalyticsConsent />
+      <Footer />
+    </>
+  );
+}
 
 export default function App() {
+  const isStorePage = window.location.pathname.replace(/\/+$/, "") === "/tienda";
+  if (isStorePage) return <StorePage />;
+
   return (
     <>
       <Header />
       <main id="inicio">
         <Hero />
         <PromoStrip />
-        <Store />
         <QuoteFinder />
         <BrandsStrip />
         <Intro />
         <Diagnostic />
         <Services />
-        <RepairOptions />
+        <Faq />
         <Guarantee />
         <ZentraTechnology />
         <BeforeAfter />
@@ -48,13 +65,11 @@ export default function App() {
         <Gallery />
         <Branches />
         <AppointmentBooking />
-        <Faq />
         <SeoGuides />
         <RepairTracking />
         <FinalCta />
       </main>
       <Chatbot />
-      <FloatingWhatsApp />
       <AnalyticsConsent />
       <Footer />
     </>

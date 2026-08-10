@@ -11,7 +11,7 @@ export default function AppointmentBooking() {
   const today = new Date().toISOString().slice(0, 10);
   const ready = Object.values(form).every((value) => value.trim());
   const message = useMemo(() => [
-    "Hola DoctorCell, quiero agendar una cita.",
+    "Hola DoctorCell Quito, quiero agendar una cita.",
     `Sucursal: ${form.branch}.`, `Fecha: ${form.date}.`, `Hora: ${form.time}.`,
     `Cliente: ${form.name}.`, `Teléfono: ${form.phone}.`, `Falla: ${form.issue}.`,
     "Por favor confirmen la disponibilidad."
