@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/generateSeoPages.mjs && vite --host 127.0.0.1 --port 5173",
-    "build": "node scripts/generateSeoPages.mjs && vite build",
+    "build": "node scripts/generateSeoPages.mjs && vite build && node scripts/generateStaticRoutes.mjs",
+    "release": "npm run build && node scripts/packageDist.mjs",
     "seo:generate": "node scripts/generateSeoPages.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
     "start": "node server.mjs"

@@ -14,6 +14,8 @@ export default function PromoStrip() {
         href="https://www.bluewindowstudio.com/planes-y-precios"
         target="_blank"
         rel="noopener noreferrer"
+        data-analytics-partner="zentra_blue_window_studio"
+        data-analytics-placement="promo_strip"
       >
         Conocer planes de Zentra <ArrowRight size={17} />
       </a>

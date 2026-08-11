@@ -55,6 +55,8 @@ export default function Hero() {
           href="https://www.bluewindowstudio.com/"
           target="_blank"
           rel="noopener noreferrer"
+          data-analytics-partner="zentra_blue_window_studio"
+          data-analytics-placement="hero_mobile_powered"
           aria-label="Conocer Zentra y Blue Window Studio"
         >
           <span className="hero-mobile-powered-mark" aria-hidden="true">Z</span>
@@ -93,6 +95,8 @@ export default function Hero() {
             href="https://www.bluewindowstudio.com/"
             target="_blank"
             rel="noopener noreferrer"
+            data-analytics-partner="zentra_blue_window_studio"
+            data-analytics-placement="hero_diagnosis_card"
             aria-label="Conocer Blue Window Studio, creador de Zentra"
           >
             <span className="zentra-powered-mark" aria-hidden="true">Z</span>

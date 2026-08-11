@@ -21,7 +21,16 @@ export default function AnalyticsConsent() {
       const link = event.target.closest("a");
       if (!link) return;
       const href = link.getAttribute("href") || "";
-      if (href.includes("wa.me")) trackEvent("whatsapp_click", { link_text: link.innerText.trim().slice(0, 80) }, "Contact");
+      const outboundPartner = link.dataset.analyticsPartner;
+      if (outboundPartner) {
+        trackEvent("partner_outbound_click", {
+          partner: outboundPartner,
+          placement: link.dataset.analyticsPlacement || "unknown",
+          destination: link.href,
+          link_text: link.innerText.trim().slice(0, 80)
+        });
+      }
+      else if (href.includes("wa.me")) trackEvent("whatsapp_click", { link_text: link.innerText.trim().slice(0, 80) }, "Contact");
       else if (href.startsWith("tel:")) trackEvent("phone_click", {}, "Contact");
       else if (href.startsWith("mailto:")) trackEvent("email_click", {}, "Contact");
       else if (href.includes("/guias/")) trackEvent("guide_open", { destination: href });
@@ -48,4 +57,3 @@ export default function AnalyticsConsent() {
     </aside>
   );
 }
-
