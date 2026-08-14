@@ -26,7 +26,11 @@ export default function Diagnostic() {
   return (
     <section className="section diagnostic" id="diagnostico">
       <SectionHeading eyebrow="Diagnóstico rápido" title="¿Qué le pasa a tu equipo?">
+<<<<<<< HEAD
         Busca por modelo o falla. Tenemos servicios seleccionados desde $20.
+=======
+        Busca por modelo o falla. Te orientamos según el equipo y la revisión necesaria.
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
       </SectionHeading>
       <div className="problem-search">
         <div className="problem-search-field">
@@ -48,12 +52,19 @@ export default function Diagnostic() {
         </div>
       </div>
       <div className="diagnostic-grid">
+<<<<<<< HEAD
         {filteredDiagnostics.map(({ icon: Icon, title, text, startingPrice }) => (
+=======
+        {filteredDiagnostics.map(({ icon: Icon, title, text }) => (
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
           <button className="diagnostic-card" type="button" key={title} onClick={() => handleProblem(title)}>
             <span><Icon size={22} /></span>
             <strong>{title}</strong>
             <small>{text}</small>
+<<<<<<< HEAD
             <b className="diagnostic-price">Desde ${startingPrice}</b>
+=======
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
           </button>
         ))}
       </div>
@@ -65,7 +76,10 @@ export default function Diagnostic() {
           </a>
         </div>
       )}
+<<<<<<< HEAD
       <p className="price-disclaimer">* Valores referenciales. El precio final depende del modelo, repuesto y diagnóstico.</p>
+=======
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
     </section>
   );
 }

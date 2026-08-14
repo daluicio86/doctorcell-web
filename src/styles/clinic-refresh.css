@@ -1,0 +1,88 @@
+/* DoctorCell clinic refresh — green leads, navy supports. */
+:root {
+  --clinic-green: #67bd32;
+  --clinic-green-dark: #367f27;
+  --clinic-navy: #062f3d;
+  --clinic-warm: #fbfaf6;
+}
+
+.header-main { max-width: 1760px; min-height: 68px; }
+.header-main .brand { transform: scale(.82); transform-origin: left center; }
+.site-nav a:hover { color: var(--clinic-green-dark); background: #f0f8eb; }
+.site-nav .nav-store { background: linear-gradient(135deg,#397f2c,#70c83b); }
+.site-nav .nav-cta { background: var(--clinic-navy); }
+
+.hero.hero-conversion {
+  min-height: 650px;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(124,202,66,.2),transparent 30%),
+    linear-gradient(120deg,#052f29 0%,#0b4939 54%,#062f3d 100%);
+}
+.hero-proof-points { display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:28px; }
+.hero-proof-points span { display:inline-flex; align-items:center; gap:7px; color:#eaf8e5; font-size:13px; font-weight:850; }
+.hero-proof-points svg { color:#9ee868; }
+.hero-glow { background:rgba(103,189,50,.2); }
+.diagnosis-card { border-color:rgba(121,211,70,.24); }
+
+.quote-form { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.quote-file { position:relative; display:flex !important; align-items:center; gap:9px; min-height:50px; margin:0 !important; padding:0 14px; overflow:hidden; border:1px dashed #a8c89a; border-radius:9px; color:#315d2b !important; background:#f4faef; cursor:pointer; }
+.quote-file input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+.quote-form label:nth-of-type(5) { grid-column:1/-1; }
+.quote-route span { color:#2f6f28; background:#eff8e9; }
+
+.repair-evidence { position:relative; min-height:150px; margin:0 0 18px; overflow:hidden; border-radius:16px; color:var(--clinic-green-dark); background:linear-gradient(145deg,#f5fbf1,#e9f5e4); }
+.repair-evidence img { display:block; width:100%; height:150px; object-fit:cover; }
+.repair-evidence figcaption { position:absolute; right:9px; bottom:9px; padding:5px 8px; border-radius:999px; color:#fff; background:rgba(6,47,61,.78); backdrop-filter:blur(6px); font-size:9px; font-weight:850; letter-spacing:.04em; text-transform:uppercase; }
+.case-evidence-note { background:linear-gradient(105deg,#062f3d,#0d5540); }
+.trust-process { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.trust-process article { display:grid; grid-template-columns:auto 1fr; gap:12px; padding:17px; border:1px solid rgba(103,189,50,.22); border-radius:14px; background:rgba(255,255,255,.08); }
+.trust-process article svg { color:#9ee868; }
+.trust-process article strong,.trust-process article p { display:block; margin:0; }
+.trust-process article p { margin-top:4px; color:#d4e3dc; font-size:13px; line-height:1.55; }
+
+.utility-page { min-height:66vh; padding-top:20px; background:linear-gradient(135deg,#f4f9ef,#fff 56%,#f1f6f4); }
+.utility-page > .section { border-radius:24px; }
+.branch-profile-link { margin-top:10px !important; color:var(--clinic-green-dark) !important; border:1px solid #bcd9ae; background:#fff !important; }
+.branch-actions { display:grid; grid-template-columns:1fr 1fr; }
+.branch-detail { display:grid; grid-template-columns:minmax(0,.85fr) minmax(420px,1.15fr); gap:clamp(32px,6vw,80px); align-items:center; width:min(1440px,calc(100% - 40px)); margin:0 auto; padding:clamp(58px,8vw,108px) 0; }
+.back-link,.branch-call { display:inline-flex; align-items:center; gap:8px; color:var(--clinic-green-dark); font-weight:850; }
+.branch-detail h1 { margin:12px 0 18px; font-size:clamp(46px,6vw,78px); line-height:1; letter-spacing:-.05em; }
+.branch-detail-lead { max-width:650px; color:var(--muted); font-size:19px; line-height:1.7; }
+.branch-facts { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:28px 0; }
+.branch-facts span { display:grid; grid-template-columns:auto 1fr; gap:4px 9px; padding:15px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+.branch-facts svg { grid-row:1/3; color:var(--clinic-green-dark); }
+.branch-facts small { color:var(--muted); }
+.branch-detail-actions { display:flex; flex-wrap:wrap; gap:10px; margin:26px 0 18px; }
+.branch-detail-actions .button { color:#fff; background:linear-gradient(135deg,#397f2c,#70c83b); }
+.branch-detail-actions .button-ghost { color:var(--clinic-navy); border:1px solid #b6c7cc; background:#fff; }
+.branch-detail-map { overflow:hidden; border:1px solid var(--line); border-radius:24px; background:#fff; box-shadow:0 28px 70px rgba(6,47,61,.13); }
+.branch-detail-map iframe { display:block; width:100%; min-height:530px; border:0; }
+.branch-detail-map p { display:flex; align-items:center; gap:9px; margin:0; padding:15px 18px; color:var(--muted); font-size:12px; }
+
+@media (max-width:1050px) {
+  .branch-detail { grid-template-columns:1fr; }
+  .branch-detail-map iframe { min-height:390px; }
+}
+
+@media (max-width:760px) {
+  body { padding-bottom:76px; }
+  .header-main { min-height:58px; }
+  .header-main .brand { transform:scale(.7); margin-left:-18px; }
+  .hero.hero-conversion { min-height:auto; padding-top:28px; }
+  .hero-conversion h1 { font-size:clamp(38px,11.2vw,52px); }
+  .hero-proof-points { display:grid; grid-template-columns:1fr 1fr; }
+  .quote-form,.trust-process,.branch-facts { grid-template-columns:1fr; }
+  .quote-form label:nth-of-type(5) { grid-column:1; }
+  .mobile-dock { grid-template-columns:repeat(3,1fr); width:min(430px,calc(100% - 20px)); }
+  .mobile-dock a { min-height:54px; border-radius:13px; }
+  .mobile-dock a.is-active { color:#fff; background:linear-gradient(135deg,#397f2c,#70c83b); box-shadow:0 8px 20px rgba(63,152,42,.24); }
+  .chatbot-launcher { display:none; }
+  .store-model-fab { display:none; }
+  .store-heading h1 br,.store-heading h2 br { display:block; }
+  .store-heading h1,.store-heading h2 { line-height:1.03; }
+  .branch-detail { width:min(100% - 28px,680px); padding:42px 0; }
+  .branch-detail h1 { font-size:43px; }
+  .branch-detail-actions { align-items:stretch; flex-direction:column; }
+  .branch-detail-map iframe { min-height:300px; }
+  .branch-actions { grid-template-columns:1fr; }
+}

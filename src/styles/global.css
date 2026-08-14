@@ -4,6 +4,7 @@
   --line: #dfe5ec;
   --paper: #fbfcfe;
   --white: #ffffff;
+<<<<<<< HEAD
   --blue: #0b69ff;
   --teal: #00a88f;
   --green: #17b26a;
@@ -11,10 +12,20 @@
   --red: #f04438;
   --violet: #7a5af8;
   --cyan: #06aed5;
+=======
+  --blue: #1767b7;
+  --teal: #3c9d55;
+  --green: #67bd32;
+  --amber: #f79009;
+  --red: #f04438;
+  --violet: #4e9f38;
+  --cyan: #45a9a0;
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
   --shadow: 0 20px 60px rgba(16, 24, 40, .12);
   --big-shadow: 0 34px 90px rgba(16, 24, 40, .22);
 }
 
+<<<<<<< HEAD
 /* 2026 conversion-focused DoctorCell refresh */
 :root {
   --dc-blue: #3473b9;
@@ -22,6 +33,26 @@
   --dc-blue-night: #041d37;
   --dc-green: #7cc43c;
   --dc-green-bright: #96dc4d;
+=======
+/* DoctorCell unified brand palette */
+:root{--blue:#1767b7;--teal:#3c9d55;--green:#67bd32;--violet:#4e9f38;--cyan:#45a9a0;--dc-blue:#1767b7;--dc-blue-deep:#0b477e;--dc-blue-night:#07345d;--dc-green:#67bd32;--dc-green-bright:#86d443;--dc-green-deep:#3f982a;--dc-brand-gradient:linear-gradient(135deg,#1767b7 0%,#319065 50%,#73c936 100%)}
+.site-nav .nav-store{background:var(--dc-brand-gradient);box-shadow:0 10px 24px rgba(54,145,74,.28)}
+.site-nav .nav-store small{color:#efffe7}.site-nav .nav-store:hover{color:#fff;background:linear-gradient(135deg,#125ca6,#57b537 78%);box-shadow:0 15px 30px rgba(54,145,74,.36)}
+.site-nav .nav-store[aria-current="page"]{box-shadow:0 0 0 3px rgba(103,189,50,.2),0 12px 27px rgba(23,103,183,.24)}
+
+/* 2026 conversion-focused DoctorCell refresh */
+:root {
+  --dc-blue: #1767b7;
+  --dc-blue-deep: #0b477e;
+  --dc-blue-night: #07345d;
+  --dc-green: #67bd32;
+  --dc-green-bright: #86d443;
+  --dc-green-deep: #3f982a;
+  --dc-cream: #fbfcf6;
+  --dc-mist: #f1f8ed;
+  --dc-brand-gradient: linear-gradient(135deg, #1767b7 0%, #319065 50%, #73c936 100%);
+  --dc-action-gradient: linear-gradient(135deg, #75c936 0%, #4cab37 100%);
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 }
 
 .hero.hero-conversion {
@@ -60,6 +91,14 @@
 }
 .hero-conversion h1 em { color: var(--dc-green-bright); font-style: normal; }
 .hero-conversion .hero-copy { max-width: 700px; color: #e6f2ff; font-size: clamp(18px, 2vw, 22px); font-weight: 600; }
+<<<<<<< HEAD
+=======
+.apple-specialist { display:flex; align-items:center; gap:13px; width:fit-content; margin-top:22px; padding:11px 16px 11px 11px; border:1px solid rgba(255,255,255,.32); border-radius:16px; color:#fff; background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.07)); box-shadow:0 16px 38px rgba(0,12,31,.25); backdrop-filter:blur(12px); }
+.apple-specialist-icon { display:grid; place-items:center; width:42px; height:42px; flex:none; border-radius:12px; color:#10240a; background:linear-gradient(135deg,#d9ffac,var(--dc-green-bright)); box-shadow:0 8px 20px rgba(124,196,60,.28); }
+.apple-specialist span:last-child { display:grid; gap:2px; }
+.apple-specialist small { color:#cfe3f6; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.apple-specialist strong { font-size:clamp(14px,1.5vw,17px); line-height:1.2; }
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 .hero-conversion .hero-livebar { color: #dcecff; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.13); }
 .hero-conversion .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dc-green-bright); box-shadow: 0 0 0 5px rgba(150,220,77,.12); }
 .hero-conversion .button.primary { background: linear-gradient(135deg, var(--dc-green-bright), var(--dc-green)); color: #10240a; box-shadow: 0 16px 40px rgba(124,196,60,.28); }
@@ -258,6 +297,12 @@
 }
 
 .quote-intro p:not(.eyebrow) { color: var(--muted); font-size: 17px; line-height: 1.65; }
+<<<<<<< HEAD
+=======
+.nearest-branch-button { display:inline-flex; align-items:center; justify-content:center; gap:7px; width:fit-content; margin-top:8px; padding:8px 11px; border:1px solid rgba(52,115,185,.25); border-radius:9px; color:var(--dc-blue); background:#f4f9ff; font-size:12px; font-weight:850; cursor:pointer; transition:.2s ease; }
+.nearest-branch-button:hover { border-color:var(--dc-blue); background:#eaf4ff; transform:translateY(-1px); }
+.location-status { display:block; margin-top:7px; color:var(--muted); font-size:11px; line-height:1.35; }
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 .quote-route { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 24px; color: var(--blue); }
 .quote-route span { padding: 7px 10px; border-radius: 999px; background: #eef4ff; font-size: 12px; font-weight: 900; }
 .quote-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -599,6 +644,28 @@ h3 {
   transform: translateY(-1px);
 }
 
+<<<<<<< HEAD
+=======
+.site-nav .nav-store {
+  position: relative;
+  min-height: 48px;
+  padding: 7px 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.38);
+  color: #fff;
+  background: var(--dc-brand-gradient);
+  box-shadow: 0 10px 24px rgba(54,145,74,.28);
+  isolation: isolate;
+}
+.site-nav .nav-store:before { content:""; position:absolute; z-index:-1; inset:-80% auto -80% -35%; width:35%; background:rgba(255,255,255,.32); transform:rotate(20deg); transition:left .45s ease; }
+.site-nav .nav-store:hover:before { left:115%; }
+.site-nav .nav-store>svg { flex:none; }
+.site-nav .nav-store span,.site-nav .nav-store small { display:block; line-height:1.05; }
+.site-nav .nav-store small { display:flex; align-items:center; gap:3px; margin-bottom:3px; color:#efffe7; font-size:8px; font-weight:900; letter-spacing:.055em; text-transform:uppercase; }
+.site-nav .nav-store:hover { color:#fff; background:linear-gradient(135deg,#125ca6,#57b537 78%); transform:translateY(-3px); box-shadow:0 15px 30px rgba(54,145,74,.36); }
+.site-nav .nav-store[aria-current="page"] { box-shadow:0 0 0 3px rgba(103,189,50,.2),0 12px 27px rgba(23,103,183,.24); }
+
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 .site-nav .nav-cta {
   min-height: 52px;
   margin-left: 10px;
@@ -1623,6 +1690,11 @@ h3 {
     text-align: left;
   }
 
+<<<<<<< HEAD
+=======
+  .site-nav .nav-store { justify-content:center; min-height:56px; margin:3px 0; text-align:left; }
+
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
   .hero {
     padding-top: 28px;
   }
@@ -1744,4 +1816,79 @@ h3 {
     max-height: 55px;
   }
 }
+<<<<<<< HEAD
+=======
+
+/* Keep the logo palette authoritative after legacy declarations. */
+:root{--blue:#1767b7;--teal:#3c9d55;--green:#67bd32;--violet:#4e9f38;--cyan:#45a9a0;--dc-blue:#1767b7;--dc-blue-deep:#0b477e;--dc-blue-night:#07345d;--dc-green:#67bd32;--dc-green-bright:#86d443;--dc-green-deep:#3f982a;--dc-brand-gradient:linear-gradient(135deg,#1767b7 0%,#319065 50%,#73c936 100%)}
+.site-nav .nav-store{background:var(--dc-brand-gradient);box-shadow:0 10px 24px rgba(54,145,74,.28)}
+.site-nav .nav-store small{color:#efffe7}.site-nav .nav-store:hover{color:#fff;background:linear-gradient(135deg,#125ca6,#57b537 78%);box-shadow:0 15px 30px rgba(54,145,74,.36)}
+.site-nav .nav-store[aria-current="page"]{box-shadow:0 0 0 3px rgba(103,189,50,.2),0 12px 27px rgba(23,103,183,.24)}
+}
+
+/* DoctorCell: verde protagonista, azul oscuro como soporte. */
+:root {
+  --dc-brand-gradient: linear-gradient(135deg, #3f982a 0%, #67bd32 55%, #45a9a0 100%);
+}
+
+.hero.hero-conversion {
+  background:
+    radial-gradient(circle at 84% 12%, rgba(134, 212, 67, .24), transparent 30%),
+    linear-gradient(118deg, #062f27 0%, #0b4d38 58%, #07345d 100%);
+}
+
+.header-topline { min-height: 24px; background: #07345d; }
+.header-main { min-height: 70px; }
+.header-main .brand { transform: scale(.9); transform-origin: left center; }
+.site-nav { gap: 4px; }
+.nav-cta,
+.mini-whatsapp,
+.tracking-submit,
+.final-cta .button { background: var(--dc-brand-gradient); }
+.mobile-dock { display: none; }
+.branch-review-links > a {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid rgba(63, 152, 42, .2);
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(7, 52, 93, .08);
+}
+.branch-review-links > a:hover { transform: translateY(-3px); border-color: var(--dc-green); }
+.branch-review-links small { display: flex; align-items: center; gap: 6px; color: var(--dc-green-deep); font-weight: 800; }
+.tracking-result { display: grid; gap: 4px; padding: 14px; border-radius: 12px; background: #edf8e8; color: #24591a; }
+.tracking-error { margin: 0; padding: 12px; border-radius: 10px; background: #fff2ed; color: #8b321e; }
+.spin { animation: dc-spin .8s linear infinite; }
+@keyframes dc-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 760px) {
+  body { padding-bottom: 72px; }
+  .header-topline { display: none; }
+  .header-main { min-height: 60px; padding-block: 6px; }
+  .header-main .brand { transform: scale(.76); }
+  .menu-button,
+  .site-nav { display: none !important; }
+  .mobile-dock {
+    position: fixed;
+    z-index: 1000;
+    right: 10px;
+    bottom: 8px;
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    min-height: 62px;
+    padding: 6px;
+    background: rgba(255, 255, 255, .96);
+    border: 1px solid rgba(63, 152, 42, .2);
+    border-radius: 18px;
+    box-shadow: 0 12px 34px rgba(7, 52, 93, .22);
+    backdrop-filter: blur(14px);
+  }
+  .mobile-dock a { display: grid; place-items: center; align-content: center; gap: 3px; color: #294056; font-size: 10px; font-weight: 800; text-decoration: none; }
+  .mobile-dock-primary { margin-top: -16px; color: #fff !important; background: var(--dc-brand-gradient); border-radius: 16px; box-shadow: 0 9px 20px rgba(63, 152, 42, .3); }
+  .chatbot-launcher { bottom: 84px; }
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 }

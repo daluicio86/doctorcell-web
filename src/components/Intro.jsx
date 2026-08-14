@@ -8,7 +8,11 @@ export default function Intro() {
       <div>
         <p className="eyebrow">Repara hoy, sin complicaciones</p>
         <h2>Recupera tu celular y vuelve a lo importante.</h2>
+<<<<<<< HEAD
         <div className="intro-price"><strong>Servicios desde $15</strong><span>Cotización antes de reparar</span></div>
+=======
+        <div className="intro-price"><strong>Cotización personalizada</strong><span>Confirmación antes de reparar</span></div>
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
       </div>
       <div className="intro-offer">
         <p>Cuéntanos qué le pasa a tu equipo. Te orientamos, confirmamos disponibilidad y explicamos el valor antes de comenzar.</p>

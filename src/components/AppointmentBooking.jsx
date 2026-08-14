@@ -11,7 +11,11 @@ export default function AppointmentBooking() {
   const today = new Date().toISOString().slice(0, 10);
   const ready = Object.values(form).every((value) => value.trim());
   const message = useMemo(() => [
+<<<<<<< HEAD
     "Hola DoctorCell Quito, quiero agendar una cita.",
+=======
+    "Hola DoctorCell Quito, quiero solicitar una cita.",
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
     `Sucursal: ${form.branch}.`, `Fecha: ${form.date}.`, `Hora: ${form.time}.`,
     `Cliente: ${form.name}.`, `Teléfono: ${form.phone}.`, `Falla: ${form.issue}.`,
     "Por favor confirmen la disponibilidad."
@@ -21,12 +25,21 @@ export default function AppointmentBooking() {
   return (
     <section className="section booking" id="agendar">
       <div className="booking-copy">
+<<<<<<< HEAD
         <SectionHeading eyebrow="Agenda en minutos" title="Reserva una revisión en tu sucursal.">
           Escoge fecha y horario. La cita queda lista para confirmar por WhatsApp con el equipo de la sucursal.
         </SectionHeading>
         <div className="booking-benefits">
           <span><CalendarDays size={20} /><b>Elige tu sucursal</b><small>Cuatro puntos en Quito</small></span>
           <span><Clock3 size={20} /><b>Evita esperas</b><small>Selecciona un horario</small></span>
+=======
+        <SectionHeading eyebrow="Solicitud de cita" title="Elige cuándo prefieres visitarnos.">
+          Indica una fecha y una hora preferidas. La sucursal confirmará el horario real disponible antes de reservarlo.
+        </SectionHeading>
+        <div className="booking-benefits">
+          <span><CalendarDays size={20} /><b>Elige tu sucursal</b><small>Cuatro puntos en Quito</small></span>
+          <span><Clock3 size={20} /><b>Horario preferido</b><small>Sujeto a confirmación</small></span>
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
           <span><CheckCircle2 size={20} /><b>Confirmación humana</b><small>Recíbela por WhatsApp</small></span>
         </div>
       </div>

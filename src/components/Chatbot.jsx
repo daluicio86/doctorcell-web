@@ -35,12 +35,18 @@ function detectProblem(value) {
   if (/pantalla|vidrio|touch|tactil|display|linea|mancha|quebr/.test(text)) return ["Pantalla rota", 90];
   if (/bateria|descarga|calienta|hinch|apaga/.test(text)) return ["Batería", 86];
   if (/carga|cargador|puerto|conector|no prende|no enciende/.test(text)) return ["No carga", 84];
+<<<<<<< HEAD
   if (/camara|audio|parlante|microfono|sensor/.test(text)) return ["Cámara o audio", 88];
+=======
+  if (/camara|enfoque|lente/.test(text)) return ["Cámara", 88];
+  if (/audio|parlante|auricular|microfono|sonido/.test(text)) return ["Audio", 88];
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
   if (/software|lento|bloque|reinicia|actualiza|virus/.test(text)) return ["Software", 78];
   return ["Otro problema", 45];
 }
 
 const estimates = {
+<<<<<<< HEAD
   "Pantalla rota": { service: "Revisión y posible cambio de pantalla", price: "$35–$160", time: "1–3 horas" },
   "No carga": { service: "Diagnóstico de batería y sistema de carga", price: "$20–$70", time: "1–2 horas" },
   "Cámara o audio": { service: "Revisión de cámara, audio o sensores", price: "$25–$90", time: "1–3 horas" },
@@ -49,6 +55,17 @@ const estimates = {
   "Software": { service: "Diagnóstico y servicio de software", price: "$20–$50", time: "1–4 horas" },
   "Tablet / iWatch": { service: "Diagnóstico especializado", price: "$30–$120", time: "1–3 días" },
   "Otro problema": { service: "Diagnóstico técnico completo", price: "Desde $20", time: "Según revisión" }
+=======
+  "Pantalla rota": { service: "Revisión y posible cambio de pantalla", time: "1–3 horas" },
+  "No carga": { service: "Diagnóstico de batería y sistema de carga", time: "1–2 horas" },
+  "Cámara": { service: "Revisión de cámara, enfoque o sensores", time: "1–3 horas" },
+  "Audio": { service: "Revisión de parlante, auricular o micrófono", time: "1–3 horas" },
+  "Se mojó": { service: "Limpieza técnica y diagnóstico por humedad", time: "24–72 horas" },
+  "Batería": { service: "Prueba y posible cambio de batería", time: "1–2 horas" },
+  "Software": { service: "Diagnóstico y servicio de software", time: "1–4 horas" },
+  "Tablet / iWatch": { service: "Diagnóstico especializado", time: "1–3 días" },
+  "Otro problema": { service: "Diagnóstico técnico completo", time: "Según revisión" }
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 };
 
 export default function Chatbot() {
@@ -154,7 +171,11 @@ export default function Chatbot() {
     add({ from: "user", text: `${files.length} foto(s) adjunta(s) al diagnóstico.` }); event.target.value = "";
   };
 
+<<<<<<< HEAD
   const summary = `Hola DoctorCell Quito. Caso: ${answers.caseId || "por crear"}. Equipo: ${answers.device} ${answers.brand} ${answers.model}. Problema: ${diagnosis.problem}. Detalle: ${answers.detail}. Diagnóstico preliminar (${diagnosis.confidence}%): ${diagnosis.service}. Estimado: ${diagnosis.price}, ${diagnosis.time}. Atención: ${answers.location || "por definir"}. Fecha: ${answers.schedule || "por definir"}. Contacto: ${answers.contact || "por definir"}.`;
+=======
+  const summary = `Hola DoctorCell Quito. Caso: ${answers.caseId || "por crear"}. Equipo: ${answers.device} ${answers.brand} ${answers.model}. Problema: ${diagnosis.problem}. Detalle: ${answers.detail}. Diagnóstico preliminar (${diagnosis.confidence}%): ${diagnosis.service}. Tiempo estimado: ${diagnosis.time}. Atención: ${answers.location || "por definir"}. Fecha: ${answers.schedule || "por definir"}. Contacto: ${answers.contact || "por definir"}.`;
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
   const progress = `${Math.max(8, Math.round(((flow.indexOf(step) + 1) / flow.length) * 100))}%`;
 
   return <>
@@ -175,7 +196,11 @@ export default function Chatbot() {
         {step === "diagnosis" && <div className="chatbot-diagnosis">
           <div><strong>Diagnóstico preliminar</strong><b>{diagnosis.confidence}% confianza</b></div>
           <h3>{diagnosis.problem}</h3><p>{diagnosis.service}</p>
+<<<<<<< HEAD
           <dl><div><dt>Precio referencial</dt><dd>{diagnosis.price}</dd></div><div><dt>Tiempo estimado</dt><dd>{diagnosis.time}</dd></div><div><dt>Repuesto</dt><dd>Por confirmar</dd></div></dl>
+=======
+          <dl><div><dt>Tiempo estimado</dt><dd>{diagnosis.time}</dd></div><div><dt>Repuesto</dt><dd>Por confirmar</dd></div></dl>
+>>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
           <small>No sustituye la revisión física del equipo.</small>
           <button type="button" onClick={() => { setStep("service"); botReply("¿Cómo deseas continuar?"); }}>Continuar</button>
         </div>}
