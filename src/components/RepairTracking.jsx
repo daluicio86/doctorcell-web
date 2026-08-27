@@ -1,21 +1,24 @@
-import React, { useState } from "react";
-<<<<<<< HEAD
-import { CheckCircle2, ClipboardCheck, MessageCircle, Search, Wrench } from "lucide-react";
-import { whatsappUrl } from "../utils/whatsapp.js";
-
-export default function RepairTracking() {
-  const [orderNumber, setOrderNumber] = useState("");
-  const cleanOrder = orderNumber.trim();
-
-=======
-import { CheckCircle2, ClipboardCheck, LoaderCircle, Search, Wrench } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { CheckCircle2, ClipboardCheck, LoaderCircle, MessageCircle, Phone, Search, Wrench } from "lucide-react";
+import { contactInfo } from "../data/siteData";
+import { whatsappUrl } from "../utils/whatsapp";
 
 export default function RepairTracking() {
   const [orderNumber, setOrderNumber] = useState("");
   const [status, setStatus] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [availability, setAvailability] = useState("checking");
   const cleanOrder = orderNumber.trim();
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/repair-status/availability")
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((payload) => active && setAvailability(payload.available ? "available" : "unavailable"))
+      .catch(() => active && setAvailability("unavailable"));
+    return () => { active = false; };
+  }, []);
 
   async function consultOrder(event) {
     event.preventDefault();
@@ -35,13 +38,12 @@ export default function RepairTracking() {
     }
   }
 
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
   return (
     <section className="section repair-tracking" id="seguimiento">
       <div className="tracking-copy">
         <p className="eyebrow">Seguimiento de reparación</p>
         <h2>¿Ya dejaste tu equipo?</h2>
-        <p>Ingresa el número de tu orden y consulta el estado directamente con el equipo de DoctorCell Quito.</p>
+        <p>Ten a mano el número de tu orden para revisar el avance de tu reparación con DoctorCell Quito.</p>
         <div className="tracking-steps" aria-label="Etapas de una reparación">
           <span><ClipboardCheck size={20} /><b>1</b>Recibido</span>
           <span><Search size={20} /><b>2</b>Diagnóstico</span>
@@ -49,11 +51,7 @@ export default function RepairTracking() {
           <span><CheckCircle2 size={20} /><b>4</b>Listo</span>
         </div>
       </div>
-<<<<<<< HEAD
-      <div className="tracking-card">
-=======
-      <form className="tracking-card" onSubmit={consultOrder}>
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
+      {availability === "available" && <form className="tracking-card" onSubmit={consultOrder}>
         <label htmlFor="order-number">Número de orden</label>
         <input
           id="order-number"
@@ -62,20 +60,6 @@ export default function RepairTracking() {
           placeholder="Ej. DC-10428"
           autoComplete="off"
         />
-<<<<<<< HEAD
-        <a
-          className={`button tracking-submit ${cleanOrder ? "" : "is-disabled"}`}
-          href={cleanOrder ? whatsappUrl(`Hola DoctorCell Quito, quiero consultar el estado de mi reparación. Número de orden: ${cleanOrder}.`) : undefined}
-          target={cleanOrder ? "_blank" : undefined}
-          rel="noopener noreferrer"
-          aria-disabled={!cleanOrder}
-          onClick={(event) => { if (!cleanOrder) event.preventDefault(); }}
-        >
-          <MessageCircle size={19} /> Consultar estado
-        </a>
-        <small>La confirmación la realiza un asesor por WhatsApp. No mostramos estados automáticos sin verificar.</small>
-      </div>
-=======
         <button
           className={`button tracking-submit ${cleanOrder ? "" : "is-disabled"}`}
           type="submit"
@@ -86,8 +70,37 @@ export default function RepairTracking() {
         {status && <div className="tracking-result" role="status"><strong>{status.status || "Orden encontrada"}</strong><span>{status.message || `Orden ${cleanOrder}`}</span>{status.updatedAt && <small>Actualizado: {status.updatedAt}</small>}</div>}
         {error && <p className="tracking-error" role="alert">{error}</p>}
         <small>La consulta se realiza automáticamente con el sistema de órdenes; no abre WhatsApp.</small>
-      </form>
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
+      </form>}
+      {availability === "checking" && <div className="tracking-card tracking-availability" role="status">
+        <LoaderCircle className="spin" size={24} />
+        <strong>Preparando tu opción de seguimiento…</strong>
+        <small>En un momento te indicaremos cómo consultar tu reparación.</small>
+      </div>}
+      {availability === "unavailable" && <div className="tracking-card tracking-fallback">
+        <span className="tracking-fallback-icon"><MessageCircle size={24} /></span>
+        <strong>Consulta tu reparación con nuestro equipo</strong>
+        <p>Envíanos tu número de orden y te ayudaremos a confirmar el estado actual de tu equipo.</p>
+        <label htmlFor="assisted-order-number">Número de orden</label>
+        <input
+          id="assisted-order-number"
+          value={orderNumber}
+          onChange={(event) => setOrderNumber(event.target.value)}
+          placeholder="Ej. DC-10428"
+          autoComplete="off"
+        />
+        <a
+          className={`button tracking-submit ${cleanOrder ? "" : "is-disabled"}`}
+          href={cleanOrder ? whatsappUrl(`Hola DoctorCell Quito, quiero consultar el estado de mi reparación. Mi número de orden es: ${cleanOrder}.`) : undefined}
+          target={cleanOrder ? "_blank" : undefined}
+          rel="noopener noreferrer"
+          aria-disabled={!cleanOrder}
+          onClick={(event) => { if (!cleanOrder) event.preventDefault(); }}
+        >
+          <MessageCircle size={19} /> Consultar por WhatsApp
+        </a>
+        <a className="tracking-phone" href={`tel:${contactInfo.phoneHref}`}><Phone size={17} /> Llamar al {contactInfo.phoneDisplay}</a>
+        <small>Horario de atención: {contactInfo.hours}.</small>
+      </div>}
     </section>
   );
 }

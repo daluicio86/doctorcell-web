@@ -1,9 +1,5 @@
 import React, { useMemo, useState } from "react";
-<<<<<<< HEAD
-import { Clock3, Landmark, MessageCircle, Navigation } from "lucide-react";
-=======
 import { ArrowUpRight, Clock3, Landmark, MessageCircle, Navigation } from "lucide-react";
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 import { branches } from "../data/siteData.js";
 import { mapsUrl, whatsappUrl } from "../utils/whatsapp.js";
 import SectionHeading from "./SectionHeading.jsx";
@@ -37,18 +33,11 @@ export default function Branches() {
           <a href={mapsUrl(`DoctorCell Quito ${selected.address} Quito Ecuador`)} target="_blank" rel="noopener noreferrer">
             <Navigation size={16} /> Abrir ruta en Google Maps
           </a>
-<<<<<<< HEAD
-        </div>
-      </div>
-      <div className="branch-grid">
-        {branches.map(({ name, address, reference, hours, icon: Icon }, index) => (
-=======
           <a className="branch-profile-link" href={`/sucursales/${selected.slug}`}>Ver ficha de esta sucursal <ArrowUpRight size={16} /></a>
         </div>
       </div>
       <div className="branch-grid">
         {branches.map(({ slug, name, address, reference, hours, icon: Icon }, index) => (
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
           <article className="branch-card" id={`sucursal-${index + 1}`} key={address}>
             <span className="branch-number">{index + 1}</span>
             <Icon size={24} />
@@ -61,12 +50,6 @@ export default function Branches() {
                 <Navigation size={15} />
                 Cómo llegar
               </a>
-<<<<<<< HEAD
-              <a href={whatsappUrl(`Hola DoctorCell Quito, quiero atención en ${name} (${address}).`)} target="_blank" rel="noopener noreferrer">
-                <MessageCircle size={15} />
-                WhatsApp
-              </a>
-=======
               <a href={mapsUrl(`DoctorCell Quito ${address} reseñas`)} target="_blank" rel="noopener noreferrer">
                 <ArrowUpRight size={15} />
                 Ver reseñas
@@ -79,7 +62,6 @@ export default function Branches() {
                 <ArrowUpRight size={15} />
                 Ver sucursal
               </a>
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
             </div>
           </article>
         ))}

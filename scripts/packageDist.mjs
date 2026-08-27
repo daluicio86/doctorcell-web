@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const distDirectory = resolve(projectRoot, "dist");
 const entryFile = resolve(distDirectory, "index.html");
-const archiveFile = resolve(projectRoot, "dist.zip");
+const archiveFile = resolve(distDirectory, "dc.zip");
 const temporaryArchive = resolve(projectRoot, "dist.tmp.zip");
 
 const html = await readFile(entryFile, "utf8");
@@ -20,6 +20,7 @@ for (const reference of references) {
 }
 
 await rm(temporaryArchive, { force: true });
+await rm(archiveFile, { force: true });
 
 if (process.platform !== "win32") {
   throw new Error("El empaquetado ZIP requiere PowerShell en Windows.");
@@ -27,7 +28,7 @@ if (process.platform !== "win32") {
 
 const command = [
   "$ErrorActionPreference = 'Stop'",
-  `Compress-Archive -LiteralPath '${distDirectory.replaceAll("'", "''")}' -DestinationPath '${temporaryArchive.replaceAll("'", "''")}' -CompressionLevel Optimal -Force`,
+  `Compress-Archive -Path '${distDirectory.replaceAll("'", "''")}\\*' -DestinationPath '${temporaryArchive.replaceAll("'", "''")}' -CompressionLevel Optimal -Force`,
 ].join("; ");
 
 execFileSync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", command], {
@@ -35,7 +36,6 @@ execFileSync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", com
   stdio: "inherit",
 });
 
-await rm(archiveFile, { force: true });
 await rename(temporaryArchive, archiveFile);
 
-console.log(`Archivo listo: dist.zip (${references.length} recursos de index.html verificados).`);
+console.log(`Archivo listo: dist/dc.zip (${references.length} recursos de index.html verificados).`);

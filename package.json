@@ -9,6 +9,7 @@
     "release": "npm run build && node scripts/packageDist.mjs",
     "seo:generate": "node scripts/generateSeoPages.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "test": "node --test",
     "start": "node server.mjs"
   },
   "dependencies": {

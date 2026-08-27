@@ -132,10 +132,7 @@
 .zentra-panel-note svg { flex:0 0 auto; color:var(--dc-green); }
 @media(max-width:1050px){.zentra-section{grid-template-columns:1fr}.zentra-copy{max-width:760px}.zentra-panel{width:min(720px,100%)}}
 @media(max-width:600px){.zentra-section{padding-block:68px}.zentra-copy h2{font-size:clamp(34px,10vw,46px)}.zentra-lead{font-size:16px}.zentra-workflow{grid-template-columns:1fr}.zentra-panel-head{align-items:flex-start;flex-direction:column}.zentra-panel-head>span{align-self:flex-start}.zentra-trust{align-items:stretch;flex-direction:column}.zentra-trust span{justify-content:center}}
-<<<<<<< HEAD
-=======
 
 /* Softer, more personal DoctorCell surfaces */
 .intro,.booking,.zentra-section{background:linear-gradient(135deg,#f3f9ee 0%,#fff 55%,#eef6fb 100%)}.brand-list a:hover,.branch-shortcuts button{color:var(--dc-green-deep);border-color:#b7dba2;background:#eff8e9}
 .testimonial-author>span,.gallery-blue .gallery-photo-placeholder{background:var(--dc-brand-gradient)}.repair-tracking{background:linear-gradient(135deg,#07345d 0%,#14645f 58%,#397f32 100%)}
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)

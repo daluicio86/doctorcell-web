@@ -97,16 +97,12 @@ function analyticsScript() {
 const head = (p, body, json = "") => `<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(p.title)} | DoctorCell</title><meta name="description" content="${esc(p.description)}"><meta name="robots" content="index,follow"><link rel="canonical" href="${origin}/guias/${p.slug ? `${p.slug}/` : ""}"><meta property="og:title" content="${esc(p.title)}"><meta property="og:description" content="${esc(p.description)}"><meta property="og:locale" content="es_EC"><link rel="stylesheet" href="/guias/seo.css">${json ? `<script type="application/ld+json">${json}</script>` : ""}${analyticsScript()}</head><body><header class="top"><nav class="nav"><a class="logo" href="/" aria-label="DoctorCell inicio"><img src="/logo.jpg" alt="DoctorCell logo" width="210" height="72"></a><div class="nav-links"><a href="/#servicios">Servicios</a><a href="/#sucursales">Sucursales</a><a href="/guias/">Guías</a></div><a class="nav-cta" href="${wa("Hola DoctorCell, necesito ayuda con mi equipo.")}">Consultar reparación</a></nav></header>${body}<footer class="footer"><div class="wrap"><strong>DoctorCell · Quito</strong><a href="/">Página principal</a></div></footer></body></html>`;
 
 await mkdir(resolve("public/guias"), { recursive: true });
-<<<<<<< HEAD
-await writeFile(resolve("public/guias/seo.css"), css);
-=======
 const brandedCss = css
   .replaceAll("#0b69ff", "#4f9f34")
   .replaceAll("#101828", "#10271d")
   .replaceAll("#dfe5ec", "#dfe5df")
   .replace("linear-gradient(135deg,#062b50,#0d64a4)", "linear-gradient(135deg,#071f35,#194a35)");
 await writeFile(resolve("public/guias/seo.css"), brandedCss);
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 for (const page of pages) {
   const faqSchema = { "@context": "https://schema.org", "@graph": [{ "@type": "Article", headline: page.title, description: page.description, inLanguage: "es-EC", mainEntityOfPage: `${origin}/guias/${page.slug}/`, author: { "@type": "Organization", name: "DoctorCell" } }, { "@type": "FAQPage", mainEntity: page.faqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) }] };
   const relatedBySlug = {
@@ -125,16 +121,12 @@ for (const page of pages) {
 const cards = pages.map((p) => `<a href="/guias/${p.slug}/"><strong>${esc(p.title)}</strong><span>${esc(p.description)}</span></a>`).join("");
 const indexPage = { title: "Guías de reparación de celulares", description: "Guías sobre pantallas, baterías, carga, humedad y reparación de celulares en Quito." };
 await writeFile(resolve("public/guias/index.html"), withFavicon(head(indexPage, `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · Guías</div><h1>Guías para cuidar y reparar tu celular</h1><p>Información práctica para actuar ante una falla y llegar mejor preparado al diagnóstico.</p></div></header><section class="content"><div class="wrap"><div class="grid index">${cards}</div></div></section></main>`)));
-<<<<<<< HEAD
-const paths = ["/", "/tienda", "/guias/", ...pages.map((p) => `/guias/${p.slug}/`)];
-=======
 const paths = [
   "/", "/tienda/", "/agendar/", "/seguimiento/", "/sucursales/", "/preguntas/",
   "/sucursales/matriz-prensa-rio-arajuno/", "/sucursales/colon-juan-leon-mera/",
   "/sucursales/shyris-tomas-de-berlanga/", "/sucursales/prensa-vaca-de-castro/",
   "/guias/", ...pages.map((p) => `/guias/${p.slug}/`)
 ];
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 await writeFile(resolve("public/sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map((p) => `<url><loc>${origin}${p}</loc></url>`).join("")}</urlset>`);
 await writeFile(resolve("public/robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 console.log(`Generadas ${pages.length} páginas SEO.`);

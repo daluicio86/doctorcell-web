@@ -7,11 +7,7 @@ const questions = [
   ["¿Atienden todas las marcas?", "Sí. Atendemos iPhone, Samsung, Xiaomi y muchas marcas más."],
   ["¿Puedo cotizar antes de llevar mi equipo?", "Sí. Escríbenos por WhatsApp con la marca, el modelo y la falla."],
   ["¿Tienen repuestos en stock?", "Disponemos de un amplio stock. Confirma la disponibilidad para tu modelo por WhatsApp."],
-<<<<<<< HEAD
-  ["¿Cuánto cuesta reparar la pantalla de un celular en Quito?", "Depende de la marca, el modelo y el tipo de repuesto. En DoctorCell Quito tenemos cambios de pantalla desde $35; confirma el valor exacto con el cotizador."],
-=======
   ["¿Cuánto cuesta reparar la pantalla de un celular en Quito?", "Depende de la marca, el modelo, el diagnóstico y el tipo de repuesto. Te confirmamos la cotización antes de iniciar la reparación."],
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
   ["¿Cuánto tarda un cambio de pantalla de iPhone?", "Muchos cambios se realizan el mismo día. El tiempo definitivo depende del modelo, la disponibilidad del repuesto y las pruebas finales."],
   ["¿La reparación tiene garantía?", "Sí. La cobertura y vigencia se indican por escrito según el servicio y repuesto instalados."],
   ["¿Debo agendar antes de visitar una sucursal?", "No es obligatorio, pero agendar te ayuda a reducir la espera y permite confirmar disponibilidad en la sucursal elegida."],

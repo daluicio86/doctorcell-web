@@ -7,3 +7,5 @@ Thumbs.db
 data/*.ndjson
 .env
 .env.local
+
+dist.zip

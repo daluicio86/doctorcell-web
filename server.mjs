@@ -4,14 +4,12 @@ import { createServer } from "node:http";
 import { extname, join, normalize, resolve } from "node:path";
 import { createLead, readJsonBody } from "./server/leadService.js";
 import { dispatchDueFollowups, recordLifecycleEvent } from "./server/followupService.js";
+import { isRepairStatusAvailable, queryRepairStatus } from "./server/repairStatusService.js";
 
 const PORT = Number(process.env.PORT || 4173);
 const DIST = resolve("dist");
 const types = { ".css": "text/css", ".html": "text/html", ".ico": "image/x-icon", ".jpg": "image/jpeg", ".js": "text/javascript", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml", ".txt": "text/plain", ".webp": "image/webp", ".xml": "application/xml" };
-<<<<<<< HEAD
-=======
 const retiredPaths = new Set(["/lead-generation", "/lead-generation/", "/cursos", "/cursos/", "/curso", "/curso/", "/courses", "/courses/"]);
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
 
 function json(response, status, body) {
   response.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
@@ -42,27 +40,19 @@ async function handleLeadEvent(request, response, caseId) {
   } catch { json(response, 400, { error: "Solicitud inválida." }); }
 }
 
-<<<<<<< HEAD
-=======
 async function handleRepairStatus(request, response) {
   if (request.method !== "GET") return json(response, 405, { error: "Método no permitido." });
   const order = new URL(request.url, "http://localhost").searchParams.get("order")?.trim();
   if (!order) return json(response, 400, { error: "Ingresa un número de orden válido." });
-  const endpoint = process.env.ZENTRA_STATUS_URL;
-  if (!endpoint) return json(response, 503, { error: "La consulta automática está en proceso de configuración. Inténtalo nuevamente más tarde." });
-  try {
-    const target = new URL(endpoint);
-    target.searchParams.set("order", order);
-    const upstream = await fetch(target, { headers: process.env.ZENTRA_API_TOKEN ? { authorization: `Bearer ${process.env.ZENTRA_API_TOKEN}` } : {} });
-    const payload = await upstream.json();
-    if (!upstream.ok) return json(response, upstream.status, { error: payload.error || "No pudimos consultar esta orden." });
-    return json(response, 200, payload);
-  } catch {
-    return json(response, 502, { error: "El sistema de seguimiento no está disponible en este momento." });
-  }
+  const result = await queryRepairStatus(order);
+  return json(response, result.status, result.body);
 }
 
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
+function handleRepairStatusAvailability(request, response) {
+  if (request.method !== "GET") return json(response, 405, { error: "Método no permitido." });
+  return json(response, 200, { available: isRepairStatusAvailable() });
+}
+
 async function serveStatic(request, response) {
   const requested = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
   const safePath = normalize(requested).replace(/^(\.\.[/\\])+/, "");
@@ -78,10 +68,6 @@ async function serveStatic(request, response) {
 }
 
 createServer((request, response) => {
-<<<<<<< HEAD
-  const eventMatch = new URL(request.url, "http://localhost").pathname.match(/^\/api\/leads\/([^/]+)\/events$/);
-  if (eventMatch) return void handleLeadEvent(request, response, eventMatch[1]);
-=======
   const pathname = new URL(request.url, "http://localhost").pathname.toLowerCase();
   if (retiredPaths.has(pathname)) {
     response.writeHead(301, { location: "/", "cache-control": "public, max-age=86400" });
@@ -89,8 +75,8 @@ createServer((request, response) => {
   }
   const eventMatch = pathname.match(/^\/api\/leads\/([^/]+)\/events$/);
   if (eventMatch) return void handleLeadEvent(request, response, eventMatch[1]);
-  if (request.url?.startsWith("/api/repair-status")) return void handleRepairStatus(request, response);
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)
+  if (pathname === "/api/repair-status/availability") return void handleRepairStatusAvailability(request, response);
+  if (pathname === "/api/repair-status") return void handleRepairStatus(request, response);
   if (request.url?.startsWith("/api/leads")) return void handleLead(request, response);
   return void serveStatic(request, response);
 }).listen(PORT, "0.0.0.0", () => console.log(`DoctorCell Quito listo en http://localhost:${PORT}`));

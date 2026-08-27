@@ -77,11 +77,8 @@
   .chatbot-panel { animation: none; }
   .chatbot-launcher, .chatbot-progress span { transition: none; }
 }
-<<<<<<< HEAD
-=======
 
 /* DoctorCell branded assistant */
 .chatbot-launcher{background:var(--dc-brand-gradient)}.chatbot-header{background:linear-gradient(135deg,#0b477e,#4fac38)}.chatbot-avatar{color:var(--dc-green-deep)}
 .chatbot-message.is-user>div,.chatbot-input>button{border-color:var(--dc-green-deep);background:var(--dc-green-deep)}.chatbot-options button{color:var(--dc-green-deep);border-color:#b7dba2;background:#eff8e9}.chatbot-options button:hover{border-color:var(--dc-green-deep);background:var(--dc-green-deep)}
 .chatbot-input input:focus{border-color:var(--dc-green);box-shadow:0 0 0 3px rgba(103,189,50,.15)}
->>>>>>> 2292f79 (Actualización del proyecto DoctorCell)

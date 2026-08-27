@@ -14,6 +14,11 @@ Variables opcionales:
 - `FOLLOWUP_WEBHOOK_URL`: recibe seguimientos para enviarlos por email, SMS o WhatsApp.
 - `LEADS_ADMIN_TOKEN`: protege el registro de eventos internos.
 - `FOLLOWUPS_FILE` y `LEAD_EVENTS_FILE`: rutas opcionales de cola y eventos.
+- `ZENTRA_STATUS_URL`: activa la consulta automática del estado de una reparación.
+- `ZENTRA_API_TOKEN`: token Bearer opcional para el servicio de estado de Zentra.
+
+Si `ZENTRA_STATUS_URL` no está configurada, la página de seguimiento ofrece una
+consulta asistida por WhatsApp y teléfono, sin mostrar un error técnico al cliente.
 
 El archivo local debe respaldarse o montarse en almacenamiento persistente en
 producción. Si el hosting usa un filesystem efímero, configura
