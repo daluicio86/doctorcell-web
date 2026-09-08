@@ -155,6 +155,119 @@
 .promo-zentra > a { background:linear-gradient(135deg,var(--dc-blue),#174f88); box-shadow:0 10px 24px rgba(52,115,185,.2); }
 .quote-finder { margin: 0 auto 58px; border-color: rgba(52,115,185,.18); }
 
+/* Zentra Free — purchase benefit */
+.zentra-free-offer {
+  position: relative;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(18px, 3vw, 34px);
+  width: min(1240px, calc(100% - 40px));
+  margin: -42px auto 48px;
+  padding: clamp(22px, 3vw, 32px);
+  overflow: hidden;
+  border: 1px solid rgba(137, 218, 73, .45);
+  border-radius: 24px;
+  color: #fff;
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.08), transparent 40%),
+    linear-gradient(120deg, #052f29 0%, #0a5139 53%, #07345d 100%);
+  box-shadow: 0 28px 70px rgba(6, 47, 61, .25);
+}
+.zentra-free-offer::after {
+  content: "Z";
+  position: absolute;
+  top: -62px;
+  right: 18%;
+  color: rgba(255,255,255,.035);
+  font-size: 250px;
+  font-weight: 950;
+  line-height: 1;
+  pointer-events: none;
+}
+.zentra-free-glow {
+  position: absolute;
+  right: -90px;
+  bottom: -130px;
+  width: 370px;
+  height: 370px;
+  border-radius: 50%;
+  background: rgba(134, 212, 67, .19);
+  filter: blur(18px);
+  pointer-events: none;
+}
+.zentra-free-badge {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  border: 1px solid rgba(255,255,255,.26);
+  border-radius: 25px;
+  background: linear-gradient(145deg, #99e85b, #67bd32);
+  box-shadow: 0 18px 40px rgba(56, 140, 38, .34);
+  transform: rotate(-3deg);
+}
+.zentra-free-badge span { display: grid; place-items: center; color: #17310c; }
+.zentra-free-badge strong { color: #17310c; font-size: 22px; letter-spacing: .08em; }
+.zentra-free-copy { position: relative; z-index: 1; min-width: 0; }
+.zentra-free-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 7px;
+  color: #b9f08e;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.zentra-free-copy h2 { margin: 0; color: #fff; font-size: clamp(25px, 3vw, 39px); line-height: 1.08; letter-spacing: -.025em; }
+.zentra-free-copy h2 em { color: #a8ef70; font-style: normal; }
+.zentra-free-copy p { margin: 9px 0 0; color: #d8e9e4; font-size: 16px; line-height: 1.5; }
+.zentra-free-benefits { display: flex; flex-wrap: wrap; gap: 9px 18px; margin-top: 14px; }
+.zentra-free-benefits span { display: inline-flex; align-items: center; gap: 6px; color: #f1fbef; font-size: 13px; font-weight: 800; }
+.zentra-free-benefits svg { color: #a8ef70; }
+.zentra-free-action {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 245px;
+  padding: 16px 18px;
+  border-radius: 15px;
+  color: #17310c;
+  background: linear-gradient(135deg, #b6f57e, #86d443);
+  box-shadow: 0 16px 34px rgba(103, 189, 50, .28);
+  font-weight: 950;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.zentra-free-action:hover { transform: translateY(-3px); box-shadow: 0 20px 42px rgba(103, 189, 50, .38); }
+.zentra-free-action span { display: grid; gap: 3px; }
+.zentra-free-action small { color: #356824; font-size: 11px; font-weight: 800; }
+.zentra-free-action > svg { margin-left: auto; }
+.zentra-free-store { width: 100%; margin: 4px 0 32px; }
+
+@media (max-width: 860px) {
+  .zentra-free-offer { grid-template-columns: auto 1fr; margin-top: -30px; }
+  .zentra-free-action { grid-column: 1 / -1; justify-content: center; width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .zentra-free-offer { grid-template-columns: 1fr; width: calc(100% - 28px); margin-bottom: 34px; padding: 22px; text-align: center; }
+  .zentra-free-badge { width: 78px; height: 78px; margin: 0 auto; border-radius: 20px; }
+  .zentra-free-badge strong { font-size: 17px; }
+  .zentra-free-kicker { justify-content: center; font-size: 10px; }
+  .zentra-free-copy h2 { font-size: clamp(27px, 8.5vw, 36px); }
+  .zentra-free-copy p { font-size: 15px; }
+  .zentra-free-benefits { justify-content: center; }
+  .zentra-free-action { grid-column: 1; min-width: 0; text-align: left; }
+  .zentra-free-store { width: 100%; margin-top: 2px; }
+}
+
 .guarantee-card { position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: clamp(24px,4vw,40px); border: 1px solid rgba(255,255,255,.18); border-radius: 20px; color: var(--white); background: rgba(255,255,255,.09); backdrop-filter: blur(12px); }
 .guarantee-seal { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 19px; color: #17310c; background: var(--dc-green-bright); }
 .guarantee-card span { display: block; margin-bottom: 15px; color: #d5e8f7; font-weight: 800; }

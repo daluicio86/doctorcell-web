@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, HelpCircle, Maximize2, MessageCircle, Minus, Plus, Search, ShieldCheck, ShoppingBag, ShoppingCart, Sparkles, Trash2, Truck, X, Zap } from "lucide-react";
 import { whatsappUrl } from "../utils/whatsapp.js";
+import PromoStrip from "./PromoStrip.jsx";
 import "../styles/store.css";
 
 const productData = [
@@ -208,6 +209,8 @@ export default function Store({ standalone = false }) {
           <ShoppingCart size={20} /><span><small>Tu selección</small>Mi pedido</span><b>{itemCount}</b>
         </button>
       </div>
+
+      <PromoStrip variant="store" />
 
       <div className="store-toolbar">
         <label className="store-search"><Search size={18} /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar un producto..." aria-label="Buscar en la tienda" /></label>
