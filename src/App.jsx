@@ -12,6 +12,8 @@ import Guarantee from "./components/Guarantee.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import QuoteFinder from "./components/QuoteFinder.jsx";
+import RafflePopup from "./components/RafflePopup.jsx";
+import RaffleTerms from "./components/RaffleTerms.jsx";
 import RepairTracking from "./components/RepairTracking.jsx";
 import Services from "./components/Services.jsx";
 import Store, { products } from "./components/Store.jsx";
@@ -28,16 +30,17 @@ const pages = {
   "/agendar": ["Solicitar una cita | DoctorCell Quito", "Solicita un horario de revisión en una de las cuatro sucursales DoctorCell de Quito."],
   "/seguimiento": ["Seguimiento de reparación | DoctorCell Quito", "Consulta el estado de una reparación DoctorCell mediante el número de orden."],
   "/sucursales": ["Sucursales DoctorCell en Quito", "Direcciones, horarios, rutas y contacto de las cuatro sucursales DoctorCell en Quito."],
-  "/preguntas": ["Preguntas frecuentes | DoctorCell Quito", "Respuestas sobre tiempos, repuestos, garantía, diagnóstico y visita a las sucursales DoctorCell."]
+  "/preguntas": ["Preguntas frecuentes | DoctorCell Quito", "Respuestas sobre tiempos, repuestos, garantía, diagnóstico y visita a las sucursales DoctorCell."],
+  "/terminos-rifa": ["Términos de la rifa | DoctorCell Quito", "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung S07 el 7 de noviembre de 2026."]
 };
 
-function PageFrame({ children, pageRoute, schema }) {
+function PageFrame({ children, pageRoute, schema, showRafflePopup = true }) {
   const serializedSchema = schema ? JSON.stringify(schema) : "";
   useEffect(() => {
     const [title, description] = pages[pageRoute];
     setPageMetadata({ title, description, path: pageRoute, schema });
   }, [pageRoute, serializedSchema]);
-  return <><Header /><main className="utility-page">{children}</main><Chatbot /><AnalyticsConsent /><Footer /></>;
+  return <><Header /><main className="utility-page">{children}</main>{showRafflePopup ? <RafflePopup /> : null}<Chatbot /><AnalyticsConsent /><Footer /></>;
 }
 
 function StorePage() {
@@ -61,12 +64,13 @@ export default function App() {
     }
   }, []);
   const branch = branches.find((item) => route === `/sucursales/${item.slug}`);
-  if (branch) return <><Header /><main className="utility-page"><BranchDetail branch={branch} /></main><Chatbot /><AnalyticsConsent /><Footer /></>;
+  if (branch) return <><Header /><main className="utility-page"><BranchDetail branch={branch} /></main><RafflePopup /><Chatbot /><AnalyticsConsent /><Footer /></>;
   if (route === "/tienda") return <StorePage />;
   if (route === "/seguimiento") return <PageFrame pageRoute="/seguimiento"><RepairTracking /></PageFrame>;
   if (route === "/agendar") return <PageFrame pageRoute="/agendar"><AppointmentBooking /></PageFrame>;
   if (route === "/sucursales") return <PageFrame pageRoute="/sucursales"><Branches /></PageFrame>;
   if (route === "/preguntas") return <PageFrame pageRoute="/preguntas"><Faq /></PageFrame>;
+  if (route === "/terminos-rifa") return <PageFrame pageRoute="/terminos-rifa" showRafflePopup={false}><RaffleTerms /></PageFrame>;
 
   return (
     <>
@@ -82,6 +86,7 @@ export default function App() {
         <Branches />
         <FinalCta />
       </main>
+      <RafflePopup />
       <Chatbot />
       <AnalyticsConsent />
       <Footer />
