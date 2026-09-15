@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { whatsappUrl } from "../utils/whatsapp.js";
 
-const raffleQuestion = "Hola DoctorCell Quito. Leí los términos de la rifa del Samsung S07 y quiero consultar mis compras acumuladas y cuántas oportunidades tengo registradas.";
+const raffleQuestion = "Hola DoctorCell Quito. Leí los términos de la rifa del Samsung A07 y quiero consultar mis compras acumuladas y cuántas oportunidades tengo registradas.";
 
 const sectionLinks = [
   ["organizador", "Organizador"],
@@ -59,12 +59,12 @@ export default function RaffleTerms() {
             <p className="raffle-terms-auto"><TicketCheck size={18} aria-hidden="true" /> Registro automático y compras acumulativas.</p>
           </div>
 
-          <div className="raffle-terms-prize" aria-label="Premio anunciado: Samsung S07">
+          <div className="raffle-terms-prize" aria-label="Premio anunciado: Samsung A07">
             <span className="raffle-terms-prize-label"><Sparkles size={16} aria-hidden="true" /> Gran premio</span>
             <div className="raffle-terms-device-frame">
               <img src="/images/raffle-device.jpg" alt="Imagen promocional del equipo Samsung anunciado como premio" width="447" height="447" />
             </div>
-            <div className="raffle-terms-prize-name"><small>Premio anunciado</small><strong>Samsung S07</strong></div>
+            <div className="raffle-terms-prize-name"><small>Premio anunciado</small><strong>Samsung A07</strong></div>
             <span className="raffle-terms-reference">Imagen referencial</span>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function RaffleTerms() {
               <div><dt>Organiza</dt><dd>DoctorCell Quito</dd></div>
               <div><dt>Mecánica</dt><dd>USD 25 acumulados = 1 oportunidad</dd></div>
               <div><dt>Registro</dt><dd>Automático con cada compra</dd></div>
-              <div><dt>Premio anunciado</dt><dd>Samsung S07</dd></div>
+              <div><dt>Premio anunciado</dt><dd>Samsung A07</dd></div>
               <div><dt>Vigencia</dt><dd>Hasta el 31 de octubre de 2026</dd></div>
               <div><dt>Sorteo</dt><dd><span className="raffle-terms-confirmed">7 de noviembre de 2026</span></dd></div>
             </dl>
@@ -116,7 +116,7 @@ export default function RaffleTerms() {
           </TermSection>
 
           <TermSection id="premio" number="03" title="Premio" icon={Gift}>
-            <p>El premio anunciado para esta promoción es un <strong>Samsung S07</strong>. Las imágenes de la campaña son referenciales; las características finales del equipo serán confirmadas por DoctorCell antes del sorteo.</p>
+            <p>El premio anunciado para esta promoción es un <strong>Samsung A07</strong>. Las imágenes de la campaña son referenciales; las características finales del equipo serán confirmadas por DoctorCell antes del sorteo.</p>
           </TermSection>
 
           <TermSection id="vigencia" number="04" title="Vigencia y sorteo" icon={CalendarClock}>

@@ -15,7 +15,7 @@ const routes = [
   { path: "seguimiento", title: "Seguimiento de reparación | DoctorCell Quito", description: "Consulta el estado de una reparación DoctorCell mediante el número de orden.", heading: "Seguimiento de reparación", copy: "Ten a mano el número de orden entregado al recibir tu equipo." },
   { path: "sucursales", title: "Sucursales DoctorCell en Quito", description: "Direcciones, horarios, rutas y contacto de las cuatro sucursales DoctorCell en Quito.", heading: "Cuatro sucursales en Quito", copy: "Encuentra la sede más conveniente y abre la ruta directa." },
   { path: "preguntas", title: "Preguntas frecuentes | DoctorCell Quito", description: "Respuestas sobre tiempos, repuestos, garantía, diagnóstico y visita a las sucursales DoctorCell.", heading: "Preguntas frecuentes", copy: "Lo esencial antes de traer tu equipo a una sucursal DoctorCell." },
-  { path: "terminos-rifa", title: "Términos de la rifa | DoctorCell Quito", description: "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung S07 el 7 de noviembre de 2026.", heading: "Términos y condiciones de la rifa", copy: "Tus compras se acumulan y cada USD 25 generan automáticamente una oportunidad. Participa hasta el 31 de octubre de 2026." },
+  { path: "terminos-rifa", title: "Términos de la rifa | DoctorCell Quito", description: "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung A07 el 7 de noviembre de 2026.", heading: "Términos y condiciones de la rifa", copy: "Tus compras se acumulan y cada USD 25 generan automáticamente una oportunidad. Participa hasta el 31 de octubre de 2026." },
   ...branches.map(([slug, name, address]) => ({
     path: `sucursales/${slug}`,
     title: `${name} | DoctorCell Quito`,

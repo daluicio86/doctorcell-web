@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, FileText, Gift, Sparkles, TicketCheck, X } from "lucide-react";
 
-const DISMISSED_KEY = "doctorcell-raffle-s07-dismissed";
+const DISMISSED_KEY = "doctorcell-raffle-A07-dismissed";
 
 export default function RafflePopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -111,7 +111,7 @@ export default function RafflePopup() {
 
           <div className="raffle-content">
             <span className="raffle-kicker"><Gift size={15} /> Rifa DoctorCell</span>
-            <h2 id="raffle-title">¡Participa para ganar un <em>Samsung S07!</em></h2>
+            <h2 id="raffle-title">¡Participa para ganar un <em>Samsung A07!</em></h2>
             <p id="raffle-description">
               Tus compras se acumulan automáticamente: por cada <strong>$25 acumulados</strong> recibes una oportunidad para participar en la rifa.
             </p>
