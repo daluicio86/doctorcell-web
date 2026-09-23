@@ -1962,7 +1962,7 @@ h3 {
     bottom: 8px;
     left: 10px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     min-height: 62px;
     padding: 6px;
     background: rgba(255, 255, 255, .96);

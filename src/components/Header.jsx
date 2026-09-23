@@ -52,7 +52,6 @@ export default function Header() {
     </header>
       <nav className="mobile-dock" aria-label="Acciones principales">
         <a className={currentPath === "/" ? "is-active" : ""} href={resolveHref("#cotizador")}><Stethoscope size={21} /><span>Reparar</span></a>
-        <a className={currentPath === "/tienda" ? "is-active" : ""} href="/tienda"><ShoppingBag size={21} /><span>Comprar</span></a>
         <a className={currentPath.startsWith("/sucursales") ? "is-active" : ""} href="/sucursales"><MapPin size={21} /><span>Sucursales</span></a>
       </nav>
     </>

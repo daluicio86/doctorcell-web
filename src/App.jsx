@@ -18,7 +18,6 @@ import RepairTracking from "./components/RepairTracking.jsx";
 import Services from "./components/Services.jsx";
 import Store, { products } from "./components/Store.jsx";
 import Testimonials from "./components/Testimonials.jsx";
-import PromoStrip from "./components/PromoStrip.jsx";
 import { branches } from "./data/siteData.js";
 import { setPageMetadata } from "./utils/pageMetadata.js";
 
@@ -77,7 +76,6 @@ export default function App() {
       <Header />
       <main id="inicio">
         <Hero />
-        <PromoStrip />
         <QuoteFinder />
         <Services />
         <BeforeAfter />

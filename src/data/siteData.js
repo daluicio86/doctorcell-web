@@ -33,7 +33,6 @@ export const contactInfo = {
 
 export const navItems = [
   { label: "Inicio", href: "/" },
-  { label: "Tienda", href: "/tienda" },
   { label: "Servicios", href: "#servicios" },
   { label: "Citas", href: "/agendar" },
   { label: "Sucursales", href: "/sucursales" },
