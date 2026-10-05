@@ -54,7 +54,7 @@ export default function Branches() {
                 <ArrowUpRight size={15} />
                 Ver reseñas
               </a>
-              <a href={whatsappUrl(`Hola DoctorCell, necesito ayuda en ${name}.`)} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl(`Hola DoctorCell, necesito ayuda en ${name}.`)} target="_blank" rel="noopener noreferrer" data-analytics-placement="branch_card" data-analytics-branch={slug}>
                 <MessageCircle size={15} />
                 WhatsApp
               </a>

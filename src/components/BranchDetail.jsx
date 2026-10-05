@@ -28,7 +28,7 @@ export default function BranchDetail({ branch }) {
           <span><ShieldCheck size={20} /><b>Garantía por escrito</b><small>Según servicio y repuesto</small></span>
         </div>
         <div className="branch-detail-actions">
-          <a className="button" href={whatsappUrl(`Hola DoctorCell, necesito orientación para reparar mi equipo en ${branch.name}.`)} target="_blank" rel="noopener noreferrer"><Stethoscope size={18} /> Orientar mi reparación</a>
+          <a className="button" href={whatsappUrl(`Hola DoctorCell, quiero cotizar una reparación en ${branch.name}.`)} target="_blank" rel="noopener noreferrer" data-analytics-placement="branch_detail" data-analytics-branch={branch.slug}><Stethoscope size={18} /> Cotiza por WhatsApp</a>
           <a className="button button-ghost" href={mapsUrl(query)} target="_blank" rel="noopener noreferrer"><Navigation size={18} /> Cómo llegar</a>
         </div>
         <a className="branch-call" href={`tel:${contactInfo.phoneHref}`}><MessageCircle size={17} /> {contactInfo.phoneDisplay}</a>

@@ -18,6 +18,8 @@
     radial-gradient(circle at 78% 12%, rgba(124,202,66,.2),transparent 30%),
     linear-gradient(120deg,#052f29 0%,#0b4939 54%,#062f3d 100%);
 }
+.hero-conversion .hero-media { order:0; }
+.chatbot-launcher.chatbot-launcher { height:44px; color:#244438; background:#fff; border:1px solid #cfddcf; box-shadow:0 4px 16px rgba(0,0,0,.12); font-weight:600; }
 .hero-proof-points { display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:28px; }
 .hero-proof-points span { display:inline-flex; align-items:center; gap:7px; color:#eaf8e5; font-size:13px; font-weight:850; }
 .hero-proof-points svg { color:#9ee868; }
@@ -73,7 +75,7 @@
   .hero-proof-points { display:grid; grid-template-columns:1fr 1fr; }
   .quote-form,.trust-process,.branch-facts { grid-template-columns:1fr; }
   .quote-form label:nth-of-type(5) { grid-column:1; }
-  .mobile-dock { grid-template-columns:repeat(3,1fr); width:min(430px,calc(100% - 20px)); }
+  .mobile-dock { grid-template-columns:1.5fr 1fr; width:min(430px,calc(100% - 20px)); }
   .mobile-dock a { min-height:54px; border-radius:13px; }
   .mobile-dock a.is-active { color:#fff; background:linear-gradient(135deg,#397f2c,#70c83b); box-shadow:0 8px 20px rgba(63,152,42,.24); }
   .chatbot-launcher { display:none; }
@@ -86,3 +88,13 @@
   .branch-detail-map iframe { min-height:300px; }
   .branch-actions { grid-template-columns:1fr; }
 }
+
+.raffle-home { display:grid; grid-template-columns:minmax(160px,260px) minmax(0,1fr); gap:36px; align-items:center; background:#f1f9ec; border-radius:24px; padding:32px; }
+.raffle-home figure { margin:0; text-align:center; }
+.raffle-home img { width:100%; height:auto; border-radius:18px; }
+.raffle-home figcaption { color:var(--muted); font-size:12px; margin-top:8px; }
+.raffle-home .eyebrow { display:flex; gap:8px; align-items:center; }
+.raffle-home h2 { font-size:clamp(26px,3.4vw,40px); line-height:1.15; margin:10px 0 16px; }
+.raffle-home p { line-height:1.6; }
+.raffle-home-countdown { font-weight:700; color:#326b27; }
+@media (max-width:600px) { .raffle-home { grid-template-columns:1fr; gap:20px; padding:24px; } .raffle-home figure { max-width:180px; margin:auto; } }

@@ -1,9 +1,10 @@
-import { Clock3, Mail, MapPin, Menu, Phone, ShoppingBag, Sparkles, Stethoscope, X } from "lucide-react";
+import { Clock3, Mail, MapPin, Menu, MessageCircle, Phone, ShoppingBag, Sparkles, X } from "lucide-react";
 import React, { useState } from "react";
 import { contactInfo, navItems } from "../data/siteData.js";
 import Brand from "./Brand.jsx";
+import { whatsappUrl } from "../utils/whatsapp.js";
 
-const path = () => window.location.pathname.replace(/\/+$/, "") || "/";
+const path = () => typeof window === "undefined" ? "/" : window.location.pathname.replace(/\/+$/, "") || "/";
 const resolveHref = (href) => href.startsWith("#") && path() !== "/" ? `/${href}` : href;
 
 export default function Header() {
@@ -43,15 +44,15 @@ export default function Header() {
               {isStoreLink ? <span><small><Sparkles size={10} /> Descubre</small>{item.label}</span> : item.label}
             </a>;
           })}
-          <a className="nav-cta" href={resolveHref("#cotizador")} onClick={closeMenu}>
-            <Stethoscope size={17} />
-            <span><small>Orientación preliminar</small>Diagnosticar mi equipo</span>
+          <a className="nav-cta" href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} target="_blank" rel="noopener noreferrer" data-analytics-placement="header" onClick={closeMenu}>
+            <MessageCircle size={17} />
+            <span>Cotiza por WhatsApp</span>
           </a>
         </nav>
       </div>
     </header>
       <nav className="mobile-dock" aria-label="Acciones principales">
-        <a className={currentPath === "/" ? "is-active" : ""} href={resolveHref("#cotizador")}><Stethoscope size={21} /><span>Reparar</span></a>
+        <a className="is-active" href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} target="_blank" rel="noopener noreferrer" data-analytics-placement="mobile_dock"><MessageCircle size={21} /><span>Cotiza por WhatsApp</span></a>
         <a className={currentPath.startsWith("/sucursales") ? "is-active" : ""} href="/sucursales"><MapPin size={21} /><span>Sucursales</span></a>
       </nav>
     </>

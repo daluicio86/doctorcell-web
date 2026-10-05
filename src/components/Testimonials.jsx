@@ -13,7 +13,7 @@ export default function Testimonials() {
       <div className="testimonial-track branch-review-links">
         {branches.map((branch) => (
           <a key={branch.name} href={mapsUrl(`DoctorCell Quito ${branch.address} reseñas`)} target="_blank" rel="noopener noreferrer">
-            <div className="stars" aria-hidden="true">{Array.from({ length: 5 }).map((_, index) => <Star key={index} size={17} fill="currentColor" />)}</div>
+            <div className="stars" aria-hidden="true"><Star size={17} /></div>
             <strong>{branch.name}</strong>
             <span>{branch.address}</span>
             <small>Leer reseñas reales <ArrowUpRight size={16} /></small>
@@ -22,12 +22,12 @@ export default function Testimonials() {
       </div>
       <div className="reviews-proof">
         <div className="reviews-proof-copy">
-          <div className="stars" aria-hidden="true">
+          {googleReviewSummary && <div className="stars" aria-hidden="true">
             {Array.from({ length: 5 }).map((_, index) => <Star key={index} size={20} fill="currentColor" />)}
-          </div>
+          </div>}
           <strong>
             {googleReviewSummary
-              ? `${googleReviewSummary.rating}★ con ${googleReviewSummary.count}+ reseñas en Google`
+              ? `${googleReviewSummary.rating}★ con ${googleReviewSummary.count} reseñas en Google`
               : "Revisa opiniones públicas antes de elegir."}
           </strong>
           <span>La puntuación y el número de reseñas se consultan directamente en Google Maps.</span>

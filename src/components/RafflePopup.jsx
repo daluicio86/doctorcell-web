@@ -104,7 +104,7 @@ export default function RafflePopup() {
             <div className="raffle-prize-tag"><Gift size={16} /> Gran premio</div>
             <div className="raffle-device-glow" />
             <div className="raffle-device-card">
-              <img className="raffle-device-image" src="/images/raffle-device.jpg" alt="" width="447" height="447" decoding="async" />
+              <img className="raffle-device-image" src="/images/raffle-device.webp" alt="" width="447" height="447" decoding="async" />
             </div>
             <div className="raffle-winner-ribbon"><Sparkles size={15} /> ¡Puede ser tuyo!</div>
           </div>

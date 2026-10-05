@@ -3,7 +3,9 @@ import { BarChart3, X } from "lucide-react";
 import { ANALYTICS_ENABLED, CONSENT_KEY, initializeAnalytics, trackEvent } from "../utils/analytics.js";
 
 export default function AnalyticsConsent() {
-  const [choice, setChoice] = useState(() => localStorage.getItem(CONSENT_KEY));
+  const [choice, setChoice] = useState(null);
+
+  useEffect(() => { setChoice(localStorage.getItem(CONSENT_KEY)); }, []);
 
   
   useEffect(() => {
@@ -30,7 +32,12 @@ export default function AnalyticsConsent() {
           link_text: link.innerText.trim().slice(0, 80)
         });
       }
-      else if (href.includes("wa.me")) trackEvent("whatsapp_click", { link_text: link.innerText.trim().slice(0, 80) }, "Contact");
+      else if (href.startsWith("https://wa.me/")) trackEvent("whatsapp_click", {
+        link_text: link.innerText.trim().slice(0, 80),
+        placement: link.dataset.analyticsPlacement || link.closest("section")?.id || "other",
+        branch: link.dataset.analyticsBranch || "general",
+        page_path: window.location.pathname
+      }, "Contact");
       else if (href.startsWith("tel:")) trackEvent("phone_click", {}, "Contact");
       else if (href.startsWith("mailto:")) trackEvent("email_click", {}, "Contact");
       else if (href.includes("/guias/")) trackEvent("guide_open", { destination: href });

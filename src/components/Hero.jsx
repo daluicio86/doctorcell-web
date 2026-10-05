@@ -5,10 +5,13 @@ import {
   Clock3,
   ShieldCheck,
   Sparkles,
-  Stethoscope,
+  MessageCircle,
   Wrench
 } from "lucide-react";
 import ButtonLink from "./ButtonLink.jsx";
+import { whatsappUrl } from "../utils/whatsapp.js";
+
+const quoteUrl = whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación. Mi equipo es: ");
 
 const proofPoints = ["15+ años de experiencia", "4 sucursales", "Garantía por escrito", "Todas las marcas"];
 
@@ -21,10 +24,10 @@ export default function Hero() {
           <span><Clock3 size={15} /> Quito · 4 sucursales</span>
         </div>
 
-        <p className="eyebrow">DoctorCell · la solución tecnológica a tus dispositivos</p>
-        <h1>Tu dispositivo vuelve a funcionar. <em>Sin sorpresas.</em></h1>
+        <p className="eyebrow">Reparación de celulares en Quito</p>
+        <h1>¿Pantalla rota? <em>Conoce el precio antes de reparar.</em></h1>
         <p className="hero-copy">
-          Diagnóstico claro, precio autorizado y garantía por escrito. Reparamos celulares
+          Cotiza por WhatsApp y autoriza el precio antes de reparar, con garantía por escrito. Reparamos celulares
           multimarca, MacBook, tablets y smartwatches. Cuatro sucursales disponibles en Quito.
         </p>
 
@@ -35,10 +38,13 @@ export default function Hero() {
 
         <div className="hero-actions">
           <ButtonLink
-            href="#cotizador"
-            icon={Stethoscope}
+            href={quoteUrl}
+            icon={MessageCircle}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-placement="hero"
           >
-            Diagnosticar mi equipo
+            Cotiza por WhatsApp
           </ButtonLink>
           <ButtonLink href="/sucursales" variant="ghost" icon={ArrowRight}>
             Encontrar una sucursal
@@ -64,8 +70,8 @@ export default function Hero() {
           <div className="chat-bubble chat-in">
             Te damos una orientación preliminar y confirmamos el diagnóstico al revisar el equipo.
           </div>
-          <a className="mini-whatsapp" href="#cotizador">
-            <Stethoscope size={18} /> Orientar mi reparación
+          <a className="mini-whatsapp" href={quoteUrl} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero_chat">
+            <MessageCircle size={18} /> Cotiza por WhatsApp
           </a>
         </div>
         <div className="floating-proof proof-top"><ShieldCheck size={18} /><span><strong>Garantía clara</strong> antes de reparar</span></div>

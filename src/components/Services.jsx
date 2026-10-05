@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight, Clock3, ShieldCheck, Stethoscope } from "lucide-react";
 import { services } from "../data/siteData.js";
 import SectionHeading from "./SectionHeading.jsx";
+import { whatsappUrl } from "../utils/whatsapp.js";
 
 export default function Services() {
   return (
@@ -20,8 +21,8 @@ export default function Services() {
               <li><ShieldCheck size={16} /> Garantía por escrito según reparación</li>
             </ul>
             <div className="service-footer">
-              <a href="#cotizador">
-                <Stethoscope size={16} /> Diagnosticar
+              <a href={whatsappUrl(`Hola DoctorCell Quito, quiero cotizar: ${title}. Mi modelo es: `)} target="_blank" rel="noopener noreferrer" data-analytics-placement={`service_${title}`}>
+                <Stethoscope size={16} /> Cotiza por WhatsApp
               </a>
             </div>
             <a className="service-guide-link" href={guideHref}>{guideLabel} <ArrowRight size={15} /></a>

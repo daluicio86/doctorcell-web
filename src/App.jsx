@@ -13,6 +13,7 @@ import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import QuoteFinder from "./components/QuoteFinder.jsx";
 import RafflePopup from "./components/RafflePopup.jsx";
+import RaffleBanner from "./components/RaffleBanner.jsx";
 import RaffleTerms from "./components/RaffleTerms.jsx";
 import RepairTracking from "./components/RepairTracking.jsx";
 import Services from "./components/Services.jsx";
@@ -21,10 +22,10 @@ import Testimonials from "./components/Testimonials.jsx";
 import { branches } from "./data/siteData.js";
 import { setPageMetadata } from "./utils/pageMetadata.js";
 
-const route = window.location.pathname.replace(/\/+$/, "") || "/";
+const route = typeof window === "undefined" ? "/" : window.location.pathname.replace(/\/+$/, "") || "/";
 
 const pages = {
-  "/": ["DoctorCell Quito | La solución tecnológica a tus dispositivos", "Reparación de celulares, tablets y relojes en cuatro sucursales de Quito, con autorización previa y garantía por escrito."],
+  "/": ["Cambio de pantalla y reparación de celulares en Quito | DoctorCell", "¿Pantalla rota? Cotiza por WhatsApp. Confirmamos el precio antes de reparar, con garantía por escrito y cuatro sucursales en Quito."],
   "/tienda": ["Tienda de accesorios | DoctorCell Quito", "Estuches, audífonos, cables y cargadores con fotografías, precios y compatibilidad por modelo."],
   "/agendar": ["Solicitar una cita | DoctorCell Quito", "Solicita un horario de revisión en una de las cuatro sucursales DoctorCell de Quito."],
   "/seguimiento": ["Seguimiento de reparación | DoctorCell Quito", "Consulta el estado de una reparación DoctorCell mediante el número de orden."],
@@ -49,7 +50,7 @@ function StorePage() {
     name: "Catálogo DoctorCell Quito",
     itemListElement: products.slice(0, 40).map((product, index) => ({
       "@type": "ListItem", position: index + 1,
-      item: { "@type": "Product", name: product.name, image: `https://www.doctorcell.com.ec${product.image}`, category: product.category, offers: { "@type": "Offer", priceCurrency: "USD", price: product.price, availability: "https://schema.org/InStock" } }
+      item: { "@type": "Product", name: product.name, image: `https://www.doctorcell.com.ec${product.image}`, category: product.category, offers: { "@type": "Offer", priceCurrency: "USD", price: product.price.replace("$", "") } }
     }))
   };
   return <PageFrame pageRoute="/tienda" schema={itemList}><Store standalone /></PageFrame>;
@@ -76,11 +77,12 @@ export default function App() {
       <Header />
       <main id="inicio">
         <Hero />
+        <Testimonials />
+        <RaffleBanner />
         <QuoteFinder />
         <Services />
         <BeforeAfter />
         <Guarantee />
-        <Testimonials />
         <Branches />
         <FinalCta />
       </main>

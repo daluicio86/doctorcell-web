@@ -1,5 +1,26 @@
 # DoctorCell web app
 
+## Home comercial
+
+`npm run build` compila el cliente y una entrada de renderizado React en
+`.prerender/`; el generador incorpora el contenido completo de la home en
+`dist/index.html`. Las rutas secundarias conservan su contenido estático inicial.
+Los metadatos de la home están en `index.html` y `src/App.jsx`.
+
+La home presenta WhatsApp como acción principal, enlaces a reseñas por sucursal
+y la rifa con sus fechas existentes. El contador usa UTC−5, cierra la participación
+al terminar el 31 de octubre y cambia el mensaje el día del sorteo, sin inventar
+una hora. Antes de publicar la promoción, el negocio debe completar su revisión
+legal y confirmar la mecánica anunciada.
+
+Las imágenes del catálogo se sirven en WebP; se conservan los originales.
+No se publican precios nuevos por modelo ni cifras de reseñas sin confirmación.
+`googleReviewSummary` en `src/data/siteData.js` admite `rating` y `count` verificados.
+
+Con consentimiento, `whatsapp_click` incluye `placement`, `branch` y `page_path`.
+Un clic no acredita un mensaje recibido: esa medición requiere conectar el canal
+de WhatsApp o registrar conversaciones y ventas reales desde el CRM.
+
 ## Captura de leads
 
 `npm run build` y `npm start` sirven la web y registran en `POST /api/leads`

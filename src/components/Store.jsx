@@ -128,7 +128,7 @@ export const products = productData.map(([sourceModel, type, name], index) => {
   const isAccessory = accessoryCategories.has(sourceModel);
   return {
     id: index + 1,
-    image: `/images/${index + 1}.png`,
+    image: `/images/${index + 1}.webp`,
     name,
     model: isAccessory ? name : sourceModel,
     brand: getBrand(sourceModel, name),

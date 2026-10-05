@@ -62,7 +62,7 @@ export default function RaffleTerms() {
           <div className="raffle-terms-prize" aria-label="Premio anunciado: Samsung A07">
             <span className="raffle-terms-prize-label"><Sparkles size={16} aria-hidden="true" /> Gran premio</span>
             <div className="raffle-terms-device-frame">
-              <img src="/images/raffle-device.jpg" alt="Imagen promocional del equipo Samsung anunciado como premio" width="447" height="447" />
+              <img src="/images/raffle-device.webp" alt="Imagen promocional del equipo Samsung anunciado como premio" width="447" height="447" />
             </div>
             <div className="raffle-terms-prize-name"><small>Premio anunciado</small><strong>Samsung A07</strong></div>
             <span className="raffle-terms-reference">Imagen referencial</span>

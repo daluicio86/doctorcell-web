@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { renderHome } from "../.prerender/entry-server.js";
 
 const origin = "https://www.doctorcell.com.ec";
 const branches = [
@@ -33,7 +34,10 @@ const routes = [
 ];
 
 const esc = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-const source = await readFile(resolve("dist/index.html"), "utf8");
+const source = (await readFile(resolve("dist/index.html"), "utf8"))
+  .replaceAll("\r\n", "\n")
+  .replace(/<div id="root">[\s\S]*<\/div>/, '<div id="root"></div>');
+await writeFile(resolve("dist/index.html"), source.replace('<div id="root"></div>', `<div id="root">${renderHome()}</div>`));
 
 for (const route of routes) {
   const canonical = `${origin}/${route.path}/`;
@@ -45,6 +49,8 @@ for (const route of routes) {
     .replace(/<meta property="og:title" content=".*?"\s*\/?>/s, `<meta property="og:title" content="${esc(route.title)}" />`)
     .replace(/<meta property="og:description" content=".*?"\s*\/?>/s, `<meta property="og:description" content="${esc(route.description)}" />`)
     .replace(/<meta property="og:url" content=".*?"\s*\/?>/s, `<meta property="og:url" content="${canonical}" />`)
+    .replace(/<meta name="twitter:title" content=".*?"\s*\/?>/s, `<meta name="twitter:title" content="${esc(route.title)}" />`)
+    .replace(/<meta name="twitter:description" content=".*?"\s*\/?>/s, `<meta name="twitter:description" content="${esc(route.description)}" />`)
     .replace("</head>", `<style>.static-route-fallback{max-width:920px;margin:0 auto;padding:72px 24px;font-family:Inter,system-ui,sans-serif;color:#10271d}.static-route-fallback img{object-fit:contain}.static-route-fallback>p:first-of-type{margin-top:36px;color:#4f9f34;font-weight:800}.static-route-fallback h1{max-width:760px;margin:10px 0;font-size:clamp(38px,7vw,72px);line-height:1.02}.static-route-fallback>p:last-child{max-width:680px;font-size:18px;line-height:1.6}</style>${route.schema ? `<script type="application/ld+json">${JSON.stringify(route.schema).replaceAll("<", "\\u003c")}</script>` : ""}</head>`)
     .replace('<div id="root"></div>', `<div id="root">${fallback}</div>`);
 

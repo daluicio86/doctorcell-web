@@ -134,10 +134,12 @@ export default function QuoteFinder() {
           target={isReady ? "_blank" : undefined}
           rel="noopener noreferrer"
           aria-disabled={!isReady}
+          data-analytics-placement="quote_finder"
+          data-analytics-branch={branches.find((item) => item.name === branch)?.slug || "general"}
           onClick={handleWhatsAppClick}
         >
           <MessageCircle size={19} />
-          Continuar orientación
+          Cotiza por WhatsApp
         </a>
         <small>{photoFile ? "Foto lista. En dispositivos compatibles podrás compartirla junto con el mensaje; si WhatsApp solo abre el chat, adjúntala manualmente." : "La foto no se sube al sitio. Puedes seleccionarla para compartirla con tu consulta."}</small>
       </form>

@@ -2,6 +2,7 @@ import React from "react";
 import { Clock3, Mail, MapPin, Phone, Stethoscope } from "lucide-react";
 import { contactInfo } from "../data/siteData.js";
 import Brand from "./Brand.jsx";
+import { whatsappUrl } from "../utils/whatsapp.js";
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
       <div className="footer-contact" aria-label="Datos de contacto">
         <strong>{contactInfo.businessName}</strong>
         <span><MapPin size={16} /> {contactInfo.address}</span>
-        <a href="/#cotizador"><Stethoscope size={16} /> Diagnosticar mi equipo</a>
+        <a href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} target="_blank" rel="noopener noreferrer" data-analytics-placement="footer"><Stethoscope size={16} /> Cotiza por WhatsApp</a>
         <a href={`tel:${contactInfo.phoneHref}`}><Phone size={16} /> Teléfono: {contactInfo.phoneDisplay}</a>
         <a href={`mailto:${contactInfo.email}`}><Mail size={16} /> {contactInfo.email}</a>
       </div>

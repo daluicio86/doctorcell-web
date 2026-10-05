@@ -3,7 +3,7 @@ const origin = "https://www.doctorcell.com.ec";
 function ensureMeta(selector, attributes) {
   let element = document.head.querySelector(selector);
   if (!element) {
-    element = document.createElement(attributes.property ? "meta" : "link");
+    element = document.createElement(attributes.rel ? "link" : "meta");
     document.head.appendChild(element);
   }
   Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));

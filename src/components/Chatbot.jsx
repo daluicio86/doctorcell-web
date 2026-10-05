@@ -160,7 +160,7 @@ export default function Chatbot() {
   const progress = `${Math.max(8, Math.round(((flow.indexOf(step) + 1) / flow.length) * 100))}%`;
 
   return <>
-    <button className="chatbot-launcher" type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="doctorcell-chatbot"><Sparkles size={22} /><span>Diagnosticar mi equipo</span></button>
+    <button className="chatbot-launcher" type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="doctorcell-chatbot"><Sparkles size={18} /><span>Asistente de reparación</span></button>
     {open && <aside className="chatbot-panel" id="doctorcell-chatbot" aria-label="Asistente de diagnóstico">
       <header className="chatbot-header">
         <span className="chatbot-avatar"><Bot size={22} /></span><div><strong>Asistente DoctorCell Quito</strong><small><i /> En línea · diagnóstico guiado</small></div>
