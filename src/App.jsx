@@ -16,6 +16,7 @@ import RafflePopup from "./components/RafflePopup.jsx";
 import RaffleBanner from "./components/RaffleBanner.jsx";
 import RaffleTerms from "./components/RaffleTerms.jsx";
 import RepairTracking from "./components/RepairTracking.jsx";
+import RepairDecision, { RepairDecisionTeaser } from "./components/RepairDecision.jsx";
 import Services from "./components/Services.jsx";
 import Store, { products } from "./components/Store.jsx";
 import Testimonials from "./components/Testimonials.jsx";
@@ -33,6 +34,7 @@ const pages = {
   "/seguimiento": ["Seguimiento de reparación | DoctorCell Quito", "Consulta el estado de una reparación DoctorCell mediante el número de orden."],
   "/sucursales": ["Sucursales DoctorCell en Quito", "Direcciones, horarios, rutas y contacto de las cuatro sucursales DoctorCell en Quito."],
   "/preguntas": ["Preguntas frecuentes | DoctorCell Quito", "Respuestas sobre tiempos, repuestos, garantía, diagnóstico y visita a las sucursales DoctorCell."],
+  "/conviene-reparar": ["¿Conviene reparar mi celular? | DoctorCell Quito", "Evalúa el estado de tu celular, compara reparar o reemplazar, comparte tu resultado y cotiza por WhatsApp con DoctorCell Quito."],
   "/terminos-rifa": ["Términos de la rifa | DoctorCell Quito", "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung A07 el 7 de noviembre de 2026."]
 };
 
@@ -74,6 +76,7 @@ export default function App() {
   if (route === "/agendar") return <PageFrame pageRoute="/agendar"><AppointmentBooking /></PageFrame>;
   if (route === "/sucursales") return <PageFrame pageRoute="/sucursales"><Branches /></PageFrame>;
   if (route === "/preguntas") return <PageFrame pageRoute="/preguntas"><Faq /></PageFrame>;
+  if (route === "/conviene-reparar") return <PageFrame pageRoute="/conviene-reparar" showRafflePopup={false}><RepairDecision /></PageFrame>;
   if (route === "/terminos-rifa") return <PageFrame pageRoute="/terminos-rifa" showRafflePopup={false}><RaffleTerms /></PageFrame>;
 
   return (
@@ -83,6 +86,7 @@ export default function App() {
         <Hero />
         <TechMarquee />
         <Services />
+        <RepairDecisionTeaser />
         <QuoteFinder />
         <BeforeAfter />
         <Guarantee />

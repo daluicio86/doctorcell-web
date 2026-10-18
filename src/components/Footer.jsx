@@ -25,6 +25,7 @@ export default function Footer() {
         <a href="/agendar">Solicitar una cita</a>
         <a href="/seguimiento">Seguimiento de reparación</a>
         <a href="/preguntas">Preguntas frecuentes</a>
+        <a href="/conviene-reparar/">¿Conviene reparar mi celular?</a>
         <a href="/guias/">Guías de reparación</a>
         <button className="footer-cookie-settings" type="button" onClick={() => window.dispatchEvent(new Event("doctorcell:cookie-settings"))}>Preferencias de medición</button>
       </div>

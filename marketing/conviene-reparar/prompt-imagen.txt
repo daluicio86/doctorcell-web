@@ -1,0 +1,16 @@
+Modo: herramienta integrada image_gen; referencia de marca: public/logo.jpg.
+
+Use case: ads-marketing.
+Asset type: final Spanish promotional social media feed poster for Instagram and Facebook, portrait 4:5, ideally 1080 x 1350 pixels.
+Create one polished, publication-ready advertisement for DoctorCell Quito's real online tool '¿Conviene reparar mi celular?'.
+Input image 1 is a supporting brand-logo reference: preserve the existing DoctorCell artwork, colors, lettering and mascot faithfully and place it cleanly at the top with enough space to read the logo. Do not invent a new logo.
+Brand visual language: premium digital repair laboratory, almost-black green #080d0c, charcoal green panels #101816, restrained lime green #b7f76b and crisp warm-white typography. Clean modern sans-serif, bold editorial type, sophisticated and extremely legible on a small phone screen. Subtle grid, precise lighting, spacious margins, no busy decoration.
+Composition: bold typographic question fills upper half under the logo, with 'reparar' or 'celular' highlighted lime. Lower-middle includes an elegant realistic modern smartphone angled slightly, its screen showing a simple dark assessment interface with just three readable lines 'Tu equipo', 'La falla', 'Tus opciones' and a small lime check mark; this is an illustrative tool preview, not an invented quote or a diagnosis. Pair with two small minimal visual cues of repair vs replacement, no extra brand names. Lower quarter contains a highly visible lime call-to-action pill and the website in high-contrast readable text. Keep all essential copy well inside a 6% safe margin.
+Text to render exactly, with Spanish accents and punctuation:
+Main headline: '¿Conviene reparar mi celular?'
+Supporting line: 'Antes de cambiarlo, compara tus opciones.'
+Small feature line: 'Evalúa • Comparte • Cotiza'
+CTA: 'Pruébalo gratis en nuestra web'
+Website: 'doctorcell.com.ec'
+Small footer: 'Orientación preliminar. Cotización por WhatsApp.'
+The advertisement promotes visiting the website. Avoid implying that repair is always best. No invented prices, discounts, ratings, statistics, guarantees, QR codes, URLs other than doctorcell.com.ec, social media badges or platform logos. Do not add any additional copy. Carefully typeset all text; avoid tiny text, overlapping elements, or warped lettering. Opaque background.

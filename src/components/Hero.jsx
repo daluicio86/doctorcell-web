@@ -56,6 +56,7 @@ export default function Hero() {
           <ButtonLink href="#servicios" variant="ghost" icon={ArrowDown}>Explorar servicios</ButtonLink>
         </div>
         <p className="hero-assurance"><ShieldCheck size={15} /> Conoces y autorizas el precio antes de reparar.</p>
+        <a className="hero-decision-link" href="/conviene-reparar/">¿Conviene reparar mi celular? Evalúalo aquí <ArrowUpRight size={14} /></a>
         <div className="hero-proof-points" aria-label="Experiencia DoctorCell">
           <span><strong>15+</strong><small>Años de experiencia</small></span>
           <span><strong>04</strong><small>Sucursales en Quito</small></span>

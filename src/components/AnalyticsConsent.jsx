@@ -21,7 +21,7 @@ export default function AnalyticsConsent() {
     if (!ANALYTICS_ENABLED || choice !== "accepted") return undefined;
     const handleClick = (event) => {
       const link = event.target.closest("a");
-      if (!link) return;
+      if (!link || link.dataset.analyticsIntent === "share") return;
       const href = link.getAttribute("href") || "";
       const outboundPartner = link.dataset.analyticsPartner;
       if (outboundPartner) {

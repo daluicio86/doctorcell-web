@@ -31,6 +31,23 @@ Con consentimiento, `whatsapp_click` incluye `placement`, `branch` y `page_path`
 Un clic no acredita un mensaje recibido: esa medición requiere conectar el canal
 de WhatsApp o registrar conversaciones y ventas reales desde el CRM.
 
+## Herramienta: ¿Conviene reparar mi celular?
+
+Disponible en `/conviene-reparar/`, con accesos desde la portada y el pie de página.
+Evalúa falla, antigüedad y estado previo. Los costos son opcionales y los ingresa
+el visitante: no se inventan precios por modelo. La comparación utiliza criterios
+orientativos visibles (hasta 40 %, entre 40 % y 60 %, desde 60 %), condicionados
+al estado del equipo; humedad, batería hinchada y falta de encendido priorizan
+el diagnóstico. El precio y la viabilidad siempre requieren revisión técnica.
+
+El enlace compartido conserva las respuestas en el fragmento de URL y permite
+reconstruir el resultado, sin guardar registros en el servidor. El destinatario
+puede ver los datos incluidos y realizar su propia evaluación. Ofrece compartir
+con el menú del dispositivo, copiar enlace con alternativa manual y compartir
+por WhatsApp. Cotizar abre el WhatsApp del negocio con las respuestas y la
+sucursal elegida. Los eventos `repair_decision_complete` y
+`repair_decision_share` respetan el consentimiento de analítica existente.
+
 ## Captura de leads
 
 `npm run build` y `npm start` sirven la web y registran en `POST /api/leads`

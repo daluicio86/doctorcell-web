@@ -11,6 +11,7 @@ const branches = [
 ];
 
 const routes = [
+  { path: "conviene-reparar", title: "¿Conviene reparar mi celular? | DoctorCell Quito", description: "Evalúa el estado de tu celular, compara reparar o reemplazar, comparte tu resultado y cotiza por WhatsApp con DoctorCell Quito.", heading: "¿Conviene reparar mi celular?", copy: "Cuéntanos cómo está tu equipo. Compara tus opciones, comparte tu orientación y cotiza por WhatsApp." },
   { path: "tienda", title: "Tienda de accesorios | DoctorCell Quito", description: "Estuches, audífonos, cables y cargadores con fotografías, precios y compatibilidad por modelo.", heading: "Accesorios para tu equipo", copy: "Consulta productos reales, compatibilidad, precio y disponibilidad." },
   { path: "agendar", title: "Solicitar una cita | DoctorCell Quito", description: "Solicita un horario de revisión en una de las cuatro sucursales DoctorCell de Quito.", heading: "Solicita una cita", copy: "Elige la sucursal y el horario que prefieres; confirmaremos la disponibilidad contigo." },
   { path: "seguimiento", title: "Seguimiento de reparación | DoctorCell Quito", description: "Consulta el estado de una reparación DoctorCell mediante el número de orden.", heading: "Seguimiento de reparación", copy: "Ten a mano el número de orden entregado al recibir tu equipo." },
