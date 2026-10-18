@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight, FileText, Gift, Sparkles, TicketCheck, X } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Gift, Sparkles, TicketCheck, X } from "lucide-react";
 import { isRaffleActive, raffleClosingTime, raffleOpenEvent } from "../utils/raffle.js";
 
 export default function RafflePopup() {
@@ -108,45 +108,43 @@ export default function RafflePopup() {
 
         <div className="raffle-popup-layout">
           <div className="raffle-visual" aria-hidden="true">
-            <span className="raffle-confetti raffle-confetti-one" />
-            <span className="raffle-confetti raffle-confetti-two" />
-            <span className="raffle-confetti raffle-confetti-three" />
-            <Sparkles className="raffle-sparkle raffle-sparkle-one" size={27} />
-            <Sparkles className="raffle-sparkle raffle-sparkle-two" size={20} />
-
-            <div className="raffle-prize-tag"><Gift size={16} /> Gran premio</div>
+            <div className="raffle-visual-top"><span className="raffle-prize-tag"><Gift size={14} /> EL GRAN PREMIO</span><span className="raffle-edition">DOCTORCELL / 2026</span></div>
+            <span className="raffle-display-word">A07</span>
             <div className="raffle-device-glow" />
+            <div className="raffle-orbit" /><div className="raffle-orbit raffle-orbit-outer" />
             <div className="raffle-device-card">
-              <img className="raffle-device-image" src="/images/raffle-device.webp" alt="" width="447" height="447" decoding="async" />
+              <img className="raffle-device-image" src="/images/raffle-device-cutout.png" alt="" width="1254" height="1254" decoding="async" />
             </div>
-            <div className="raffle-winner-ribbon"><Sparkles size={15} /> ¡Puede ser tuyo!</div>
+            <span className="raffle-light-point light-point-one" /><span className="raffle-light-point light-point-two" />
+            <div className="raffle-winner-ribbon"><Sparkles size={15} /><span>Una nueva posibilidad.<strong>Puede ser tuyo.</strong></span><ArrowUpRight size={17} /></div>
+            <div className="raffle-visual-bottom"><span>SAMSUNG <b>Galaxy A07</b></span><small>Imagen referencial</small></div>
           </div>
 
           <div className="raffle-content">
-            <span className="raffle-kicker"><Gift size={15} /> Rifa DoctorCell</span>
-            <h2 id="raffle-title">¡Participa para ganar un <em>Samsung A07!</em></h2>
+            <span className="raffle-kicker"><span className="raffle-live-dot" /> PROMOCIÓN ACTIVA <span className="raffle-kicker-divider">/</span> RIFA DOCTORCELL</span>
+            <h2 id="raffle-title">Tus compras.<br />Tu oportunidad.<br /><em>Un Samsung A07.</em></h2>
             <p id="raffle-description">
-              Tus compras se acumulan automáticamente: por cada <strong>$25 acumulados</strong> recibes una oportunidad para participar en la rifa.
+              Tus compras pueden traerte algo más. Por cada <strong>$25 acumulados</strong>, recibes una oportunidad para ganar.
             </p>
 
             <div className="raffle-equation" aria-label="Cada veinticinco dólares acumulados en compras equivalen a una oportunidad">
-              <span><b>$25</b><small>en compras</small></span>
-              <i>=</i>
-              <span><b>1</b><small>oportunidad</small></span>
+              <span><b>$25</b><small>en compras acumuladas</small></span>
+              <i aria-hidden="true">→</i>
+              <span><b>01</b><small>oportunidad de ganar</small></span>
             </div>
 
-            <div className="raffle-more-chances"><TicketCheck size={18} /> Registro automático: tus compras se acumulan hasta completar $25.</div>
+            <div className="raffle-more-chances"><TicketCheck size={16} /> Registro automático con cada compra.</div>
 
             <a
               className="raffle-cta"
               href="/terminos-rifa"
               onClick={closePopup}
             >
-              <FileText size={20} />
-              <span>Quiero participar<small>Conoce los requisitos y condiciones</small></span>
-              <ArrowRight size={20} />
+              <Gift size={20} />
+              <span>Quiero participar<small>Conoce cómo y revisa las condiciones</small></span>
+              <ArrowUpRight size={22} />
             </a>
-            <a className="raffle-terms" href="/terminos-rifa" onClick={closePopup}>Vigente hasta el 31 de octubre · Sorteo: 7 de noviembre de 2026</a>
+            <a className="raffle-terms" href="/terminos-rifa" onClick={closePopup}><CalendarDays size={14} /><span>Participa hasta el <strong>31 oct 2026</strong><small>Sorteo: 7 de noviembre de 2026 · Ver condiciones</small></span></a>
           </div>
         </div>
       </section>
