@@ -7,12 +7,13 @@ import { whatsappUrl } from "../utils/whatsapp.js";
 export default function Services() {
   return (
     <section className="section services" id="servicios">
-      <SectionHeading eyebrow="Servicios especializados en las mejores manos" title="Reparamos todas las marcas.">
+      <SectionHeading eyebrow="01 / PRECISIÓN QUE SE NOTA" title="Un nuevo comienzo para tu equipo.">
         Revisamos cada equipo y confirmamos la solución según el modelo, el diagnóstico y el repuesto disponible.
       </SectionHeading>
       <div className="service-grid">
-        {services.map(({ icon: Icon, title, text, time, guideHref, guideLabel }) => (
+        {services.map(({ icon: Icon, title, text, time, guideHref, guideLabel }, index) => (
           <article key={title}>
+            <span className="service-index" aria-hidden="true">0{index + 1} <ArrowRight size={17} /></span>
             <span className="icon"><Icon size={22} /></span>
             <h3>{title}</h3>
             <p>{text}</p>

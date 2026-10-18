@@ -1,6 +1,11 @@
 // Dates use Ecuador's UTC−5. The draw time has not been announced.
 export const raffleClosingTime = Date.parse("2026-11-01T00:00:00-05:00");
 export const raffleDrawDay = Date.parse("2026-11-07T00:00:00-05:00");
+export const raffleOpenEvent = "doctorcell:open-raffle";
+
+export function isRaffleActive(now) {
+  return Number.isFinite(now) && now < raffleClosingTime;
+}
 
 export function raffleStatus(now) {
   if (now >= raffleDrawDay) return "La participación cerró. Consulta el resultado en los canales oficiales.";

@@ -19,6 +19,8 @@ import RepairTracking from "./components/RepairTracking.jsx";
 import Services from "./components/Services.jsx";
 import Store, { products } from "./components/Store.jsx";
 import Testimonials from "./components/Testimonials.jsx";
+import TechMarquee from "./components/TechMarquee.jsx";
+import useSiteMotion from "./hooks/useSiteMotion.js";
 import { branches } from "./data/siteData.js";
 import { setPageMetadata } from "./utils/pageMetadata.js";
 
@@ -40,7 +42,8 @@ function PageFrame({ children, pageRoute, schema, showRafflePopup = true }) {
     const [title, description] = pages[pageRoute];
     setPageMetadata({ title, description, path: pageRoute, schema });
   }, [pageRoute, serializedSchema]);
-  return <><Header /><main className="utility-page">{children}</main>{showRafflePopup ? <RafflePopup /> : null}<Chatbot /><AnalyticsConsent /><Footer /></>;
+  const themeClass = pageRoute === "/terminos-rifa" ? "" : pageRoute === "/tienda" ? " future-store" : " future-utility";
+  return <><Header /><main className={`utility-page${themeClass}`}>{children}</main>{showRafflePopup ? <RafflePopup /> : null}<Chatbot /><AnalyticsConsent /><Footer /></>;
 }
 
 function StorePage() {
@@ -57,6 +60,7 @@ function StorePage() {
 }
 
 export default function App() {
+  useSiteMotion();
   useEffect(() => {
     if (route === "/") {
       const [title, description] = pages["/"];
@@ -64,7 +68,7 @@ export default function App() {
     }
   }, []);
   const branch = branches.find((item) => route === `/sucursales/${item.slug}`);
-  if (branch) return <><Header /><main className="utility-page"><BranchDetail branch={branch} /></main><RafflePopup /><Chatbot /><AnalyticsConsent /><Footer /></>;
+  if (branch) return <><Header /><main className="utility-page future-utility"><BranchDetail branch={branch} /></main><RafflePopup /><Chatbot /><AnalyticsConsent /><Footer /></>;
   if (route === "/tienda") return <StorePage />;
   if (route === "/seguimiento") return <PageFrame pageRoute="/seguimiento"><RepairTracking /></PageFrame>;
   if (route === "/agendar") return <PageFrame pageRoute="/agendar"><AppointmentBooking /></PageFrame>;
@@ -75,14 +79,15 @@ export default function App() {
   return (
     <>
       <Header />
-      <main id="inicio">
+      <main id="inicio" className="futurist-home">
         <Hero />
-        <Testimonials />
-        <RaffleBanner />
-        <QuoteFinder />
+        <TechMarquee />
         <Services />
+        <QuoteFinder />
         <BeforeAfter />
         <Guarantee />
+        <Testimonials />
+        <RaffleBanner />
         <Branches />
         <FinalCta />
       </main>

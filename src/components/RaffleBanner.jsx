@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Gift } from "lucide-react";
-import { raffleClosingTime, raffleStatus } from "../utils/raffle.js";
+import { raffleClosingTime, raffleOpenEvent, raffleStatus } from "../utils/raffle.js";
 
 export default function RaffleBanner() {
   const [now, setNow] = useState(null);
@@ -23,7 +23,10 @@ export default function RaffleBanner() {
         <p>{closed ? "La participación en esta promoción ha finalizado." : <>Cada <strong>$25 acumulados en compras</strong> generan una oportunidad. Registro automático con cada compra.</>}</p>
         <p>{closed ? "La participación cerró el " : "Participa hasta el "}<strong>31 de octubre de 2026</strong>.<br />Sorteo: <strong>7 de noviembre de 2026</strong>.</p>
         <p className="raffle-home-countdown">{now === null ? "Cierre de participación: 31 de octubre de 2026" : raffleStatus(now)}</p>
-        <a className="google-reviews-link" href="/terminos-rifa">Ver requisitos y condiciones de la rifa</a>
+        <div className="raffle-home-actions">
+          {!closed && <button className="button primary raffle-reopen" type="button" onClick={() => window.dispatchEvent(new Event(raffleOpenEvent))}><Gift size={17} /> Ver promoción</button>}
+          <a className="google-reviews-link" href="/terminos-rifa">Ver requisitos y condiciones de la rifa</a>
+        </div>
       </div>
     </section>
   );

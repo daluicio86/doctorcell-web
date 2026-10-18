@@ -2,13 +2,23 @@
 
 ## Home comercial
 
+El diseño de laboratorio digital está en `src/styles/future.css`, cargado después
+de los estilos base. La portada incluye un teléfono construido con CSS, luz
+animada y una franja continua de marcas. `useSiteMotion` añade entradas al
+desplazarse e iluminación de las tarjetas con el puntero; respeta
+`prefers-reduced-motion` y pausa la escena cuando sale de pantalla. Las rutas de
+citas, seguimiento, sucursales y tienda comparten la paleta oscura.
+
 `npm run build` compila el cliente y una entrada de renderizado React en
 `.prerender/`; el generador incorpora el contenido completo de la home en
 `dist/index.html`. Las rutas secundarias conservan su contenido estático inicial.
 Los metadatos de la home están en `index.html` y `src/App.jsx`.
 
 La home presenta WhatsApp como acción principal, enlaces a reseñas por sucursal
-y la rifa con sus fechas existentes. El contador usa UTC−5, cierra la participación
+y la rifa con sus fechas existentes. El popup se muestra en cada carga o visita,
+aunque se haya cerrado previamente, y puede reabrirse desde «Ver promoción» en
+el bloque de la rifa. Se desactiva automáticamente al finalizar el 31 de octubre
+de 2026 (UTC−5), incluso si la página permanece abierta. El contador usa UTC−5, cierra la participación
 al terminar el 31 de octubre y cambia el mensaje el día del sorteo, sin inventar
 una hora. Antes de publicar la promoción, el negocio debe completar su revisión
 legal y confirmar la mecánica anunciada.

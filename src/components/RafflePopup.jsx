@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, FileText, Gift, Sparkles, TicketCheck, X } from "lucide-react";
-
-const DISMISSED_KEY = "doctorcell-raffle-A07-dismissed";
+import { isRaffleActive, raffleClosingTime, raffleOpenEvent } from "../utils/raffle.js";
 
 export default function RafflePopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,9 +9,25 @@ export default function RafflePopup() {
   const closeButtonRef = useRef(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem(DISMISSED_KEY)) return undefined;
-    const openTimer = window.setTimeout(() => setIsOpen(true), 700);
-    return () => window.clearTimeout(openTimer);
+    if (!isRaffleActive(Date.now())) return undefined;
+    const openPopup = () => setIsOpen(isRaffleActive(Date.now()));
+    const openTimer = window.setTimeout(openPopup, 700);
+    let expiryTimer;
+    const checkExpiry = () => {
+      const remaining = raffleClosingTime - Date.now();
+      if (remaining <= 0) {
+        setIsOpen(false);
+        return;
+      }
+      expiryTimer = window.setTimeout(checkExpiry, Math.min(remaining, 60000));
+    };
+    checkExpiry();
+    window.addEventListener(raffleOpenEvent, openPopup);
+    return () => {
+      window.clearTimeout(openTimer);
+      window.clearTimeout(expiryTimer);
+      window.removeEventListener(raffleOpenEvent, openPopup);
+    };
   }, []);
 
   useEffect(() => {
@@ -38,7 +53,6 @@ export default function RafflePopup() {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        sessionStorage.setItem(DISMISSED_KEY, "true");
         setIsOpen(false);
         return;
       }
@@ -72,7 +86,6 @@ export default function RafflePopup() {
   }, [isOpen]);
 
   const closePopup = () => {
-    sessionStorage.setItem(DISMISSED_KEY, "true");
     setIsOpen(false);
   };
 

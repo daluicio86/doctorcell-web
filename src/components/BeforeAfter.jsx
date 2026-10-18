@@ -11,8 +11,8 @@ const comparisons = [
 export default function BeforeAfter() {
   return (
     <section className="section before-after" id="casos-reales">
-      <SectionHeading eyebrow="Reparaciones documentadas" title="Sabes qué falló, qué hicimos y qué cubre la garantía.">
-        Cada caso real publicado incluirá autorización del cliente, evidencia antes y después, solución, tiempo y garantía. No usamos imágenes de banco para simular reparaciones.
+      <SectionHeading eyebrow="03 / ASÍ LO HACEMOS" title="De la falla a la solución. Contigo en cada paso.">
+        Un proceso claro: revisamos, te explicamos y reparamos con tu autorización. Estas ilustraciones muestran cómo cuidamos tu equipo.
       </SectionHeading>
       <div className="comparison-grid">
         {comparisons.map((item, index) => (

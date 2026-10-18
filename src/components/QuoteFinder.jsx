@@ -76,7 +76,7 @@ export default function QuoteFinder() {
   return (
     <section className="quote-finder" id="cotizador" aria-labelledby="quote-title">
       <div className="quote-intro">
-        <p className="eyebrow">Orientación preliminar</p>
+        <p className="eyebrow">02 / CONECTEMOS</p>
         <h2 id="quote-title">Cuéntanos qué le pasa a tu equipo.</h2>
         <p>Marca, modelo, falla, una foto opcional y la sucursal que prefieres. El diagnóstico definitivo se confirma al revisar físicamente el equipo.</p>
         <div className="quote-route" aria-label="Flujo del cotizador">
