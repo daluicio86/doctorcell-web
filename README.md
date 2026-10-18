@@ -34,11 +34,11 @@ de WhatsApp o registrar conversaciones y ventas reales desde el CRM.
 ## Herramienta: ¿Conviene reparar mi celular?
 
 Disponible en `/conviene-reparar/`, con accesos desde la portada y el pie de página.
-Evalúa falla, antigüedad y estado previo. Los costos son opcionales y los ingresa
-el visitante: no se inventan precios por modelo. La comparación utiliza criterios
-orientativos visibles (hasta 40 %, entre 40 % y 60 %, desde 60 %), condicionados
-al estado del equipo; humedad, batería hinchada y falta de encendido priorizan
-el diagnóstico. El precio y la viabilidad siempre requieren revisión técnica.
+Evalúa falla, antigüedad y estado previo, sin solicitar costos al visitante.
+Humedad, batería hinchada y falta de encendido priorizan el diagnóstico.
+El precio y la viabilidad siempre requieren revisión técnica. Los enlaces
+compartidos anteriores siguen abriendo la evaluación del equipo; los campos
+de costos antiguos se ignoran y no se incluyen al volver a compartir.
 
 El enlace compartido conserva las respuestas en el fragmento de URL y permite
 reconstruir el resultado, sin guardar registros en el servidor. El destinatario

@@ -9,27 +9,32 @@ const metaPixelId = /^\d{10,20}$/.test(buildEnv.VITE_META_PIXEL_ID || "") ? buil
 const wa = (text) => `https://wa.me/593983222100?text=${encodeURIComponent(text)}`;
 const writeFile = async (path, data) => {
   try {
+    if ((await readFile(path, "utf8")).trimEnd() === data.trimEnd()) return;
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  try {
     await rawWriteFile(path, data);
   } catch (error) {
     if (error?.code !== "EPERM") throw error;
     const current = await readFile(path, "utf8");
-    if (current !== data) throw error;
+    if (current.trimEnd() !== data.trimEnd()) throw error;
   }
 };
 const pages = [
   {
     slug: "cambio-pantalla-iphone-quito", title: "Cambio de pantalla iPhone en Quito",
-    description: "Guía para cambiar la pantalla de un iPhone en Quito: tipos de daño, repuestos, pruebas y garantía.",
+    description: "Guía para cambiar la pantalla de un iPhone en Quito: tipos de daño, repuestos y pruebas finales.",
     intro: "Una caída puede romper solo el vidrio o afectar también el táctil y la imagen. Identificar el daño evita una reparación incorrecta.",
     sections: [
       ["¿Qué parte está dañada?", "Si la imagen se ve normal y el táctil responde en toda la superficie, el daño puede estar limitado al vidrio. Líneas, manchas negras, parpadeos, zonas sin imagen o respuesta irregular suelen indicar daño en el módulo. La confirmación requiere revisar el equipo y el modelo exacto."],
-      ["Qué preguntar antes del cambio", "Solicita que te expliquen el tipo de repuesto, valor total, tiempo estimado y garantía aplicable. Confirma que brillo, sensores, cámara frontal y respuesta táctil serán probados antes de la entrega."],
-      ["Antes y después de reparar", "Haz una copia de seguridad si todavía funciona. Al retirarlo prueba el táctil completo, brillo, colores, cámaras, audio y sensores. Revisa el cierre del marco y conserva el comprobante con las condiciones de garantía."]
+      ["Qué preguntar antes del cambio", "Solicita que te expliquen el tipo de repuesto, valor total y tiempo estimado. Confirma que brillo, sensores, cámara frontal y respuesta táctil serán probados antes de la entrega."],
+      ["Antes y después de reparar", "Haz una copia de seguridad si todavía funciona. Al retirarlo prueba el táctil completo, brillo, colores, cámaras, audio y sensores. Revisa el cierre del marco y conserva el comprobante del servicio."]
     ], faqs: [["¿Cuánto tarda?", "Depende del modelo, la disponibilidad del repuesto y las pruebas finales."], ["¿Se borran mis datos?", "Normalmente no, pero siempre conviene contar con una copia de seguridad."], ["¿Puedo usarlo roto?", "No es recomendable: el daño puede avanzar y permitir la entrada de humedad."]]
   },
   {
     slug: "cambio-pantalla-samsung-quito", title: "Cambio de pantalla Samsung en Quito",
-    description: "Qué revisar antes de cambiar una pantalla Samsung en Quito: módulo, táctil, imagen, repuesto y garantía.",
+    description: "Qué revisar antes de cambiar una pantalla Samsung en Quito: módulo, táctil, imagen y repuesto.",
     intro: "En muchos Samsung la imagen y el táctil forman parte de un módulo. El modelo y el diagnóstico importan tanto como el repuesto.",
     sections: [
       ["Vidrio, táctil o display", "Manchas moradas, líneas verticales, pantalla negra con sonido o zonas sin respuesta apuntan a una afectación interna. No presiones el panel: una mancha pequeña puede extenderse."],
@@ -55,7 +60,7 @@ const pages = [
     sections: [
       ["Señales de degradación", "Descarga acelerada, apagados con porcentaje disponible, reinicios, carga lenta o calentamiento justifican una revisión. La señal débil, aplicaciones y errores de software también aumentan el consumo."],
       ["Si está hinchada", "Deja de cargar y usar el equipo. No presiones la tapa, no perfores la batería y aléjala del calor. Una batería deformada requiere atención prioritaria."],
-      ["Qué debe incluir el servicio", "Pregunta por compatibilidad, valor total, tiempo y garantía. Después del cambio deben revisarse carga, consumo, temperatura, encendido y cierre correcto."]
+      ["Qué debe incluir el servicio", "Pregunta por compatibilidad, valor total y tiempo. Después del cambio deben revisarse carga, consumo, temperatura, encendido y cierre correcto."]
     ], faqs: [["¿Cuándo debo cambiarla?", "Cuando una prueba confirma degradación o existen apagados, hinchazón o autonomía insuficiente."], ["¿Pierdo datos?", "Normalmente no, pero recomendamos una copia de seguridad."], ["¿Es peligroso usarla hinchada?", "Sí. Apaga el equipo y no lo cargues."]]
   },
   {
@@ -77,7 +82,7 @@ const pages = [
       ["Identifica modelo y falla", "Busca el nombre y código en Ajustes, la caja o etiqueta. Describe si hubo golpe, humedad, actualización o calentamiento. Una misma falla visible puede tener causas distintas."],
       ["Pantalla, batería y carga", "Líneas, manchas o táctil irregular requieren revisar el módulo. En carga deben descartarse accesorios y suciedad antes de reemplazar el conector."],
       ["Problemas de software", "Reinicios, lentitud y bloqueos pueden requerir diagnóstico de almacenamiento, aplicaciones o sistema. Pregunta si el proceso borrará datos y respáldalos cuando sea posible."],
-      ["Antes de autorizar", "Confirma repuesto compatible, costo, plazo y garantía. Al retirarlo prueba pantalla, cámaras, audio, carga, conectividad y sensores."]
+      ["Antes de autorizar", "Confirma repuesto compatible, costo y plazo. Al retirarlo prueba pantalla, cámaras, audio, carga, conectividad y sensores."]
     ], faqs: [["¿Reparan Redmi y POCO?", "Depende del modelo y repuesto; consulta con el código exacto."], ["¿Se borran datos al actualizar?", "No siempre, pero ciertos procesos de recuperación sí pueden hacerlo."], ["¿Dónde veo el modelo?", "En Ajustes, la caja o la etiqueta del equipo."]]
   }
 ];

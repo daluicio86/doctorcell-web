@@ -1,0 +1,16 @@
+Modo: herramienta integrada image_gen.
+Referencias: doctorcell-instagram-facebook.png y public/logo.jpg.
+
+Use case: ads-marketing.
+Asset type: final portrait 9:16 Instagram and Facebook Story, ideally 1080 x 1920 pixels.
+Adapt the provided DoctorCell feed campaign artwork into a beautiful, publication-ready Story promoting the real tool '¿Conviene reparar mi celular?'. Input image 1 is the campaign design and visual reference. Input image 2 is the official logo: preserve its existing DoctorCell lettering, mascot and colors faithfully. Keep the black and lime digital repair-laboratory look, photographic smartphones, white/lime bold clean Spanish typography, dark green panels, sophisticated restrained lighting.
+CRITICAL REQUIREMENT: leave a truly empty, unobstructed dark region in the LOWER MIDDLE for the user to add the real clickable link sticker in the Instagram/Facebook editor. Leave the area between approximately 73% and 85% of the image height and the central 76% of image width completely empty: no text, no placeholder, no border, no fake button, no box, no smartphone, no watermark. The natural almost-black background should continue seamlessly through this empty area. Do NOT draw a sticker or write 'sticker', 'enlace aquí' or any production instructions.
+Story-safe layout: top 10% and bottom 10% are quiet near-black margins so the app interface cannot obscure important content. Official logo centered around 12–20% height. Large headline between 23–36%, supporting text 38–42%. A compact realistic phone showing the assessment, paired with a broken phone and repair tool, from 44–63%. No Apple wordmark or other new branding. A short CTA and a tiny downward arrow between 65–71%, directing attention toward the empty sticker area. A small footer around 87% height. Keep the composition airy, legible and balanced, not a tall squeezed version of the old poster.
+Text verbatim (only these texts, plus lettering already present in official logo):
+Headline: '¿Conviene reparar mi celular?'
+Supporting line: 'Antes de cambiarlo, compara tus opciones.'
+On the assessment phone, three short lines: 'Tu equipo', 'La falla', 'Tus opciones'.
+CTA above empty sticker area: 'Pruébalo gratis'
+Footer: 'doctorcell.com.ec'
+Small footer qualifier: 'Orientación preliminar. Cotiza por WhatsApp.'
+Do not use the old wide lime CTA button. Do not place any fake link button in the blank region. No QR code, invented prices, guaranteed diagnosis, unsupported claims, or additional text. Check accents carefully. Opaque background.

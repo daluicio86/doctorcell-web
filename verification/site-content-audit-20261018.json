@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-18",
+  "domain": "https://doctorcell.com.ec",
+  "queryUsedToVerifyCurrentVersion": "v=20261018-textos",
+  "pages": [
+    {
+      "path": "/",
+      "mentions": [],
+      "title": "Cambio de pantalla y reparación de celulares en Quito | DoctorCell"
+    },
+    {
+      "path": "/conviene-reparar/",
+      "mentions": [],
+      "title": "¿Conviene reparar mi celular? | DoctorCell Quito"
+    },
+    {
+      "path": "/agendar/",
+      "mentions": [],
+      "title": "Solicitar una cita | DoctorCell Quito"
+    },
+    {
+      "path": "/preguntas/",
+      "mentions": [],
+      "title": "Preguntas frecuentes | DoctorCell Quito"
+    },
+    {
+      "path": "/seguimiento/",
+      "mentions": [],
+      "title": "Seguimiento de reparación | DoctorCell Quito"
+    },
+    {
+      "path": "/terminos-rifa/",
+      "mentions": [],
+      "title": "Términos de la rifa | DoctorCell Quito"
+    },
+    {
+      "path": "/tienda/",
+      "mentions": [],
+      "title": "Tienda de accesorios | DoctorCell Quito"
+    },
+    {
+      "path": "/sucursales/",
+      "mentions": [],
+      "title": "Sucursales DoctorCell en Quito"
+    },
+    {
+      "path": "/sucursales/colon-juan-leon-mera/",
+      "mentions": [],
+      "title": "Sucursal Colón | DoctorCell Quito"
+    },
+    {
+      "path": "/sucursales/matriz-prensa-rio-arajuno/",
+      "mentions": [],
+      "title": "Sucursal Prensa | DoctorCell Quito"
+    },
+    {
+      "path": "/sucursales/prensa-vaca-de-castro/",
+      "mentions": [],
+      "title": "Sucursal Vaca de Castro | DoctorCell Quito"
+    },
+    {
+      "path": "/sucursales/shyris-tomas-de-berlanga/",
+      "mentions": [],
+      "title": "Sucursal Shyris | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/",
+      "mentions": [],
+      "title": "Guías de reparación de celulares | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/cambio-pantalla-iphone-quito/",
+      "mentions": [],
+      "title": "Cambio de pantalla iPhone en Quito | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/cambio-pantalla-samsung-quito/",
+      "mentions": [],
+      "title": "Cambio de pantalla Samsung en Quito | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/cambio-bateria-celular-quito/",
+      "mentions": [],
+      "title": "Cambio de batería de celular en Quito | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/reparacion-xiaomi-quito/",
+      "mentions": [],
+      "title": "Reparación de celulares Xiaomi en Quito | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/celular-no-carga-quito/",
+      "mentions": [],
+      "title": "Mi celular no carga: diagnóstico en Quito | DoctorCell Quito"
+    },
+    {
+      "path": "/guias/celular-mojado-que-hacer/",
+      "mentions": [],
+      "title": "Qué hacer si tu celular se mojó | DoctorCell Quito"
+    }
+  ],
+  "quoteMessage": "¿Conviene reparar mi celular? · DoctorCell Quito\nEquipo: Samsung Galaxy A54.\nFalla: Pantalla rota o falla del táctil.\nAntigüedad: Menos de 2 años. Estado: Funcionaba bien antes de esta falla.\nOrientación: Vale la pena cotizar la reparación.\nSi el equipo cubría tus necesidades, conocer el costo de solucionar esta falla es un buen primer paso antes de reemplazarlo.\nOrientación preliminar; el diagnóstico, precio y viabilidad se confirman al revisar el equipo.\n\nHola DoctorCell, usé la herramienta y quiero cotizar mi reparación.\nSucursal preferida: Sucursal Prensa.\n¿Me confirman la viabilidad, el precio total y el tiempo?",
+  "quoteHasNoMentions": true
+}

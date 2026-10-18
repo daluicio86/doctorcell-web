@@ -42,7 +42,6 @@ export const navItems = [
 export const trustItems = [
   { label: "Repuestos premium", icon: ShieldCheck },
   { label: "Entrega rápida", icon: Clock3 },
-  { label: "Garantía por escrito", icon: CheckCircle2 }
 ];
 
 export const diagnostics = [
@@ -123,7 +122,7 @@ export const services = [
   }
 ];
 
-export const guaranteeItems = [
+export const serviceProcessItems = [
   { label: "Diagnóstico transparente", icon: CheckCircle2 },
   { label: "Repuestos de calidad", icon: ShieldCheck },
   { label: "Pruebas antes de entregar", icon: Sparkles },
@@ -165,11 +164,6 @@ export const testimonials = [
   {
     name: "Jhoana Colina",
     text: "La atención fue excelente, muy amables y profesionales. Los recomiendo.",
-    branch: "Cliente de DoctorCell Quito"
-  },
-  {
-    name: "Juan Morejon",
-    text: "Mi pantalla quedó impecable, con garantía y atención muy amable.",
     branch: "Cliente de DoctorCell Quito"
   }
 ];

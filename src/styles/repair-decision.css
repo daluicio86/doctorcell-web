@@ -33,14 +33,9 @@
 .decision-field input, .decision-field select { width: 100%; min-width: 0; min-height: 48px; padding: 12px; border: 1px solid #3c4d40; border-radius: 7px; color: #f1f4ee; background: #0a110e; color-scheme: dark; font-size: 13px; }
 .decision-field select { padding-right: 24px; }
 .decision-field input::placeholder { color: #849187; opacity: 1; }
-.decision-field small, .decision-costs small { color: #a0afa6; font-size: 11px; line-height: 1.7; }
+.decision-field small { color: #a0afa6; font-size: 11px; line-height: 1.7; }
 .decision-full { grid-column: 1 / -1; }
-.decision-costs { min-width: 0; margin: 30px 0 25px; padding: 22px 0 0; border: 0; border-top: 1px solid #2a3930; }
-.decision-costs legend { display: flex; align-items: center; gap: 7px; padding-right: 10px; color: #d5dfd0; font-size: 13px; }
-.decision-costs legend > span { margin-left: 4px; padding: 2px 6px; border-radius: 4px; color: #b7f76b; background: #b7f76b0d; font-size: 10px; }
-.decision-costs > p { margin: -4px 0 20px; color: #a0afa6; font-size: 12px; line-height: 1.8; }
-.decision-costs > small { display: block; margin-top: 13px; }
-.decision-submit { width: 100%; }
+.decision-submit { width: 100%; margin-top: 28px; }
 .decision-form-note { margin: 14px 0 0; color: #a0afa6; font-size: 11px; line-height: 1.8; text-align: center; }
 .decision-guide { padding: 30px; border: 1px solid #2b3c2b; border-radius: 14px; background: linear-gradient(145deg, #152018, #0c1410); }
 .decision-guide-icon { display: grid; place-items: center; width: 62px; height: 62px; margin-bottom: 30px; border: 1px solid #3a5131; border-radius: 14px; color: #b7f76b; background: #b7f76b08; }
@@ -65,16 +60,6 @@
 .decision-facts > div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; padding: 7px 0; font-size: 12px; line-height: 1.7; }
 .decision-facts dt { color: #98ab96; }
 .decision-facts dd { margin: 0; color: #d5dfd0; }
-.decision-comparison { margin: 22px 0; padding: 20px; border: 1px solid #415b32; border-radius: 8px; background: #b7f76b06; }
-.decision-comparison > div:first-child { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.decision-comparison span { color: #b9cbb0; font-size: 12px; }
-.decision-comparison strong { color: #b7f76b; font-size: 30px; font-weight: 500; }
-.decision-meter { height: 5px; margin-top: 14px; overflow: hidden; border-radius: 5px; background: #2d3d2b; }
-.decision-meter > span { display: block; height: 100%; border-radius: inherit; background: #b7f76b; }
-.decision-comparison p { margin: 12px 0 0; color: #a0afa6; font-size: 11px; line-height: 1.7; }
-.decision-no-costs { display: flex; align-items: center; gap: 13px; margin: 23px 0; color: #b7f76b; }
-.decision-no-costs svg { flex: none; }
-.decision-no-costs p { margin: 0; color: #a0afa6; font-size: 12px; line-height: 1.8; }
 .decision-result h3 { margin: 26px 0 14px; color: #e1eadb; font-size: 15px; font-weight: 500; }
 .decision-next-steps { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
 .decision-next-steps li { display: flex; align-items: start; gap: 9px; color: #b4c3ae; font-size: 12px; line-height: 1.8; }

@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-about">
         <Brand />
-        <p>Servicio técnico para celulares, tablets y relojes inteligentes, con diagnóstico claro y garantía por escrito.</p>
+        <p>Servicio técnico para celulares, tablets y relojes inteligentes, con diagnóstico claro y autorización previa.</p>
       </div>
       <div className="footer-contact" aria-label="Datos de contacto">
         <strong>{contactInfo.businessName}</strong>

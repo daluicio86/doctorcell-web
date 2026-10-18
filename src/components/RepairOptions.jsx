@@ -11,7 +11,6 @@ const options = [
     features: [
       "Repuesto compatible verificado",
       "Prueba de táctil, imagen y funciones",
-      "Garantía por escrito según el repuesto"
     ],
     cta: "Cotizar compatible",
     message: "Hola DoctorCell Quito, quiero cotizar una reparación con repuesto compatible. ¿Qué opciones tienen para mi modelo?"
@@ -23,7 +22,6 @@ const options = [
     features: [
       "Mejor ajuste de brillo, color o respuesta según pieza",
       "Repuesto premium u original cuando esté disponible",
-      "Cobertura y condiciones informadas antes de reparar"
     ],
     cta: "Comparar opción premium",
     message: "Hola DoctorCell Quito, quiero comparar la opción premium u original para mi reparación. ¿Cuál recomiendan para mi modelo?",
@@ -35,7 +33,7 @@ export default function RepairOptions() {
   return (
     <section className="section repair-options" id="opciones-repuesto">
       <SectionHeading eyebrow="Elige con claridad" title="No todos los repuestos ofrecen la misma experiencia.">
-        Compara antes de decidir. Te confirmamos compatibilidad, disponibilidad, precio final y garantía antes de intervenir tu equipo.
+        Compara antes de decidir. Te confirmamos compatibilidad, disponibilidad y precio final antes de intervenir tu equipo.
       </SectionHeading>
 
       <div className="repair-option-grid">
@@ -57,7 +55,7 @@ export default function RepairOptions() {
 
       <div className="option-clarity-note">
         <ShieldCheck size={21} />
-        <p><strong>Sin sorpresas:</strong> la cotización final identifica el tipo de pieza, las pruebas incluidas y la cobertura exacta.</p>
+        <p><strong>Sin sorpresas:</strong> la cotización final identifica el tipo de pieza y las pruebas incluidas.</p>
       </div>
     </section>
   );

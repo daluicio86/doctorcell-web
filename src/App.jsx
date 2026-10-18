@@ -8,7 +8,7 @@ import Chatbot from "./components/Chatbot.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Faq from "./components/Faq.jsx";
 import Footer from "./components/Footer.jsx";
-import Guarantee from "./components/Guarantee.jsx";
+import ServiceProcess from "./components/ServiceProcess.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import QuoteFinder from "./components/QuoteFinder.jsx";
@@ -28,12 +28,12 @@ import { setPageMetadata } from "./utils/pageMetadata.js";
 const route = typeof window === "undefined" ? "/" : window.location.pathname.replace(/\/+$/, "") || "/";
 
 const pages = {
-  "/": ["Cambio de pantalla y reparación de celulares en Quito | DoctorCell", "¿Pantalla rota? Cotiza por WhatsApp. Confirmamos el precio antes de reparar, con garantía por escrito y cuatro sucursales en Quito."],
+  "/": ["Cambio de pantalla y reparación de celulares en Quito | DoctorCell", "¿Pantalla rota? Cotiza por WhatsApp. Confirmamos el precio antes de reparar. Encuéntranos en cuatro sucursales de Quito."],
   "/tienda": ["Tienda de accesorios | DoctorCell Quito", "Estuches, audífonos, cables y cargadores con fotografías, precios y compatibilidad por modelo."],
   "/agendar": ["Solicitar una cita | DoctorCell Quito", "Solicita un horario de revisión en una de las cuatro sucursales DoctorCell de Quito."],
   "/seguimiento": ["Seguimiento de reparación | DoctorCell Quito", "Consulta el estado de una reparación DoctorCell mediante el número de orden."],
   "/sucursales": ["Sucursales DoctorCell en Quito", "Direcciones, horarios, rutas y contacto de las cuatro sucursales DoctorCell en Quito."],
-  "/preguntas": ["Preguntas frecuentes | DoctorCell Quito", "Respuestas sobre tiempos, repuestos, garantía, diagnóstico y visita a las sucursales DoctorCell."],
+  "/preguntas": ["Preguntas frecuentes | DoctorCell Quito", "Respuestas sobre tiempos, repuestos, diagnóstico y visita a las sucursales DoctorCell."],
   "/conviene-reparar": ["¿Conviene reparar mi celular? | DoctorCell Quito", "Evalúa el estado de tu celular, compara reparar o reemplazar, comparte tu resultado y cotiza por WhatsApp con DoctorCell Quito."],
   "/terminos-rifa": ["Términos de la rifa | DoctorCell Quito", "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung A07 el 7 de noviembre de 2026."]
 };
@@ -89,7 +89,7 @@ export default function App() {
         <RepairDecisionTeaser />
         <QuoteFinder />
         <BeforeAfter />
-        <Guarantee />
+        <ServiceProcess />
         <Testimonials />
         <RaffleBanner />
         <Branches />

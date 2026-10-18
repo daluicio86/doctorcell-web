@@ -14,7 +14,6 @@ export default function Intro() {
         <p>Cuéntanos qué le pasa a tu equipo. Te orientamos, confirmamos disponibilidad y explicamos el valor antes de comenzar.</p>
         <ul>
           <li><CheckCircle2 size={19} /> Diagnóstico y precio claros</li>
-          <li><CheckCircle2 size={19} /> Repuestos con garantía por escrito</li>
           <li><CheckCircle2 size={19} /> Cuatro sucursales en Quito</li>
         </ul>
         <a href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación. Mi equipo, modelo y falla son:")} target="_blank" rel="noopener noreferrer">

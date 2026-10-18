@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, ArrowUpRight, BatteryCharging, Check, Cpu, MessageCircle, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
 import ButtonLink from "./ButtonLink.jsx";
 import { whatsappUrl } from "../utils/whatsapp.js";
 
@@ -34,7 +34,6 @@ function DeviceScene() {
         </div>
       </div>
       <div className="lab-chip chip-precision"><span><ScanLine size={19} /></span><div><small>TECNOLOGÍA + EXPERIENCIA</small><strong>Diagnóstico de precisión</strong></div><span className="chip-status" /></div>
-      <div className="lab-chip chip-guarantee"><span><ShieldCheck size={20} /></span><div><strong>Tu tranquilidad, por escrito.</strong><small>Garantía según reparación</small></div><Check size={14} /></div>
       <div className="lab-chip chip-component"><Cpu size={22} /><span>CUIDAMOS<br /><b>CADA COMPONENTE</b></span></div>
       <span className="lab-spark spark-one" /><span className="lab-spark spark-two" /><span className="lab-spark spark-three" />
     </div>
@@ -50,7 +49,7 @@ export default function Hero() {
         <a className="hero-location" href="/sucursales"><span className="live-dot" /> QUITO, ECUADOR <span className="location-separator">/</span> 4 SUCURSALES <ArrowUpRight size={14} /></a>
         <p className="eyebrow">SERVICIO TÉCNICO. SIGUIENTE NIVEL.</p>
         <h1 id="hero-title">Tu mundo<br />no se detiene.<br /><em>Tu equipo tampoco.</em></h1>
-        <p className="hero-copy">Le damos una nueva vida a tu tecnología. Reparación de celulares, MacBook, tablets y smartwatches, con diagnóstico claro y garantía por escrito.</p>
+        <p className="hero-copy">Le damos una nueva vida a tu tecnología. Reparación de celulares, MacBook, tablets y smartwatches, con diagnóstico claro y autorización previa.</p>
         <div className="hero-actions">
           <ButtonLink href={quoteUrl} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero">Cotiza por WhatsApp <ArrowUpRight size={17} /></ButtonLink>
           <ButtonLink href="#servicios" variant="ghost" icon={ArrowDown}>Explorar servicios</ButtonLink>

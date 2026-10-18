@@ -1,0 +1,14 @@
+Modo: edición con la herramienta integrada image_gen.
+
+Edit the supplied DoctorCell Story artwork. Precise Spanish typography correction, not a redesign. Preserve the portrait 9:16 composition, exact DoctorCell logo and mascot, main headline, colors, smartphone images, arrows, and the large empty lower-middle area for the real link sticker. Do not add anything to the blank sticker area. No new claims or additional graphics.
+The footer has a misspelling: correct it to EXACTLY 'Cotiza por WhatsApp.' Spell Cotiza C-O-T-I-Z-A, with a SINGLE Z. Do not write Cotizza, Cotisa, Cotíza or any other variation. Make the footer clean, crisp and slightly larger so the spelling is unmistakable. It may use two centered lines: 'Orientación preliminar.' then 'Cotiza por WhatsApp.' Keep the website 'doctorcell.com.ec' on its own line above this footer. Keep the footer neatly spaced inside the canvas, without encroaching on the empty sticker area.
+Proofread ALL Spanish text. Every visible string must be exactly one of the following, preserving the corresponding original placement and meaning:
+Official logo: 'DoctorCell' and 'EXPERTOS EN TECNOLOGÍA'.
+Headline: '¿Conviene reparar mi celular?'
+Subtitle: 'Antes de cambiarlo, compara tus opciones.'
+On the phone: 'Tu equipo', 'La falla', 'Tus opciones'.
+Main CTA: 'Pruébalo gratis' (accent on the é).
+Website: 'doctorcell.com.ec'.
+Footer line 1: 'Orientación preliminar.' (accent on the ó).
+Footer line 2: 'Cotiza por WhatsApp.'
+Use readable, correct punctuation and accents, no doubled or malformed letters. Do not include references to guarantees, warranties, discounts or prices. Change only typography as needed for these corrections and footer legibility; preserve the rest of the approved artwork.

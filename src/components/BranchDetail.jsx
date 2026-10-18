@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ArrowLeft, Clock3, MapPin, MessageCircle, Navigation, ShieldCheck, Stethoscope } from "lucide-react";
+import { ArrowLeft, Clock3, MapPin, MessageCircle, Navigation, Stethoscope } from "lucide-react";
 import { contactInfo } from "../data/siteData.js";
 import { mapsUrl, whatsappUrl } from "../utils/whatsapp.js";
 import { localBusinessSchema, setPageMetadata } from "../utils/pageMetadata.js";
@@ -21,11 +21,10 @@ export default function BranchDetail({ branch }) {
         <a className="back-link" href="/sucursales"><ArrowLeft size={17} /> Todas las sucursales</a>
         <p className="eyebrow">DoctorCell · la solución tecnológica a tus dispositivos</p>
         <h1>{branch.name}</h1>
-        <p className="branch-detail-lead">Atención para celulares, tablets y relojes con orientación clara, autorización previa y garantía por escrito.</p>
+        <p className="branch-detail-lead">Atención para celulares, tablets y relojes con orientación clara y autorización previa.</p>
         <div className="branch-facts">
           <span><MapPin size={20} /><b>{branch.address}</b><small>{branch.reference}</small></span>
           <span><Clock3 size={20} /><b>{branch.hours}</b><small>Horario habitual</small></span>
-          <span><ShieldCheck size={20} /><b>Garantía por escrito</b><small>Según servicio y repuesto</small></span>
         </div>
         <div className="branch-detail-actions">
           <a className="button" href={whatsappUrl(`Hola DoctorCell, quiero cotizar una reparación en ${branch.name}.`)} target="_blank" rel="noopener noreferrer" data-analytics-placement="branch_detail" data-analytics-branch={branch.slug}><Stethoscope size={18} /> Cotiza por WhatsApp</a>

@@ -8,7 +8,7 @@ export default function useSiteMotion() {
     const setup = () => {
       cleanup();
       if (preference.matches || !("IntersectionObserver" in window)) return;
-      const targets = [...document.querySelectorAll(".futurist-home .section-heading, .futurist-home .service-grid article, .futurist-home .comparison-grid article, .futurist-home .quote-intro, .futurist-home .guarantee-content, .futurist-home .trust-process article, .futurist-home .branch-card, .futurist-home .branch-review-links > a")];
+      const targets = [...document.querySelectorAll(".futurist-home .section-heading, .futurist-home .service-grid article, .futurist-home .comparison-grid article, .futurist-home .quote-intro, .futurist-home .service-process-content, .futurist-home .trust-process article, .futurist-home .branch-card, .futurist-home .branch-review-links > a")];
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(({ target, isIntersecting }) => {
           if (isIntersecting) {
