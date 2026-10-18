@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Smartphone, Sparkles } from "lucide-react";
 import ButtonLink from "./ButtonLink.jsx";
 import { whatsappUrl } from "../utils/whatsapp.js";
 
@@ -55,7 +55,11 @@ export default function Hero() {
           <ButtonLink href="#servicios" variant="ghost" icon={ArrowDown}>Explorar servicios</ButtonLink>
         </div>
         <p className="hero-assurance"><ShieldCheck size={15} /> Conoces y autorizas el precio antes de reparar.</p>
-        <a className="hero-decision-link" href="/conviene-reparar/">¿Conviene reparar mi celular? Evalúalo aquí <ArrowUpRight size={14} /></a>
+        <a className="hero-decision-link" href="/conviene-reparar/">
+          <span className="hero-decision-icon" aria-hidden="true"><Smartphone size={25} /></span>
+          <span className="hero-decision-copy"><small>HERRAMIENTA GRATIS</small><strong>¿Conviene reparar<br />mi celular?</strong></span>
+          <span className="hero-decision-action">Evalúalo aquí <ArrowUpRight size={18} aria-hidden="true" /></span>
+        </a>
         <div className="hero-proof-points" aria-label="Experiencia DoctorCell">
           <span><strong>15+</strong><small>Años de experiencia</small></span>
           <span><strong>04</strong><small>Sucursales en Quito</small></span>
