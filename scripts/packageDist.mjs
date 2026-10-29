@@ -28,7 +28,8 @@ if (process.platform !== "win32") {
 
 const command = [
   "$ErrorActionPreference = 'Stop'",
-  `Compress-Archive -Path '${distDirectory.replaceAll("'", "''")}\\*' -DestinationPath '${temporaryArchive.replaceAll("'", "''")}' -CompressionLevel Optimal -Force`,
+  "Add-Type -AssemblyName System.IO.Compression.FileSystem",
+  `[System.IO.Compression.ZipFile]::CreateFromDirectory('${distDirectory.replaceAll("'", "''")}', '${temporaryArchive.replaceAll("'", "''")}', [System.IO.Compression.CompressionLevel]::Optimal, $false)`,
 ].join("; ");
 
 execFileSync("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", command], {

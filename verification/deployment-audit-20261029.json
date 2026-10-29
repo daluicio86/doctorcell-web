@@ -1,0 +1,268 @@
+{
+  "date": "2026-10-29",
+  "domain": "https://doctorcell.com.ec",
+  "deployment": "3927258",
+  "commit": "f20073abb6f15deccf5e86e0b3776e657d9487f1",
+  "pages": [
+    {
+      "url": "https://doctorcell.com.ec/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/tienda/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/tienda/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/agendar/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/agendar/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/seguimiento/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/seguimiento/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/sucursales/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/sucursales/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/preguntas/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/preguntas/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/terminos-rifa/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/terminos-rifa/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/conviene-reparar/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/conviene-reparar/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/sucursales/matriz-prensa-rio-arajuno/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/sucursales/matriz-prensa-rio-arajuno/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/sucursales/colon-juan-leon-mera/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/sucursales/colon-juan-leon-mera/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/sucursales/shyris-tomas-de-berlanga/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/sucursales/shyris-tomas-de-berlanga/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/sucursales/prensa-vaca-de-castro/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/sucursales/prensa-vaca-de-castro/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/cambio-pantalla-iphone-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/cambio-pantalla-iphone-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/cambio-pantalla-samsung-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/cambio-pantalla-samsung-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/celular-mojado-que-hacer/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/celular-mojado-que-hacer/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/cambio-bateria-celular-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/cambio-bateria-celular-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/celular-no-carga-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/celular-no-carga-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/reparacion-xiaomi-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/reparacion-xiaomi-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/software-celulares-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/software-celulares-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/reparacion-tablets-ipad-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/reparacion-tablets-ipad-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/reparacion-smartwatch-apple-watch-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/reparacion-smartwatch-apple-watch-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/microsoldadura-celulares-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/microsoldadura-celulares-quito/",
+      "pass": true
+    },
+    {
+      "url": "https://doctorcell.com.ec/guias/reparacion-camaras-audio-perifericos-quito/",
+      "status": 200,
+      "canonical": "https://doctorcell.com.ec/guias/reparacion-camaras-audio-perifericos-quito/",
+      "pass": true
+    }
+  ],
+  "redirects": [
+    {
+      "url": "https://www.doctorcell.com.ec/",
+      "status": 301,
+      "location": "https://doctorcell.com.ec/",
+      "expected": "https://doctorcell.com.ec/",
+      "pass": true
+    },
+    {
+      "url": "https://www.doctorcell.com.ec/guias/microsoldadura-celulares-quito/?utm_source=publication-check&value=a%20b",
+      "status": 301,
+      "location": "https://doctorcell.com.ec/guias/microsoldadura-celulares-quito/?utm_source=publication-check&value=a%20b",
+      "expected": "https://doctorcell.com.ec/guias/microsoldadura-celulares-quito/?utm_source=publication-check&value=a%20b",
+      "pass": true
+    },
+    {
+      "url": "http://www.doctorcell.com.ec/guias/microsoldadura-celulares-quito/?utm_source=publication-check&value=a%20b",
+      "status": 301,
+      "location": "https://doctorcell.com.ec/guias/microsoldadura-celulares-quito/?utm_source=publication-check&value=a%20b",
+      "expected": "https://doctorcell.com.ec/guias/microsoldadura-celulares-quito/?utm_source=publication-check&value=a%20b",
+      "pass": true
+    },
+    {
+      "url": "http://doctorcell.com.ec/",
+      "status": 301,
+      "location": "https://doctorcell.com.ec/",
+      "expected": "https://doctorcell.com.ec/",
+      "pass": true
+    }
+  ],
+  "services": [
+    {
+      "title": "Cambio de pantallas certificado",
+      "href": "/guias/cambio-pantalla-iphone-quito/",
+      "pass": true
+    },
+    {
+      "title": "Cambio de batería",
+      "href": "/guias/cambio-bateria-celular-quito/",
+      "pass": true
+    },
+    {
+      "title": "Puerto de carga",
+      "href": "/guias/celular-no-carga-quito/",
+      "pass": true
+    },
+    {
+      "title": "Equipos mojados",
+      "href": "/guias/celular-mojado-que-hacer/",
+      "pass": true
+    },
+    {
+      "title": "Cámaras, audio y periféricos",
+      "href": "/guias/reparacion-camaras-audio-perifericos-quito/",
+      "pass": true
+    },
+    {
+      "title": "Microsoldadura",
+      "href": "/guias/microsoldadura-celulares-quito/",
+      "pass": true
+    },
+    {
+      "title": "Software y actualizaciones",
+      "href": "/guias/software-celulares-quito/",
+      "pass": true
+    },
+    {
+      "title": "Reparación de tablets y iPad",
+      "href": "/guias/reparacion-tablets-ipad-quito/",
+      "pass": true
+    },
+    {
+      "title": "Smartwatches y Apple Watch",
+      "href": "/guias/reparacion-smartwatch-apple-watch-quito/",
+      "pass": true
+    }
+  ],
+  "api": [
+    {
+      "path": "/api/repair-status/availability",
+      "method": "GET",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/api/leads",
+      "method": "GET",
+      "status": 405,
+      "pass": true
+    },
+    {
+      "path": "/api/leads",
+      "method": "POST",
+      "status": 400,
+      "pass": true
+    }
+  ],
+  "sitemap": {
+    "count": 24,
+    "pass": true
+  },
+  "assets": [
+    {
+      "path": "/assets/index-B_E7vxi0.js",
+      "status": 200,
+      "type": "text/javascript; charset=utf-8",
+      "pass": true
+    },
+    {
+      "path": "/assets/index-eyY1n8Gw.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

@@ -9,6 +9,7 @@ data/*.ndjson
 .env.local
 
 dist.zip
+/dist (*).zip
 /dist/**/*.zip
 
 .prerender/
