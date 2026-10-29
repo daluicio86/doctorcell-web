@@ -1,75 +1,92 @@
-import React, { useState } from "react";
-import { ArrowRight, Camera, LocateFixed, MessageCircle } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { ArrowRight, CheckCircle2, LoaderCircle, LocateFixed, MessageCircle } from "lucide-react";
 import { brands, branches, diagnostics } from "../data/siteData.js";
 import { whatsappUrl } from "../utils/whatsapp.js";
-
-const branchCoordinates = {
-  "Sucursal Prensa": [-0.1512, -78.4925],
-  "Sucursal Colón": [-0.20092, -78.49],
-  "Sucursal Shyris": [-0.16447, -78.47986],
-  "Sucursal Vaca de Castro": [-0.12932, -78.4941]
-};
+import { isValidWhatsAppPhone } from "../utils/contact.js";
+import { captureQuoteLead } from "../utils/leads.js";
+import { trackEvent } from "../utils/analytics.js";
 
 export default function QuoteFinder() {
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [problem, setProblem] = useState("");
-  const [branch, setBranch] = useState("");
-  const [photoFile, setPhotoFile] = useState(null);
+  const [form, setForm] = useState({ name: "", phone: "", problem: "", brand: "", model: "", branch: "", consent: false });
   const [locationStatus, setLocationStatus] = useState("");
-
-  const selectNearestBranch = () => {
-    if (!navigator.geolocation) {
-      setLocationStatus("Tu navegador no permite obtener la ubicación.");
-      return;
-    }
-    setLocationStatus("Buscando tu ubicación…");
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-      const toRadians = (value) => value * Math.PI / 180;
-      const distanceTo = (item) => {
-        const [latitude, longitude] = branchCoordinates[item.name];
-        const latitudeDelta = toRadians(latitude - coords.latitude);
-        const longitudeDelta = toRadians(longitude - coords.longitude);
-        const calculation = Math.sin(latitudeDelta / 2) ** 2
-          + Math.cos(toRadians(coords.latitude)) * Math.cos(toRadians(latitude))
-          * Math.sin(longitudeDelta / 2) ** 2;
-        return 6371 * 2 * Math.atan2(Math.sqrt(calculation), Math.sqrt(1 - calculation));
-      };
-      const nearest = branches.reduce((best, item) => distanceTo(item) < distanceTo(best) ? item : best);
-      setBranch(nearest.name);
-      setLocationStatus(`${nearest.name} es la más cercana a tu ubicación.`);
-    }, () => {
-      setLocationStatus("No pudimos acceder a tu ubicación. Puedes elegir la sucursal manualmente.");
-    }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 });
+  const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(null);
+  const requestRef = useRef(null);
+  const submittingRef = useRef(false);
+  const update = (key) => (event) => {
+    const value = key === "consent" ? event.target.checked : event.target.value;
+    setForm((current) => ({ ...current, [key]: value }));
+    setErrors((current) => ({ ...current, [key]: "", submit: "" }));
   };
 
-  const isReady = brand && model.trim() && problem && branch;
+  const selectNearestBranch = () => {
+    if (!navigator.geolocation) return setLocationStatus("Puedes elegir una sucursal manualmente.");
+    setLocationStatus("Buscando tu ubicación…");
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const radians = (value) => value * Math.PI / 180;
+      const distance = ({ latitude, longitude }) => {
+        const a = Math.sin(radians(latitude - coords.latitude) / 2) ** 2
+          + Math.cos(radians(coords.latitude)) * Math.cos(radians(latitude))
+          * Math.sin(radians(longitude - coords.longitude) / 2) ** 2;
+        return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      };
+      const nearest = branches.reduce((best, item) => distance(item) < distance(best) ? item : best);
+      setForm((current) => ({ ...current, branch: nearest.name }));
+      setLocationStatus(`${nearest.name} es la más cercana a tu ubicación.`);
+    }, () => setLocationStatus("No pudimos acceder a tu ubicación. Puedes elegir la sucursal manualmente."), { timeout: 10000, maximumAge: 300000 });
+  };
 
-  const message = [
-    "Hola DoctorCell Quito, quiero cotizar una reparación.",
-    `Equipo: ${brand} ${model.trim()}.`,
-    `Problema: ${problem}.`,
-    `Sucursal preferida: ${branch}.`,
-    photoFile ? `Foto seleccionada: ${photoFile.name}. La adjunto con este mensaje.` : "No adjuntaré una foto por ahora.",
-    "¿Me ayudan con una orientación preliminar de valor y tiempo?"
-  ].join(" ");
+  const fieldProps = (key) => ({ name: key, "aria-invalid": Boolean(errors[key]), "aria-describedby": errors[key] ? `quote-${key}-error` : undefined });
+  const fieldError = (key) => errors[key] ? <small className="quote-field-error" id={`quote-${key}-error`}>{errors[key]}</small> : null;
 
-  const handleWhatsAppClick = async (event) => {
-    if (!isReady) {
-      event.preventDefault();
+  const submit = async (event) => {
+    event.preventDefault();
+    if (submittingRef.current) return;
+    const formElement = event.currentTarget;
+    const invalid = {};
+    if (form.name.trim().length < 2) invalid.name = "Escribe tu nombre (al menos 2 caracteres).";
+    if (!isValidWhatsAppPhone(form.phone)) invalid.phone = "Ingresa un celular de Ecuador (09XXXXXXXX) o un número internacional con + y código de país.";
+    if (!form.problem) invalid.problem = "Selecciona la falla de tu equipo.";
+    if (!form.consent) invalid.consent = "Necesitamos tu autorización para guardar la consulta y contactarte.";
+    setErrors(invalid);
+    if (Object.keys(invalid).length) {
+      formElement.elements.namedItem(Object.keys(invalid)[0])?.focus();
       return;
     }
-    if (!photoFile || !navigator.share || !navigator.canShare?.({ files: [photoFile] })) return;
 
-    event.preventDefault();
+    const payload = {
+      name: form.name.trim(), contact: form.phone.trim(), problem: form.problem,
+      brand: form.brand, model: form.model.trim(), location: form.branch,
+      service: "Cotización de reparación", consent: form.consent
+    };
+    const fingerprint = JSON.stringify(payload);
+    if (requestRef.current?.fingerprint !== fingerprint) requestRef.current = { fingerprint, id: crypto.randomUUID() };
+    submittingRef.current = true;
+    setSaving(true);
     try {
-      await navigator.share({
-        title: "Diagnóstico DoctorCell Quito",
-        text: message,
-        files: [photoFile]
-      });
-    } catch (error) {
-      if (error.name !== "AbortError") window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+      const { caseId } = await captureQuoteLead(payload, requestRef.current.id);
+      const message = [
+        `Hola DoctorCell Quito, registré mi consulta ${caseId} y quiero cotizar una reparación.`,
+        `Nombre: ${payload.name}.`, `WhatsApp: ${payload.contact}.`, `Problema: ${payload.problem}.`,
+        `Equipo: ${[payload.brand, payload.model].filter(Boolean).join(" ") || "por confirmar"}.`,
+        `Sucursal preferida: ${payload.location || "ayúdenme a elegir"}.`,
+        "¿Me ayudan con una orientación preliminar de valor y tiempo?"
+      ].join(" ");
+      const href = whatsappUrl(message);
+      setSaved({ caseId, href });
+      try {
+        trackEvent("generate_lead", { lead_source: "quote_finder", case_id: caseId }, "Lead");
+        trackEvent("whatsapp_click", { placement: "quote_finder", branch: branches.find((item) => item.name === payload.location)?.slug || "general", page_path: window.location.pathname }, "Contact");
+      }
+      catch { /* Measurement availability must not block a saved consultation. */ }
+      // Same-tab navigation remains reliable after the asynchronous save.
+      window.location.assign(href);
+    } catch {
+      setErrors({ submit: "No pudimos confirmar el registro. Tus datos siguen en el formulario; inténtalo de nuevo antes de continuar a WhatsApp." });
+    } finally {
+      submittingRef.current = false;
+      setSaving(false);
     }
   };
 
@@ -78,71 +95,40 @@ export default function QuoteFinder() {
       <div className="quote-intro">
         <p className="eyebrow">02 / CONECTEMOS</p>
         <h2 id="quote-title">Cuéntanos qué le pasa a tu equipo.</h2>
-        <p>Marca, modelo, falla, una foto opcional y la sucursal que prefieres. El diagnóstico definitivo se confirma al revisar físicamente el equipo.</p>
-        <div className="quote-route" aria-label="Flujo del cotizador">
-          <span>Marca</span><ArrowRight size={14} />
-          <span>Modelo</span><ArrowRight size={14} />
-          <span>Falla</span><ArrowRight size={14} />
-          <span>Foto</span><ArrowRight size={14} />
-          <span>Sucursal</span>
+        <p>Solo necesitamos tu nombre, WhatsApp y la falla. Con tu autorización, guardamos la consulta antes de abrir el chat para poder contactarte aunque no envíes el mensaje.</p>
+        <div className="quote-route" aria-label="Cómo enviar tu consulta">
+          <span>Tu contacto</span><ArrowRight size={14} /><span>Consulta guardada</span><ArrowRight size={14} /><span>WhatsApp</span>
         </div>
       </div>
-
-      <form className="quote-form" onSubmit={(event) => event.preventDefault()}>
-        <label>
-          <span>1. Marca</span>
-          <select value={brand} onChange={(event) => setBrand(event.target.value)}>
-            <option value="">Selecciona la marca</option>
-            {brands.map((item) => <option key={item} value={item}>{item}</option>)}
-          </select>
-        </label>
-        <label>
-          <span>2. Modelo</span>
-          <input
-            value={model}
-            onChange={(event) => setModel(event.target.value)}
-            placeholder="Ej. iPhone 11"
-            autoComplete="off"
-          />
-        </label>
-        <label>
-          <span>3. Problema</span>
-          <select value={problem} onChange={(event) => setProblem(event.target.value)}>
-            <option value="">¿Qué le pasa?</option>
-            {diagnostics.map((item) => <option key={item.title} value={item.title}>{item.title}</option>)}
-          </select>
-        </label>
-        <label>
-          <span>4. Foto opcional</span>
-          <span className="quote-file"><Camera size={18} />{photoFile?.name || "Añadir una foto"}<input type="file" accept="image/*" onChange={(event) => setPhotoFile(event.target.files?.[0] || null)} /></span>
-        </label>
-        <label>
-          <span>5. Sucursal</span>
-          <select value={branch} onChange={(event) => setBranch(event.target.value)}>
-            <option value="">Elige la más cercana</option>
-            {branches.map((item) => <option key={item.name} value={item.name}>{item.name}</option>)}
-          </select>
-          <button className="nearest-branch-button" type="button" onClick={selectNearestBranch}>
-            <LocateFixed size={17} /> Usar mi ubicación
-          </button>
-          {locationStatus && <small className="location-status" role="status">{locationStatus}</small>}
-        </label>
-
-        <a
-          className={`button whatsapp-submit ${isReady ? "" : "is-disabled"}`}
-          href={isReady ? whatsappUrl(message) : undefined}
-          target={isReady ? "_blank" : undefined}
-          rel="noopener noreferrer"
-          aria-disabled={!isReady}
-          data-analytics-placement="quote_finder"
-          data-analytics-branch={branches.find((item) => item.name === branch)?.slug || "general"}
-          onClick={handleWhatsAppClick}
-        >
-          <MessageCircle size={19} />
-          Cotiza por WhatsApp
-        </a>
-        <small>{photoFile ? "Foto lista. En dispositivos compatibles podrás compartirla junto con el mensaje; si WhatsApp solo abre el chat, adjúntala manualmente." : "La foto no se sube al sitio. Puedes seleccionarla para compartirla con tu consulta."}</small>
-      </form>
+      {saved ? <div className="quote-confirmation" role="status">
+        <CheckCircle2 size={28} />
+        <h3>Tu consulta quedó registrada</h3>
+        <p>Caso <strong>{saved.caseId}</strong>. Ya tenemos tus datos para gestionar tu consulta.</p>
+        <a className="button whatsapp-submit" href={saved.href} data-analytics-placement="quote_finder" data-analytics-branch={branches.find((item) => item.name === form.branch)?.slug || "general"}><MessageCircle size={19} /> Abrir WhatsApp</a>
+        <small>Puedes enviar la foto de tu equipo directamente en el chat.</small>
+      </div> : <form className="quote-form" noValidate onSubmit={submit}>
+        <fieldset className="quote-fields" aria-label="Datos para tu consulta" disabled={saving}>
+          <label><span>Tu nombre</span><input {...fieldProps("name")} autoComplete="name" required minLength={2} maxLength={100} value={form.name} onChange={update("name")} placeholder="Tu nombre" />{fieldError("name")}</label>
+          <label><span>Tu WhatsApp</span><input {...fieldProps("phone")} type="tel" autoComplete="tel" required maxLength={30} value={form.phone} onChange={update("phone")} placeholder="09 9999 9999" />{fieldError("phone")}</label>
+          <label className="quote-problem"><span>¿Qué le pasa a tu equipo?</span><select {...fieldProps("problem")} required value={form.problem} onChange={update("problem")}><option value="">Selecciona la falla</option>{diagnostics.map(({ title }) => <option key={title}>{title}</option>)}</select>{fieldError("problem")}</label>
+          <details className="quote-optional">
+            <summary>Añadir marca, modelo o sucursal (opcional)</summary>
+            <div className="quote-optional-fields">
+              <label><span>Marca</span><select name="brand" value={form.brand} onChange={update("brand")}><option value="">No lo sé todavía</option>{brands.map((item) => <option key={item}>{item}</option>)}</select></label>
+              <label><span>Modelo</span><input name="model" value={form.model} maxLength={100} onChange={update("model")} placeholder="Ej. iPhone 11" /></label>
+              <label className="quote-branch"><span>Sucursal preferida</span><select name="branch" value={form.branch} onChange={update("branch")}><option value="">Ayúdenme a elegir</option>{branches.map(({ name }) => <option key={name}>{name}</option>)}</select><button className="nearest-branch-button" type="button" onClick={selectNearestBranch}><LocateFixed size={17} /> Usar mi ubicación</button>{locationStatus && <small role="status">{locationStatus}</small>}</label>
+            </div>
+          </details>
+          <label className="quote-consent"><input {...fieldProps("consent")} type="checkbox" required checked={form.consent} onChange={update("consent")} /><span>Autorizo a DoctorCell a guardar estos datos y contactarme para gestionar esta consulta, incluidos sus seguimientos.</span></label>
+          {fieldError("consent")}
+        </fieldset>
+        {errors.submit && <p className="quote-submit-error" role="alert">{errors.submit}</p>}
+        <button className="button whatsapp-submit" type="submit" disabled={saving}>
+          {saving ? <LoaderCircle className="spin" size={19} /> : <MessageCircle size={19} />}
+          {saving ? "Guardando tu consulta…" : "Guardar consulta y abrir WhatsApp"}
+        </button>
+        <small>El diagnóstico, el precio y el tiempo se confirman al revisar el equipo. Puedes enviar una foto directamente en WhatsApp.</small>
+      </form>}
     </section>
   );
 }

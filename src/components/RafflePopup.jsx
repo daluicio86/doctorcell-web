@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, CalendarDays, Gift, Sparkles, TicketCheck, X } from "lucide-react";
-import { isRaffleActive, raffleClosingTime, raffleOpenEvent } from "../utils/raffle.js";
+import { claimRaffleAutoOpen, isRaffleActive, raffleClosingTime, raffleOpenEvent } from "../utils/raffle.js";
 
-export default function RafflePopup() {
+export default function RafflePopup({ autoOpen = true }) {
   const [isOpen, setIsOpen] = useState(false);
   const overlayRef = useRef(null);
   const dialogRef = useRef(null);
@@ -10,8 +10,18 @@ export default function RafflePopup() {
 
   useEffect(() => {
     if (!isRaffleActive(Date.now())) return undefined;
-    const openPopup = () => setIsOpen(isRaffleActive(Date.now()));
-    const openTimer = window.setTimeout(openPopup, 700);
+    const claimAutomaticDisplay = () => {
+      try { return claimRaffleAutoOpen(window.sessionStorage, Date.now()); }
+      catch { return false; }
+    };
+    const openPopup = () => {
+      if (!isRaffleActive(Date.now())) return;
+      claimAutomaticDisplay();
+      setIsOpen(true);
+    };
+    const openTimer = autoOpen ? window.setTimeout(() => {
+      if (claimAutomaticDisplay()) setIsOpen(true);
+    }, 700) : undefined;
     let expiryTimer;
     const checkExpiry = () => {
       const remaining = raffleClosingTime - Date.now();
@@ -28,7 +38,7 @@ export default function RafflePopup() {
       window.clearTimeout(expiryTimer);
       window.removeEventListener(raffleOpenEvent, openPopup);
     };
-  }, []);
+  }, [autoOpen]);
 
   useEffect(() => {
     if (!isOpen) return undefined;

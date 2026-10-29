@@ -1,0 +1,22 @@
+Mode: Built-in image_gen.
+References: public/logo.png; public/images/raffle-device.webp
+
+Use case: ads-marketing.
+Create a polished, exceptionally eye-catching Spanish social media raffle advertisement for DoctorCell Ecuador. Portrait 4:5 poster, designed to read effortlessly on mobile, finished advertising artwork.
+Input image 1 is the authentic DoctorCell brand logo including mascot. Reproduce its correct green-and-blue wordmark, recognizable mascot and branding accurately, place cleanly at top in an elegant white rounded brand panel. Input image 2 is the actual Samsung Galaxy A07 prize reference: faithfully depict this lavender smartphone with its exact dual-camera rear and front waterdrop-notch screen. The front and back together are views of ONE prize phone, not two prizes.
+Art direction: premium energetic retail technology campaign. Deep electric blue/navy background with vivid DoctorCell lime green, white, restrained green confetti and sweeping light trails. Strong contrast, generous spacing, precise editorial alignment. Photorealistic large floating lavender Samsung on a glossy lit pedestal, exciting lime halo behind it, tasteful diagonal accents, professional layered depth. Avoid visual clutter and childish casino imagery. Main headline very large and bold, prize model prominent, mechanic extremely clear. Phone hero in upper-middle, a vibrant lime callout for the $25 mechanic, then three neat comparison columns. All text sharp and legible, all text inside safe margins. Logo panel in top 12%, headline below, large phone in middle. Explanatory copy and examples below phone; contact footer strong and clear.
+Render ONLY the following Spanish copy, accurately with accents and dollar signs, no invented extra text:
+"¡ESTE SAMSUNG"
+"PUEDE SER TUYO!"
+"SAMSUNG GALAXY A07"
+"Por cada $25 de consumo"
+"recibes 1 opción para la rifa"
+"$25 = 1 opción"
+"$50 = 2 opciones"
+"$75 = 3 opciones"
+"¡Más consumo, más oportunidades!"
+"¡COMPRA Y PARTICIPA!"
+"Escríbenos: 0999252575"
+"doctorcell.com.ec"
+Small footer: "Consulta las bases de la promoción en nuestra web."
+Make the number 0999252575 large and correct, high contrast in contact bar with a simple chat/phone icon. Maintain distinction between the dollar amount required to enter the raffle and the phone prize: $25 is consumption, not the sale price of the phone. No additional prices, no invented dates, no storage specifications, no QR code, no social media handles, no duplicate logos, no watermarks.

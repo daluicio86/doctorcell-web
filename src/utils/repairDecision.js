@@ -1,3 +1,5 @@
+import { SITE_ORIGIN } from "../data/siteConfig.js";
+
 export const decisionPath = "/conviene-reparar/";
 export const decisionBrands = ["Apple", "Samsung", "Xiaomi", "Huawei", "Motorola", "Honor", "Oppo", "Infinix", "Tecno", "Nokia", "Google", "Otra"];
 export const problemOptions = {
@@ -50,7 +52,7 @@ export function evaluateRepair(input) {
   return { outcome, title, explanation, nextSteps, precaution };
 }
 
-export function decisionUrl(input, origin = "https://www.doctorcell.com.ec") {
+export function decisionUrl(input, origin = SITE_ORIGIN) {
   const answers = normalizeDecision(input);
   if (!answers) throw new TypeError("Respuestas inválidas");
   return `${origin}${decisionPath}#${new URLSearchParams({ v: "1", ...answers })}`;

@@ -23,6 +23,7 @@ import Testimonials from "./components/Testimonials.jsx";
 import TechMarquee from "./components/TechMarquee.jsx";
 import useSiteMotion from "./hooks/useSiteMotion.js";
 import { branches } from "./data/siteData.js";
+import { SITE_ORIGIN } from "./data/siteConfig.js";
 import { setPageMetadata } from "./utils/pageMetadata.js";
 
 const route = typeof window === "undefined" ? "/" : window.location.pathname.replace(/\/+$/, "") || "/";
@@ -45,7 +46,7 @@ function PageFrame({ children, pageRoute, schema, showRafflePopup = true }) {
     setPageMetadata({ title, description, path: pageRoute, schema });
   }, [pageRoute, serializedSchema]);
   const themeClass = pageRoute === "/terminos-rifa" ? "" : pageRoute === "/tienda" ? " future-store" : " future-utility";
-  return <><Header /><main className={`utility-page${themeClass}`}>{children}</main>{showRafflePopup ? <RafflePopup /> : null}<Chatbot /><AnalyticsConsent /><Footer /></>;
+  return <><Header /><main className={`utility-page${themeClass}`}>{children}</main>{showRafflePopup ? <RafflePopup autoOpen={!["/agendar", "/seguimiento"].includes(pageRoute)} /> : null}<Chatbot /><AnalyticsConsent /><Footer /></>;
 }
 
 function StorePage() {
@@ -55,7 +56,7 @@ function StorePage() {
     name: "Catálogo DoctorCell Quito",
     itemListElement: products.slice(0, 40).map((product, index) => ({
       "@type": "ListItem", position: index + 1,
-      item: { "@type": "Product", name: product.name, image: `https://www.doctorcell.com.ec${product.image}`, category: product.category, offers: { "@type": "Offer", priceCurrency: "USD", price: product.price.replace("$", "") } }
+      item: { "@type": "Product", name: product.name, image: `${SITE_ORIGIN}${product.image}`, category: product.category, offers: { "@type": "Offer", priceCurrency: "USD", price: product.price.replace("$", "") } }
     }))
   };
   return <PageFrame pageRoute="/tienda" schema={itemList}><Store standalone /></PageFrame>;

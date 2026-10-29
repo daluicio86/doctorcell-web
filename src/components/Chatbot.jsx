@@ -54,13 +54,10 @@ const estimates = {
 };
 
 export default function Chatbot() {
-  const restored = useMemo(() => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch { return null; }
-  }, []);
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState(restored?.messages || welcome);
-  const [step, setStep] = useState(restored?.step || "device");
-  const [answers, setAnswers] = useState({ ...initialAnswers, ...(restored?.answers || {}) });
+  const [messages, setMessages] = useState(welcome);
+  const [step, setStep] = useState("device");
+  const [answers, setAnswers] = useState(initialAnswers);
   const [input, setInput] = useState("");
   const [photos, setPhotos] = useState([]);
   const [typing, setTyping] = useState(false);
@@ -71,7 +68,11 @@ export default function Chatbot() {
   const messageBox = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ messages, step, answers }));
+    // Remove history stored by older versions, including unconsented contact data.
+    try { localStorage.removeItem(STORAGE_KEY); } catch { /* Storage may be disabled. */ }
+  }, []);
+
+  useEffect(() => {
     messageBox.current?.scrollTo({ top: messageBox.current.scrollHeight, behavior: "smooth" });
   }, [messages, step, answers]);
   const add = (...items) => setMessages((current) => [...current, ...items.map((item) => ({ id: nextId.current++, ...item }))]);
@@ -86,6 +87,11 @@ export default function Chatbot() {
   }, [answers]);
 
   const advance = (value) => {
+    if (savingLead) return;
+    if (step === "consent" && !optionSets.consent.includes(value)) {
+      setError("Elige si autorizas crear el caso o prefieres no guardar tus datos.");
+      return;
+    }
     setError("");
     add({ from: "user", text: value });
     if (step === "device") { setAnswers((a) => ({ ...a, device: value })); setStep("brand"); botReply("¿Cuál es la marca?"); }
@@ -102,10 +108,11 @@ export default function Chatbot() {
     if (step === "schedule") { setAnswers((a) => ({ ...a, schedule: value })); setStep("contact"); botReply("Escribe tu WhatsApp o correo para enviarte la confirmación."); }
     if (step === "contact") { setAnswers((a) => ({ ...a, contact: value })); setStep("consent"); botReply("Antes de continuar: ¿autorizas guardar estos datos para gestionar tu caso y contactarte?"); }
     if (step === "consent") {
-      const accepted = value.startsWith("Acepto");
+      const accepted = value === "Acepto y crear caso";
       if (!accepted) {
-        setAnswers((a) => ({ ...a, consent: false, caseId: "Sin registro" })); setStep("complete");
-        botReply("No guardaremos tus datos. Puedes continuar por WhatsApp sin crear un caso.");
+        setAnswers((a) => ({ ...a, contact: "", consent: false, caseId: "Sin registro" })); setStep("complete");
+        setMessages((current) => current.filter((message) => message.from !== "user" || message.text !== answers.contact));
+        botReply("No crearemos un caso ni guardaremos la conversación en este navegador. Puedes compartir el resumen por WhatsApp si lo deseas.");
         return;
       }
       setSavingLead(true);
@@ -118,7 +125,7 @@ export default function Chatbot() {
         })
         .catch((requestError) => {
           setError(`${requestError.message} Puedes reintentar o continuar por WhatsApp.`);
-          add({ from: "bot", text: "No pude confirmar el registro todavía. Tus datos siguen guardados en este navegador." });
+          add({ from: "bot", text: "No pude confirmar el registro todavía. Puedes reintentar o compartir el resumen por WhatsApp. La conversación se borrará al salir de esta página." });
         })
         .finally(() => setSavingLead(false));
     }
@@ -126,6 +133,7 @@ export default function Chatbot() {
 
   const validateAndSubmit = (event) => {
     event.preventDefault();
+    if (typing || savingLead) return;
     const text = input.trim();
     if (!text) { setError("Escribe una respuesta o elige una opción."); return; }
     if (text.length < 2) { setError("Necesito un poco más de información para continuar."); return; }
@@ -146,7 +154,7 @@ export default function Chatbot() {
   };
   const reset = () => {
     setMessages(welcome); setStep("device"); setAnswers(initialAnswers); setInput(""); setPhotos([]); setError("");
-    nextId.current = 3; localStorage.removeItem(STORAGE_KEY);
+    nextId.current = 3;
   };
   const cancel = () => { reset(); setOpen(false); };
   const handlePhotos = (event) => {
@@ -164,13 +172,14 @@ export default function Chatbot() {
     {open && <aside className="chatbot-panel" id="doctorcell-chatbot" aria-label="Asistente de diagnóstico">
       <header className="chatbot-header">
         <span className="chatbot-avatar"><Bot size={22} /></span><div><strong>Asistente DoctorCell Quito</strong><small><i /> En línea · diagnóstico guiado</small></div>
-        <button type="button" onClick={() => setOpen(false)} aria-label="Cerrar y conservar conversación"><X size={21} /></button>
+        <button type="button" onClick={() => setOpen(false)} aria-label="Cerrar asistente"><X size={21} /></button>
       </header>
       <div className="chatbot-toolbar">
-        <button type="button" onClick={goBack} disabled={step === "device"}><ArrowLeft size={15} /> Volver</button>
-        <button type="button" onClick={reset}><RotateCcw size={14} /> Reiniciar</button>
-        <button type="button" onClick={cancel}><X size={14} /> Cancelar</button>
+        <button type="button" onClick={goBack} disabled={step === "device" || savingLead}><ArrowLeft size={15} /> Volver</button>
+        <button type="button" onClick={reset} disabled={savingLead}><RotateCcw size={14} /> Reiniciar</button>
+        <button type="button" onClick={cancel} disabled={savingLead}><X size={14} /> Cancelar</button>
       </div>
+      <p className="chatbot-privacy">La conversación se borra al salir de esta página. Solo registramos tu caso si lo autorizas.</p>
       <div className="chatbot-progress" aria-label={`Progreso ${progress}`}><span style={{ width: progress }} /></div>
       <div className="chatbot-messages" ref={messageBox} role="log" aria-live="polite">
         {messages.map((message) => <div className={`chatbot-message is-${message.from}`} key={message.id}><div className={message.result ? "is-result" : ""}>{message.result && <CheckCircle2 size={18} />}<span>{message.text}</span></div></div>)}
@@ -195,7 +204,7 @@ export default function Chatbot() {
         <button className="chatbot-attach" type="button" onClick={() => fileInput.current?.click()} aria-label="Adjuntar fotos" disabled={photos.length >= 3}><Paperclip size={18} /></button>
         <label className="sr-only" htmlFor="chatbot-message">Escribe tu mensaje</label>
         <input id="chatbot-message" value={input} onChange={(event) => { setInput(event.target.value); setError(""); }} placeholder={step === "model" ? "Ej. Galaxy A54 o No sé" : "Escribe tu respuesta…"} autoComplete="off" maxLength={500} />
-        <button type="submit" aria-label="Enviar mensaje" disabled={typing}>{typing ? <LoaderCircle className="is-spinning" size={18} /> : <Send size={18} />}</button>
+        <button type="submit" aria-label="Enviar mensaje" disabled={typing || savingLead}>{typing || savingLead ? <LoaderCircle className="is-spinning" size={18} /> : <Send size={18} />}</button>
       </form>
     </aside>}
   </>;

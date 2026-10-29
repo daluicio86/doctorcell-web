@@ -1,0 +1,20 @@
+Mode: Built-in image_gen. Brand and product references: public/logo.png and output/marketing/doctorcell-sorteo-samsung-a07.png.
+
+Use case: ads-marketing.
+Create a finished, stunning Spanish-language DoctorCell social media advertisement, portrait aspect ratio 4:5. This is a NEW final-days campaign creative using the supplied images as brand and product references, not a small text edit.
+Reference image 1: existing DoctorCell Samsung A07 campaign, for the actual phone design, brand palette and celebratory energy. Reference image 2: official DoctorCell logo and mascot; preserve the exact spelling, mascot identity and green/blue wordmark. Use the logo in a clean white compact brand panel at the top. Never distort or invent a new logo.
+Art direction: premium retail technology campaign, charming, joyful, exciting and very legible on mobile. Deep electric blue backdrop, lime green highlights, elegant curved luminous trails, a few floating lime confetti pieces, subtle celebratory sparkles. Strong hierarchy and ample breathing room. The large hero Samsung A07 front and back in silver/lavender, matching reference phone geometry (two rear cameras, screen with teardrop notch), on a glowing circular pedestal. Phone is the central visual with refined realistic studio lighting. This must look polished, vibrant and desirable, not cluttered.
+Layout: compact logo top; VERY LARGE headline '¡ÚLTIMOS DÍAS!' in bold white and lime, no ambiguity about urgency. Smaller supporting headline above phone. Large A07 model label at pedestal. A clear lime participation card below phone. A compact date strip. Prominent friendly follow-us call to action and prominently legible website footer. All elements within safe margins.
+Use ONLY this Spanish copy, verbatim, with correct accents, distributed in this hierarchy:
+'¡ÚLTIMOS DÍAS!'
+'Tus compras pueden hacerte ganar'
+'un Samsung A07'
+'Por cada $25 acumulados en compras'
+'¡Obtén 1 oportunidad para el sorteo!'
+'Participa hasta el 31 de octubre de 2026'
+'Sorteo: 7 de noviembre de 2026'
+'¡Síguenos en nuestras redes sociales!'
+'Compra, participa y cruza los dedos.'
+'doctorcell.com.ec'
+'Consulta las condiciones en nuestra web. Imagen referencial.'
+The official logo includes 'DoctorCell' and 'EXPERTOS EN TECNOLOGÍA'; preserve these correctly. The website must be spelled doctorcell.com.ec, exactly, large enough to read at a glance. Make the follow-us line visually prominent with a small elegant heart/follow symbol; no made-up account handles and no invented platform names. Do not imply that winning is guaranteed. Do not add a price for the phone, countdown numbers, false deadlines, phone number, QR code, extra prize, or extra promotional requirements. No word 'rifa'. Output one single complete portrait poster, no mockup frame, no watermark.

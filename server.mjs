@@ -5,6 +5,7 @@ import { extname, join, normalize, resolve } from "node:path";
 import { createLead, readJsonBody } from "./server/leadService.js";
 import { dispatchDueFollowups, recordLifecycleEvent } from "./server/followupService.js";
 import { isRepairStatusAvailable, queryRepairStatus } from "./server/repairStatusService.js";
+import { canonicalRedirect } from "./server/canonicalRedirect.js";
 
 const PORT = Number(process.env.PORT || 4173);
 const DIST = resolve("dist");
@@ -68,6 +69,11 @@ async function serveStatic(request, response) {
 }
 
 createServer((request, response) => {
+  const canonical = canonicalRedirect(request.headers.host, request.url);
+  if (canonical) {
+    response.writeHead(301, { location: canonical, "cache-control": "public, max-age=86400" });
+    return void response.end();
+  }
   const pathname = new URL(request.url, "http://localhost").pathname.toLowerCase();
   if (retiredPaths.has(pathname)) {
     response.writeHead(301, { location: "/", "cache-control": "public, max-age=86400" });

@@ -1,0 +1,21 @@
+Mode: Built-in image_gen edit/reformat.
+Reference: output/marketing/doctorcell-ultimos-dias-a07.png
+
+Use case: ads-marketing; edit/reformat supplied DoctorCell campaign.
+Create ONE finished vertical 9:16 image for BOTH Instagram Stories and WhatsApp Status. Target 1080x1920 portrait, exact 9:16 aspect ratio. Recompose and extend the supplied 4:5 poster into a refined 9:16 design; do not stretch the artwork or simply crop it.
+Preserve the approved campaign identity: exact DoctorCell wordmark and cheerful glasses/beard technician mascot, electric deep blue background, vivid lime green, white bold 3D headline, luminous ring and pedestal, elegant celebratory confetti, silver/lavender Samsung A07 front and back with two rear cameras and teardrop screen notch. Keep the phone central and desirable, excellent realistic product lighting. Retain accurate brand spelling and Spanish accents.
+CRITICAL SAFE AREA: Keep ALL logo, text, product, website, conditions and calls to action within x=70..1010 and y=250..1640 on a 1080x1920 canvas. The top 250px and bottom 280px should contain ONLY blue decorative background and sparse confetti, no important content, so Stories/Status overlays never hide the message. Design content carefully to fit spaciously in this central band. The logo is compact, followed by huge bold headline, short supporting copy, hero phone, model name, concise participation panel, two compact date lines, conspicuous follow-us message and large website. Website must be comfortably above the bottom safe area.
+Exact copy, no extra text except logo:
+'¡ÚLTIMOS DÍAS!'
+'Tus compras pueden hacerte ganar'
+'SAMSUNG A07'
+'Por cada $25 acumulados en compras'
+'¡Obtén 1 oportunidad para el sorteo!'
+'Participa hasta el 31 de octubre de 2026'
+'Sorteo: 7 de noviembre de 2026'
+'¡Síguenos en nuestras'
+'redes sociales!'
+'doctorcell.com.ec'
+'Consulta condiciones en nuestra web.'
+'Imagen referencial.'
+Use correct official logo text 'DoctorCell' and 'EXPERTOS EN TECNOLOGÍA'. Keep 'doctorcell.com.ec' exact and large, with a small globe icon. The follow-us message is a key CTA: highly legible and inviting, with a small heart/follow icon. Avoid unsupported social handles, platform-specific icons, QR codes, phone numbers, countdown digits, word rifa, added entry requirements or promises of guaranteed winning. Prioritize beautifully composed mobile readability. Keep all text sharp, no watermarks, no mockup frame, return a single complete 9:16 poster.

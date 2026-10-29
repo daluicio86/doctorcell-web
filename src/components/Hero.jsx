@@ -48,10 +48,10 @@ export default function Hero() {
       <div className="hero-content">
         <a className="hero-location" href="/sucursales"><span className="live-dot" /> QUITO, ECUADOR <span className="location-separator">/</span> 4 SUCURSALES <ArrowUpRight size={14} /></a>
         <p className="eyebrow">SERVICIO TÉCNICO. SIGUIENTE NIVEL.</p>
-        <h1 id="hero-title">Tu mundo<br />no se detiene.<br /><em>Tu equipo tampoco.</em></h1>
-        <p className="hero-copy">Le damos una nueva vida a tu tecnología. Reparación de celulares, MacBook, tablets y smartwatches, con diagnóstico claro y autorización previa.</p>
+        <h1 id="hero-title">¿Pantalla rota?<br />¿Batería que no dura?<em>Reparamos tu celular en&nbsp;Quito.</em></h1>
+        <p className="hero-copy">Vuelve a disfrutar tu equipo con DoctorCell. Tenemos <strong>4 sucursales</strong>, diagnóstico claro y una cotización que tú apruebas antes de reparar.</p>
         <div className="hero-actions">
-          <ButtonLink href={quoteUrl} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero">Cotiza por WhatsApp <ArrowUpRight size={17} /></ButtonLink>
+          <ButtonLink href={quoteUrl} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero">Cotizar mi reparación por WhatsApp <ArrowUpRight size={17} /></ButtonLink>
           <ButtonLink href="#servicios" variant="ghost" icon={ArrowDown}>Explorar servicios</ButtonLink>
         </div>
         <p className="hero-assurance"><ShieldCheck size={15} /> Conoces y autorizas el precio antes de reparar.</p>

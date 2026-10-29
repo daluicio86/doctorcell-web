@@ -1,14 +1,11 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { renderHome } from "../.prerender/entry-server.js";
+import { SITE_ORIGIN } from "../src/data/siteConfig.js";
+import { branches } from "../src/data/siteData.js";
+import { localBusinessSchema } from "../src/utils/pageMetadata.js";
 
-const origin = "https://www.doctorcell.com.ec";
-const branches = [
-  ["matriz-prensa-rio-arajuno", "DoctorCell Sucursal Prensa", "Prensa y Río Arajuno"],
-  ["colon-juan-leon-mera", "DoctorCell Colón", "Colón y Juan León Mera"],
-  ["shyris-tomas-de-berlanga", "DoctorCell Shyris", "Shyris y Tomás de Berlanga"],
-  ["prensa-vaca-de-castro", "DoctorCell Sucursal Vaca de Castro", "Prensa y Vaca de Castro"]
-];
+const origin = SITE_ORIGIN;
 
 const routes = [
   { path: "conviene-reparar", title: "¿Conviene reparar mi celular? | DoctorCell Quito", description: "Evalúa el estado de tu celular, compara reparar o reemplazar, comparte tu resultado y cotiza por WhatsApp con DoctorCell Quito.", heading: "¿Conviene reparar mi celular?", copy: "Cuéntanos cómo está tu equipo. Compara tus opciones, comparte tu orientación y cotiza por WhatsApp." },
@@ -18,19 +15,13 @@ const routes = [
   { path: "sucursales", title: "Sucursales DoctorCell en Quito", description: "Direcciones, horarios, rutas y contacto de las cuatro sucursales DoctorCell en Quito.", heading: "Cuatro sucursales en Quito", copy: "Encuentra la sede más conveniente y abre la ruta directa." },
   { path: "preguntas", title: "Preguntas frecuentes | DoctorCell Quito", description: "Respuestas sobre tiempos, repuestos, diagnóstico y visita a las sucursales DoctorCell.", heading: "Preguntas frecuentes", copy: "Lo esencial antes de traer tu equipo a una sucursal DoctorCell." },
   { path: "terminos-rifa", title: "Términos de la rifa | DoctorCell Quito", description: "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung A07 el 7 de noviembre de 2026.", heading: "Términos y condiciones de la rifa", copy: "Tus compras se acumulan y cada USD 25 generan automáticamente una oportunidad. Participa hasta el 31 de octubre de 2026." },
-  ...branches.map(([slug, name, address]) => ({
-    path: `sucursales/${slug}`,
-    title: `${name} | DoctorCell Quito`,
-    description: `Servicio técnico DoctorCell en ${address}, Quito. Horarios, ruta, orientación preliminar y contacto.`,
-    heading: name,
-    copy: `${address}, Quito. Atención de lunes a sábado, de 09:00 a 18:00.`,
-    schema: {
-      "@context": "https://schema.org", "@type": "CellPhoneStore", name,
-      url: `${origin}/sucursales/${slug}/`, telephone: "+593983222100", email: "dc.infouio@gmail.com", priceRange: "$",
-      image: `${origin}/logo.jpg`,
-      address: { "@type": "PostalAddress", streetAddress: address, addressLocality: "Quito", addressRegion: "Pichincha", addressCountry: "EC" },
-      openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "09:00", closes: "18:00" }]
-    }
+  ...branches.map((branch) => ({
+    path: `sucursales/${branch.slug}`,
+    title: `${branch.name} | DoctorCell Quito`,
+    description: `Servicio técnico DoctorCell en ${branch.address}, Quito. Horarios, ruta, orientación preliminar y contacto.`,
+    heading: branch.name,
+    copy: `${branch.address}, Quito. ${branch.hours}.`,
+    schema: localBusinessSchema(branch)
   }))
 ];
 

@@ -1,0 +1,24 @@
+Mode: Built-in image_gen edit.
+Reference: output/marketing/doctorcell-rifa-samsung-a07.png
+
+Use case: ads-marketing, precise layout adaptation and text edit.
+Edit target: the supplied DoctorCell advertisement. Make a new true VERTICAL 9:16 image for WhatsApp Status and Instagram Stories, ideally 1080x1920 pixels or equivalent exact 9:16. This is a designed rearrangement of the same campaign into a taller canvas. Do not simply stretch or crop the reference.
+Preserve the recognizable authentic DoctorCell logo with mascot, vivid electric blue and lime green palette, energetic premium retail visual style, confetti, lighting, lavender Samsung Galaxy A07 front and back on luminous pedestal, and the same promotion. Keep all critical text inside a generous story safe area: top 12% and bottom 14% decorative background only, and minimum 6% side margins. Strong hierarchy with legible type on mobile.
+Required correction everywhere: replace the Spanish word "rifa" with "sorteo". The word "rifa" must never appear.
+Rearrange into a beautiful vertical story: compact logo panel at safe top; big two-line headline; large centered prize phone and model caption in middle; clear promo panel then examples; bold CTA; contact number on its own big line with WhatsApp icon; website below. All essential content including contact/footer must fit within central 74% of canvas with breathing room. Product hero may be shorter than original to give text space. Keep legibility high.
+Exact copy, accents, numerals and dollar amounts:
+"¡ESTE SAMSUNG"
+"¡PUEDE SER TUYO!"
+"SAMSUNG GALAXY A07"
+"Por cada $25 de consumo"
+"recibes 1 opción para el sorteo"
+"$25 = 1 opción"
+"$50 = 2 opciones"
+"$75 = 3 opciones"
+"¡Más consumo, más oportunidades!"
+"¡COMPRA Y PARTICIPA!"
+"Escríbenos"
+"0999252575"
+"doctorcell.com.ec"
+Small readable footer: "Consulta las bases de la promoción en nuestra web."
+Make phone number 0999252575 exactly correct and prominent. Use three clean comparison cards for the examples. It must be clear $25 is spending required for one entry, not the selling price of the phone. Do not add dates, prices, capacity specs, other contact numbers, social handles, watermarks or QR codes. No duplicate logos. Exact vertical 9:16 output.

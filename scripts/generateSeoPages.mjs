@@ -1,12 +1,14 @@
 import { mkdir, readFile, writeFile as rawWriteFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { loadEnv } from "vite";
+import { SITE_ORIGIN } from "../src/data/siteConfig.js";
+import { whatsappNumber } from "../src/data/businessInfo.js";
 
-const origin = "https://www.doctorcell.com.ec";
+const origin = SITE_ORIGIN;
 const buildEnv = loadEnv(process.env.NODE_ENV || "production", process.cwd(), "VITE_");
 const ga4Id = /^G-[A-Z0-9]+$/.test(buildEnv.VITE_GA4_ID || "") ? buildEnv.VITE_GA4_ID : "";
 const metaPixelId = /^\d{10,20}$/.test(buildEnv.VITE_META_PIXEL_ID || "") ? buildEnv.VITE_META_PIXEL_ID : "";
-const wa = (text) => `https://wa.me/593983222100?text=${encodeURIComponent(text)}`;
+const wa = (text) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 const writeFile = async (path, data) => {
   try {
     if ((await readFile(path, "utf8")).trimEnd() === data.trimEnd()) return;
@@ -84,6 +86,57 @@ const pages = [
       ["Problemas de software", "Reinicios, lentitud y bloqueos pueden requerir diagnóstico de almacenamiento, aplicaciones o sistema. Pregunta si el proceso borrará datos y respáldalos cuando sea posible."],
       ["Antes de autorizar", "Confirma repuesto compatible, costo y plazo. Al retirarlo prueba pantalla, cámaras, audio, carga, conectividad y sensores."]
     ], faqs: [["¿Reparan Redmi y POCO?", "Depende del modelo y repuesto; consulta con el código exacto."], ["¿Se borran datos al actualizar?", "No siempre, pero ciertos procesos de recuperación sí pueden hacerlo."], ["¿Dónde veo el modelo?", "En Ajustes, la caja o la etiqueta del equipo."]]
+  },
+  {
+    slug: "software-celulares-quito", title: "Software y actualizaciones de celulares en Quito",
+    description: "Diagnóstico de lentitud, reinicios, errores y actualizaciones de Android o iOS en Quito. Consulta el alcance del servicio antes de autorizar.",
+    intro: "¿Tu celular está lento, se reinicia o muestra errores? Cuéntanos qué ocurre y desde cuándo para orientar la revisión de software en DoctorCell.",
+    sections: [
+      ["Qué problemas revisamos", "Evaluamos lentitud, reinicios, errores de aplicaciones y problemas relacionados con actualizaciones. La revisión permite definir qué intervención corresponde; no asumimos que una falla se resuelve con una actualización sin comprobar primero el equipo."],
+      ["Tus datos antes de intervenir", "Indica si tienes una copia de seguridad y qué información necesitas conservar. Antes de autorizar, confirma si el procedimiento propuesto requiere borrar datos y qué alternativas te propone el equipo técnico."],
+      ["Cómo solicitar el servicio en Quito", "Envíanos marca, modelo, una descripción del error y si apareció después de una actualización o instalación. Elige tu sucursal y confirma el alcance, precio total y tiempo estimado después del diagnóstico. La intervención se realiza con tu autorización."]
+    ], faqs: [["¿El servicio de software borra mis datos?", "Depende del procedimiento. Te explicamos el alcance y si requiere borrar datos antes de que autorices."], ["¿Puedo cotizar por WhatsApp?", "Sí. Envía marca, modelo y descripción de la falla. El precio y la viabilidad se confirman con la revisión."], ["¿Una actualización soluciona cualquier falla?", "No lo damos por hecho. Primero revisamos el caso para definir la intervención adecuada."]]
+  },
+  {
+    slug: "reparacion-tablets-ipad-quito", title: "Reparación de tablets y iPad en Quito",
+    description: "Revisión de pantalla, batería, carga y funcionamiento de tablets Android y iPad en Quito. Confirma viabilidad, repuesto y precio para tu modelo.",
+    intro: "Una tablet para estudiar, trabajar o comunicarte necesita una revisión acorde a su modelo. En DoctorCell orientamos tu consulta y confirmamos qué reparación es viable antes de intervenir.",
+    sections: [
+      ["Pantalla, batería y carga", "Describe si el daño afecta al vidrio, la imagen, el táctil, la autonomía o la carga. Indica si hubo una caída o contacto con líquido. Revisamos el funcionamiento del equipo para definir el alcance de la reparación."],
+      ["Identifica tu tablet o iPad", "Comparte la marca y el modelo exacto que aparecen en los ajustes, la caja o la etiqueta del equipo. La disponibilidad del repuesto y las opciones de reparación se confirman para ese modelo; no todas las tablets admiten la misma intervención."],
+      ["Antes de autorizar y al retirar", "Confirma el precio total, tipo de repuesto y tiempo estimado. Pregunta si el procedimiento afecta tus datos y comunica si cuentas con una copia de seguridad. Al retirar la tablet, revisa con el equipo técnico las funciones que se repararon."]
+    ], faqs: [["¿Atienden iPad y tablets Android?", "Sí, recibimos consultas para ambos. La reparación y los repuestos se confirman según el modelo y el diagnóstico."], ["¿Puedo consultar una pantalla rota?", "Sí. Envíanos el modelo y describe el daño para orientar la revisión y comprobar disponibilidad."], ["¿Cuánto cuesta la reparación?", "El valor depende del equipo, la falla y el repuesto. Confirmamos el precio antes de iniciar el trabajo."]]
+  },
+  {
+    slug: "reparacion-smartwatch-apple-watch-quito", title: "Reparación de smartwatches y Apple Watch en Quito",
+    description: "Diagnóstico de batería, carga y funcionamiento de smartwatches y Apple Watch en Quito. Consulta viabilidad y disponibilidad de repuestos por modelo.",
+    intro: "¿Tu reloj inteligente dura menos, no carga o presenta una falla? Consulta con DoctorCell en Quito para revisar las opciones disponibles para tu modelo.",
+    sections: [
+      ["Qué información necesitamos", "Comparte la marca, el modelo o serie del reloj y una descripción de la falla. Indica desde cuándo ocurre y si hubo golpe, humedad o cambio de cargador. Con esos datos podemos orientar la revisión inicial."],
+      ["Batería, carga y funcionamiento", "Revisamos problemas de autonomía, carga y funcionamiento general. La intervención depende del diagnóstico y la disponibilidad de componentes. Te explicamos qué trabajo es viable antes de que decidas continuar."],
+      ["Qué confirmar antes de reparar", "Pregunta por el repuesto, el precio total, el plazo y las condiciones del servicio. Confirma qué pruebas de batería, carga y funcionamiento se realizarán antes de la entrega y revisa con el equipo técnico las funciones reparadas."]
+    ], faqs: [["¿Atienden Apple Watch y otros relojes inteligentes?", "Sí, revisamos consultas para Apple Watch y otros smartwatches. La viabilidad se confirma por modelo."], ["¿Pueden revisar un reloj que no carga?", "Sí. Describe el problema y el modelo; el diagnóstico permite confirmar qué intervención corresponde."], ["¿Todos los modelos tienen repuestos disponibles?", "La disponibilidad debe confirmarse con la sucursal antes de autorizar el servicio."]]
+  },
+  {
+    slug: "microsoldadura-celulares-quito", title: "Microsoldadura de celulares en Quito",
+    description: "Diagnóstico de placa y componentes para microsoldadura de celulares en Quito. Consulta viabilidad, alcance y precio antes de autorizar la reparación.",
+    intro: "Una falla de placa necesita una evaluación técnica antes de definir la reparación. En DoctorCell revisamos tu caso y explicamos si una intervención de microsoldadura es viable para tu equipo.",
+    sections: [
+      ["Qué revisamos antes de intervenir", "Describe si el celular no enciende, falla de forma intermitente o presenta problemas de carga o funcionamiento. Estos síntomas no confirman por sí solos una falla de placa: primero debemos identificar el origen del problema."],
+      ["Un diagnóstico para tu modelo", "Comparte la marca, el modelo y si hubo un golpe, contacto con líquido o una reparación anterior. La intervención depende del estado de la placa y de los componentes disponibles. Confirmamos el alcance técnico antes de que decidas continuar."],
+      ["Precio, plazo y pruebas finales", "Antes de autorizar, pregunta qué trabajo se realizará, el precio total y el tiempo estimado. Indica si conservar tus datos es una prioridad para la evaluación. Al retirar el equipo, revisa con el técnico las funciones reparadas y las condiciones del servicio."]
+    ], faqs: [["¿Un celular que no enciende siempre necesita microsoldadura?", "No. Ese síntoma requiere diagnóstico; primero se debe identificar la falla."], ["¿Pueden confirmar el precio por WhatsApp?", "Podemos orientar la consulta con la marca, modelo y síntomas. La viabilidad y el valor final requieren la revisión del equipo."], ["¿La microsoldadura garantiza recuperar mis datos?", "No se garantiza antes de revisar el equipo. Comunica si tus datos son una prioridad para evaluar el caso."]]
+  },
+  {
+    slug: "reparacion-camaras-audio-perifericos-quito", title: "Reparación de cámaras, audio y periféricos en Quito",
+    description: "Revisión de cámaras, parlantes, micrófonos, botones, sensores y conectividad de celulares en Quito. Diagnóstico y cotización antes de reparar.",
+    intro: "¿La cámara falla, no te escuchan en las llamadas o un botón dejó de responder? Cuéntanos qué función presenta el problema para orientar la revisión de tu celular en DoctorCell.",
+    sections: [
+      ["Cámaras y calidad de imagen", "Indica si el problema afecta a la cámara frontal, trasera o a ambas, y si ocurre en todas las aplicaciones o solo en una. Describe si ves imagen negra, fallas de enfoque o daños visibles. Revisamos el caso antes de proponer un cambio de componente."],
+      ["Parlantes, micrófonos y llamadas", "Explica si no escuchas, no te escuchan o el sonido es intermitente. Cuenta si ocurre durante llamadas, grabaciones, reproducción de música o al usar un accesorio. Esa información ayuda a definir qué funciones deben comprobarse."],
+      ["Botones, sensores y conectividad", "También recibimos consultas por botones, sensores y fallas de Wi-Fi o Bluetooth. Comparte el modelo y desde cuándo sucede. La causa y las opciones de reparación se confirman mediante el diagnóstico."],
+      ["Qué confirmar antes de autorizar", "Pregunta por el alcance del trabajo, disponibilidad del repuesto, precio total y plazo. Al retirar el equipo, prueba con el técnico la cámara, el audio o la función que se haya reparado."]
+    ], faqs: [["¿Una cámara que falla siempre debe cambiarse?", "No lo asumimos antes de revisar. Primero comprobamos el problema para definir la solución."], ["¿Revisan micrófonos y parlantes?", "Sí. Describe la falla y el modelo para orientar la consulta y confirmar las opciones de reparación."], ["¿Atienden problemas de Wi-Fi o Bluetooth?", "Sí, recibimos estas consultas. La viabilidad de la reparación se confirma después del diagnóstico."]]
   }
 ];
 
@@ -116,7 +169,12 @@ for (const page of pages) {
     "celular-mojado-que-hacer": ["celular-no-carga-quito", "cambio-bateria-celular-quito", "reparacion-xiaomi-quito"],
     "cambio-bateria-celular-quito": ["celular-no-carga-quito", "celular-mojado-que-hacer", "reparacion-xiaomi-quito"],
     "celular-no-carga-quito": ["cambio-bateria-celular-quito", "celular-mojado-que-hacer", "reparacion-xiaomi-quito"],
-    "reparacion-xiaomi-quito": ["cambio-pantalla-samsung-quito", "cambio-bateria-celular-quito", "celular-no-carga-quito"]
+    "reparacion-xiaomi-quito": ["software-celulares-quito", "cambio-bateria-celular-quito", "celular-no-carga-quito"],
+    "software-celulares-quito": ["reparacion-xiaomi-quito", "reparacion-tablets-ipad-quito", "cambio-bateria-celular-quito"],
+    "reparacion-tablets-ipad-quito": ["software-celulares-quito", "reparacion-smartwatch-apple-watch-quito", "celular-no-carga-quito"],
+    "reparacion-smartwatch-apple-watch-quito": ["reparacion-tablets-ipad-quito", "cambio-bateria-celular-quito", "celular-no-carga-quito"],
+    "microsoldadura-celulares-quito": ["celular-no-carga-quito", "celular-mojado-que-hacer", "reparacion-camaras-audio-perifericos-quito"],
+    "reparacion-camaras-audio-perifericos-quito": ["software-celulares-quito", "microsoldadura-celulares-quito", "celular-no-carga-quito"]
   };
   const related = relatedBySlug[page.slug].map((slug) => pages.find((x) => x.slug === slug)).map((x) => `<a href="/guias/${x.slug}/">${esc(x.title)}</a>`).join("");
   const body = `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · <a href="/guias/">Guías</a></div><h1>${esc(page.title)}</h1><p>${esc(page.intro)}</p></div></header><section class="content"><div class="wrap"><article>${page.sections.map(([h, t]) => `<h2>${esc(h)}</h2><p>${esc(t)}</p>`).join("")}<aside class="notice"><strong>Importante:</strong> el precio, repuesto y tiempo se confirman al identificar el modelo y revisar el equipo.</aside><section class="faq"><h2>Preguntas frecuentes</h2>${page.faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}</section><div class="actions"><a class="primary" href="${wa(`Hola DoctorCell, leí la guía “${page.title}” y quiero consultar mi equipo.`)}">Consultar mi caso</a><a href="/#sucursales">Ver sucursales</a></div></article></div></section><section class="related"><div class="wrap"><h2>También puede ayudarte</h2><div class="grid">${related}</div></div></section></main>`;
@@ -124,8 +182,8 @@ for (const page of pages) {
   await writeFile(resolve(dir, "index.html"), withFavicon(head(page, body, JSON.stringify(faqSchema).replaceAll("<", "\\u003c"))));
 }
 const cards = pages.map((p) => `<a href="/guias/${p.slug}/"><strong>${esc(p.title)}</strong><span>${esc(p.description)}</span></a>`).join("");
-const indexPage = { title: "Guías de reparación de celulares", description: "Guías sobre pantallas, baterías, carga, humedad y reparación de celulares en Quito." };
-await writeFile(resolve("public/guias/index.html"), withFavicon(head(indexPage, `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · Guías</div><h1>Guías para cuidar y reparar tu celular</h1><p>Información práctica para actuar ante una falla y llegar mejor preparado al diagnóstico.</p></div></header><section class="content"><div class="wrap"><div class="grid index">${cards}</div></div></section></main>`)));
+const indexPage = { title: "Guías de reparación de celulares, tablets y relojes", description: "Guías sobre pantallas, baterías, carga, humedad, software y reparación de celulares, tablets y relojes inteligentes en Quito." };
+await writeFile(resolve("public/guias/index.html"), withFavicon(head(indexPage, `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · Guías</div><h1>Guías para cuidar y reparar tus equipos</h1><p>Celulares, tablets y relojes inteligentes: información práctica para actuar ante una falla y llegar mejor preparado al diagnóstico.</p></div></header><section class="content"><div class="wrap"><div class="grid index">${cards}</div></div></section></main>`)));
 const paths = [
   "/", "/tienda/", "/agendar/", "/seguimiento/", "/sucursales/", "/preguntas/", "/terminos-rifa/", "/conviene-reparar/",
   "/sucursales/matriz-prensa-rio-arajuno/", "/sucursales/colon-juan-leon-mera/",

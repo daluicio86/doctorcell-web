@@ -15,8 +15,8 @@ citas, seguimiento, sucursales y tienda comparten la paleta oscura.
 Los metadatos de la home están en `index.html` y `src/App.jsx`.
 
 La home presenta WhatsApp como acción principal, enlaces a reseñas por sucursal
-y la rifa con sus fechas existentes. El popup se muestra en cada carga o visita,
-aunque se haya cerrado previamente, y puede reabrirse desde «Ver promoción» en
+y la rifa con sus fechas existentes. El popup se abre automáticamente una sola
+vez por sesión de pestaña, excepto en citas y seguimiento, y puede reabrirse desde «Ver promoción» en
 el bloque de la rifa. Se desactiva automáticamente al finalizar el 31 de octubre
 de 2026 (UTC−5), incluso si la página permanece abierta. El contador usa UTC−5, cierra la participación
 al terminar el 31 de octubre y cambia el mensaje el día del sorteo, sin inventar
@@ -50,9 +50,41 @@ sucursal elegida. Los eventos `repair_decision_complete` y
 
 ## Captura de leads
 
+El cotizador de la portada exige solo nombre, WhatsApp y falla, junto con una
+autorización explícita para registrar y gestionar la consulta y sus seguimientos.
+Marca, modelo y sucursal son opcionales; las fotos se envían directamente en
+WhatsApp. Primero confirma el registro mediante `POST /api/leads` y luego abre
+el chat. El nombre, contacto y falla quedan guardados aunque el visitante no
+envíe el mensaje de WhatsApp. Un fallo de registro conserva el formulario y
+permite reintentar; el mismo intento no crea leads duplicados. Los datos del
+formulario no se persisten en el navegador.
+
+El chatbot mantiene la conversación solo en memoria mientras la página está
+abierta. Elimina el historial local de versiones anteriores, no lo restaura y
+no guarda nuevos mensajes ni datos de contacto en el navegador. Rechazar el
+registro también elimina el contacto de la conversación y del resumen; no
+envía un lead al servidor. Crear un caso requiere elegir la autorización
+explícita. Los casos ya registrados con autorización permanecen en el servidor.
+
+## Solicitudes de cita
+
+El formulario valida nombres y teléfonos móviles de Ecuador (`09XXXXXXXX`,
+`5939XXXXXXXX` o `+5939XXXXXXXX`); admite otros números internacionales con
+`+` y código de país. Las fechas y horas se interpretan en Quito (UTC−5): no
+admite domingos, fechas pasadas ni turnos que ya comenzaron. La validación se
+repite al solicitar la cita. El envío abre WhatsApp y la sucursal confirma la
+disponibilidad; no representa una reserva automática.
+
+## Registro y seguimiento de leads
+
 `npm run build` y `npm start` sirven la web y registran en `POST /api/leads`
-los casos autorizados desde el chatbot. Los leads se guardan por defecto en
+los casos autorizados desde el chatbot y el cotizador. Los leads se guardan por defecto en
 `data/leads.ndjson`, un archivo excluido de Git.
+
+La captura del cotizador requiere el servidor Node (`npm start`) o que el hosting
+redirija `/api/leads` a ese servidor. Subir solo los archivos estáticos de `dist/`
+a IIS no habilita el registro. Una respuesta HTML del hosting nunca se muestra
+como registro exitoso.
 
 Variables opcionales:
 
@@ -74,10 +106,34 @@ producción. Si el hosting usa un filesystem efímero, configura
 
 ## Páginas SEO
 
-`npm run build` genera el índice `/guias/`, seis páginas temáticas, `robots.txt`
+`npm run build` genera el índice `/guias/`, once páginas temáticas, `robots.txt`
 y `sitemap.xml`. El contenido fuente está en `scripts/generateSeoPages.mjs`.
-Después de publicar, registra `https://www.doctorcell.com.ec/sitemap.xml` en
+Después de publicar, registra `https://doctorcell.com.ec/sitemap.xml` en
 Google Search Console.
+
+La portada incluye nueve tarjetas de servicio, con software y actualizaciones,
+tablets y iPad, y smartwatches y Apple Watch como categorías propias. Las tres
+categorías enlazan a sus guías específicas y a WhatsApp con el servicio en el
+mensaje. La tarjeta de cámaras, audio y periféricos también menciona botones,
+sensores y conectividad. Los nuevos servicios no publican precios ni plazos
+sin diagnóstico.
+
+Microsoldadura y cámaras, audio y periféricos enlazan a sus propias guías;
+no se reutilizan para ellos las guías de humedad o de Xiaomi.
+
+El dominio principal es `https://doctorcell.com.ec`, sin `www`. Canonical,
+sitemap, robots, metadatos sociales, datos estructurados y enlaces compartidos
+usan esa versión. `public/web.config` incluye redirecciones 301 de `www` y de
+HTTP en IIS; `public/_redirects` incluye las equivalentes para Netlify. El
+servidor Node redirige el host `www` con 301, conservando ruta y parámetros;
+HTTPS se termina en el proxy o hosting. Estas reglas deben publicarse en el
+hosting para entrar en vigor; no cambian la configuración remota por sí solas.
+
+El negocio confirmó un único teléfono, `+593 98 322 2100`, y atención de lunes
+a sábado de `09:00` a `18:00`. El contacto y horario compartidos están en
+`src/data/businessInfo.js`; las tarjetas y fichas de sucursales y sus datos
+estructurados reutilizan esa información. Los perfiles externos de Google Maps
+y redes sociales se deben revisar en sus respectivas cuentas al publicar.
 
 ## Analítica y remarketing
 

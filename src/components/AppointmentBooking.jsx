@@ -1,22 +1,52 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { CalendarDays, CheckCircle2, Clock3, MessageCircle } from "lucide-react";
 import { branches, diagnostics } from "../data/siteData.js";
 import { whatsappUrl } from "../utils/whatsapp.js";
 import SectionHeading from "./SectionHeading.jsx";
-
-const timeSlots = ["09:00", "10:30", "12:00", "14:00", "15:30", "17:00"];
+import { appointmentTimeSlots, isAppointmentSlotAvailable, quitoDate, validateAppointment } from "../utils/appointments.js";
 
 export default function AppointmentBooking() {
   const [form, setForm] = useState({ branch: "", date: "", time: "", name: "", phone: "", issue: "" });
-  const today = new Date().toISOString().slice(0, 10);
-  const ready = Object.values(form).every((value) => value.trim());
+  const [now, setNow] = useState(Date.now);
+  const [touched, setTouched] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 30000);
+    return () => window.clearInterval(timer);
+  }, []);
+  const today = quitoDate(now);
+  const errors = validateAppointment(form, now);
+  const fieldError = (key) => (submitted || touched[key]) ? errors[key] : "";
+  const fieldProps = (key) => ({
+    name: key,
+    required: true,
+    "aria-invalid": Boolean(fieldError(key)),
+    "aria-describedby": fieldError(key) ? `booking-${key}-error` : undefined,
+    onBlur: () => setTouched((current) => ({ ...current, [key]: true }))
+  });
+  const errorMessage = (key) => fieldError(key) ? <small className="booking-field-error" id={`booking-${key}-error`}>{fieldError(key)}</small> : null;
   const message = useMemo(() => [
     "Hola DoctorCell Quito, quiero solicitar una cita.",
     `Sucursal: ${form.branch}.`, `Fecha: ${form.date}.`, `Hora: ${form.time}.`,
-    `Cliente: ${form.name}.`, `Teléfono: ${form.phone}.`, `Falla: ${form.issue}.`,
+    `Cliente: ${form.name.trim()}.`, `Teléfono: ${form.phone.trim()}.`, `Falla: ${form.issue}.`,
     "Por favor confirmen la disponibilidad."
   ].join(" "), [form]);
-  const update = (key) => (event) => setForm((current) => ({ ...current, [key]: event.target.value }));
+  const update = (key) => (event) => {
+    const value = event.target.value;
+    setForm((current) => ({ ...current, [key]: value, ...(key === "date" ? { time: "" } : {}) }));
+  };
+  const submit = (event) => {
+    event.preventDefault();
+    const currentTime = Date.now();
+    setNow(currentTime);
+    setSubmitted(true);
+    const currentErrors = validateAppointment(form, currentTime);
+    if (Object.keys(currentErrors).length) {
+      event.currentTarget.elements.namedItem(Object.keys(currentErrors)[0])?.focus();
+      return;
+    }
+    window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+  };
 
   return (
     <section className="section booking" id="agendar">
@@ -30,17 +60,18 @@ export default function AppointmentBooking() {
           <span><CheckCircle2 size={20} /><b>Confirmación humana</b><small>Recíbela por WhatsApp</small></span>
         </div>
       </div>
-      <form className="booking-form" onSubmit={(event) => event.preventDefault()}>
-        <label><span>Sucursal</span><select value={form.branch} onChange={update("branch")}><option value="">Selecciona</option>{branches.map(({ name }) => <option key={name}>{name}</option>)}</select></label>
-        <label><span>Fecha</span><input type="date" min={today} value={form.date} onChange={update("date")} /></label>
-        <label><span>Hora</span><select value={form.time} onChange={update("time")}><option value="">Selecciona</option>{timeSlots.map((time) => <option key={time}>{time}</option>)}</select></label>
-        <label><span>Falla</span><select value={form.issue} onChange={update("issue")}><option value="">Selecciona</option>{diagnostics.map(({ title }) => <option key={title}>{title}</option>)}</select></label>
-        <label><span>Nombre</span><input value={form.name} onChange={update("name")} placeholder="Tu nombre" /></label>
-        <label><span>WhatsApp</span><input type="tel" value={form.phone} onChange={update("phone")} placeholder="09 9999 9999" /></label>
-        <a className={`button booking-submit ${ready ? "" : "is-disabled"}`} href={ready ? whatsappUrl(message) : undefined} target={ready ? "_blank" : undefined} rel="noopener noreferrer" aria-disabled={!ready} onClick={(event) => !ready && event.preventDefault()}>
+      <form className="booking-form" noValidate onSubmit={submit}>
+        <label><span>Sucursal</span><select {...fieldProps("branch")} value={form.branch} onChange={update("branch")}><option value="">Selecciona</option>{branches.map(({ name }) => <option key={name}>{name}</option>)}</select>{errorMessage("branch")}</label>
+        <label><span>Fecha (Quito)</span><input {...fieldProps("date")} type="date" min={today} value={form.date} onInput={update("date")} onChange={update("date")} />{errorMessage("date")}</label>
+        <label><span>Hora (Quito)</span><select {...fieldProps("time")} value={form.time} onChange={update("time")}><option value="">Selecciona</option>{appointmentTimeSlots.map((time) => <option key={time} disabled={!isAppointmentSlotAvailable(form.date, time, now)}>{time}</option>)}</select>{errorMessage("time")}</label>
+        <label><span>Falla</span><select {...fieldProps("issue")} value={form.issue} onChange={update("issue")}><option value="">Selecciona</option>{diagnostics.map(({ title }) => <option key={title}>{title}</option>)}</select>{errorMessage("issue")}</label>
+        <label><span>Nombre</span><input {...fieldProps("name")} autoComplete="name" minLength={2} maxLength={100} value={form.name} onChange={update("name")} placeholder="Tu nombre" />{errorMessage("name")}</label>
+        <label><span>WhatsApp</span><input {...fieldProps("phone")} type="tel" autoComplete="tel" maxLength={30} value={form.phone} onChange={update("phone")} placeholder="09 9999 9999" />{errorMessage("phone")}</label>
+        {submitted && Object.keys(errors).length > 0 && <p className="booking-error-summary" role="alert">Revisa los campos indicados antes de solicitar tu cita.</p>}
+        <button className="button booking-submit" type="submit">
           <MessageCircle size={19} /> Solicitar cita
-        </a>
-        <small>La hora se confirma según disponibilidad de la sucursal.</small>
+        </button>
+        <small>Atendemos de lunes a sábado. Todas las horas corresponden a Quito. La sucursal confirma la disponibilidad por WhatsApp.</small>
       </form>
     </section>
   );

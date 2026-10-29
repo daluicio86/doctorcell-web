@@ -2,10 +2,11 @@ import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 import { scheduleNewLeadFollowups } from "./followupService.js";
+import { isValidWhatsAppPhone } from "../src/utils/contact.js";
 
 const DATA_FILE = resolve(process.env.LEADS_FILE || "data/leads.ndjson");
 const MAX_BODY_SIZE = 32 * 1024;
-const allowedFields = ["sessionId", "device", "brand", "model", "problem", "detail", "service", "location", "schedule", "contact"];
+const allowedFields = ["sessionId", "name", "device", "brand", "model", "problem", "detail", "service", "location", "schedule", "contact"];
 
 const clean = (value, max = 500) => typeof value === "string" ? value.trim().slice(0, max) : "";
 
@@ -45,6 +46,11 @@ export async function createLead(payload, metadata = {}) {
   }
 
   const lead = Object.fromEntries(allowedFields.map((field) => [field, clean(payload[field], field === "detail" ? 500 : 160)]));
+  if (payload.source === "quote-finder-web") {
+    if (lead.name.length < 2) return { status: 400, body: { error: "Escribe tu nombre (al menos 2 caracteres)." } };
+    if (!isValidWhatsAppPhone(lead.contact)) return { status: 400, body: { error: "Ingresa un teléfono de WhatsApp válido." } };
+    if (!lead.problem) return { status: 400, body: { error: "Selecciona la falla de tu equipo." } };
+  }
   if (!validContact(lead.contact)) {
     return { status: 400, body: { error: "El teléfono o correo no es válido." } };
   }
@@ -54,7 +60,9 @@ export async function createLead(payload, metadata = {}) {
 
   lead.caseId = `DC-${randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase()}`;
   lead.createdAt = new Date().toISOString();
-  lead.source = "chatbot-web";
+  lead.source = payload.source === "quote-finder-web" ? "quote-finder-web" : "chatbot-web";
+  lead.consent = true;
+  lead.consentedAt = lead.createdAt;
   lead.ip = clean(metadata.ip, 80);
   lead.userAgent = clean(metadata.userAgent, 240);
 

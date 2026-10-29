@@ -8,7 +8,7 @@ export default function Services() {
   return (
     <section className="section services" id="servicios">
       <SectionHeading eyebrow="01 / PRECISIÓN QUE SE NOTA" title="Un nuevo comienzo para tu equipo.">
-        Revisamos cada equipo y confirmamos la solución según el modelo, el diagnóstico y el repuesto disponible.
+        Pantallas, baterías, software y más para celulares, tablets y relojes inteligentes en Quito. Confirmamos la solución según el modelo, el diagnóstico y el repuesto disponible.
       </SectionHeading>
       <div className="service-grid">
         {services.map(({ icon: Icon, title, text, time, guideHref, guideLabel }, index) => (

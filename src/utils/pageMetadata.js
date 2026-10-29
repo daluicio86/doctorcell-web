@@ -1,4 +1,7 @@
-const origin = "https://www.doctorcell.com.ec";
+import { SITE_ORIGIN } from "../data/siteConfig.js";
+import { contactInfo, openingHours } from "../data/businessInfo.js";
+
+const origin = SITE_ORIGIN;
 
 function ensureMeta(selector, attributes) {
   let element = document.head.querySelector(selector);
@@ -40,8 +43,8 @@ export function localBusinessSchema(branch) {
     "@type": "CellPhoneStore",
     name: `DoctorCell Quito — ${branch.name}`,
     url: `${origin}/sucursales/${branch.slug}/`,
-    telephone: "+593983222100",
-    email: "dc.infouio@gmail.com",
+    telephone: contactInfo.phoneHref,
+    email: contactInfo.email,
     priceRange: "$",
     image: `${origin}/logo.jpg`,
     address: {
@@ -53,9 +56,9 @@ export function localBusinessSchema(branch) {
     },
     openingHoursSpecification: [{
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "09:00",
-      closes: "18:00"
+      dayOfWeek: openingHours.dayOfWeek,
+      opens: openingHours.opens,
+      closes: openingHours.closes
     }]
   };
 }

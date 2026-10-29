@@ -1,0 +1,19 @@
+DoctorCell - Últimos días - anuncio vertical de 15 segundos
+
+Entrega: ../../output/marketing/doctorcell-ultimos-dias-a07-15s.mp4
+Formato: 1080 x 1920, 9:16, 30 fps, 450 fotogramas, H.264 con audio AAC.
+
+0-4 s: Últimos días / Tus compras pueden hacerte ganar / Samsung A07.
+4-9 s: Compra y participa / Por cada $25 acumulados en compras, 1 oportunidad.
+9-15 s: Síguenos en nuestras redes sociales / Fecha del sorteo.
+doctorcell.com.ec visible durante todo el anuncio.
+
+Participación hasta el 31 de octubre de 2026. Sorteo el 7 de noviembre de 2026.
+La música es una composición instrumental electrónica original, 128 BPM, sintetizada
+mediante scripts/music.py, con percusión, bajo, acordes, melodía y transiciones.
+No utiliza grabaciones musicales de terceros. El WAV fuente está en public/.
+Los recursos visuales proceden del logo y del A07 existentes en este proyecto.
+
+Edición: src/Opening.tsx, src/Participation.tsx, src/Closing.tsx, src/design.tsx.
+Vista previa: npm run dev -- --no-open --port=3003
+Exportación: npx remotion render src/index.ts DoctorCell-UltimosDias-15s ../../output/marketing/doctorcell-ultimos-dias-a07-15s.mp4 --port=3004 --codec=h264 --audio-codec=aac --pixel-format=yuv420p --crf=19

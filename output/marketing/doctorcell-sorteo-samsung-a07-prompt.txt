@@ -1,0 +1,9 @@
+Mode: Built-in image_gen edit.
+Reference: output/marketing/doctorcell-rifa-samsung-a07.png
+
+Use case: text-localization, precise text correction.
+Edit the supplied original DoctorCell advertisement. Make ONLY one localized text replacement in the lime green promotion panel under the Samsung model title:
+Current two-line copy: "Por cada $25 de consumo" / "recibes 1 opción para la rifa"
+Correct two-line copy: "Por cada $25 de consumo" / "recibes 1 opción para el sorteo"
+The exact final second line must read "recibes 1 opción para el sorteo". Correct the article to "el". Fit the longer line naturally in the existing panel, slightly adjusting the line's font size if required.
+Preserve everything else unchanged: same 4:5 canvas, original composition, logo and mascot, all phone imagery, lime green and blue palette, glowing effects, confetti, all other copy, three examples "$25 = 1 opción", "$50 = 2 opciones", "$75 = 3 opciones", website doctorcell.com.ec, and especially exact contact number 0999252575. Do not redesign, move, crop, add or remove any other element. The word "rifa" must not appear. Return the corrected full original advertisement.

@@ -15,25 +15,18 @@ import {
   Smartphone,
   Sparkles,
   TabletSmartphone,
+  Watch,
   Wrench,
   Zap
 } from "lucide-react";
 
-export const whatsappNumber = "593983222100";
-
-export const contactInfo = {
-  businessName: "DoctorCell Quito",
-  address: "Prensa y Río Arajuno, Quito, Ecuador",
-  whatsappDisplay: "+593 98 322 2100",
-  phoneDisplay: "+593 98 322 2100",
-  phoneHref: "+593983222100",
-  email: "dc.infouio@gmail.com",
-  hours: "Lunes a sábado, 09:00–18:00"
-};
+import { contactInfo } from "./businessInfo.js";
+export { contactInfo, whatsappNumber } from "./businessInfo.js";
 
 export const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "#servicios" },
+  { label: "Tienda", href: "/tienda" },
   { label: "Citas", href: "/agendar" },
   { label: "Sucursales", href: "/sucursales" },
   { label: "Seguimiento", href: "/seguimiento" }
@@ -102,13 +95,13 @@ export const services = [
   },
   {
     icon: Camera,
-    title: "Cámaras y audio",
-    text: "Revisión de cámaras, parlantes, micrófonos, sensores y conectores internos.",
+    title: "Cámaras, audio y periféricos",
+    text: "Revisión de cámaras, parlantes, micrófonos, botones, sensores y fallas de Wi-Fi o Bluetooth.",
     time: "Tiempo estimado después del diagnóstico",
     price: "Desde $25",
     problem: "Cámara o audio",
-    guideHref: "/guias/reparacion-xiaomi-quito/",
-    guideLabel: "Guía de diagnóstico"
+    guideHref: "/guias/reparacion-camaras-audio-perifericos-quito/",
+    guideLabel: "Guía de cámaras, audio y periféricos"
   },
   {
     icon: Wrench,
@@ -117,8 +110,35 @@ export const services = [
     time: "Tiempo estimado después del diagnóstico",
     price: "Desde $30",
     problem: "Otro problema",
-    guideHref: "/guias/celular-mojado-que-hacer/",
+    guideHref: "/guias/microsoldadura-celulares-quito/",
     guideLabel: "Guía de microsoldadura"
+  },
+  {
+    icon: MonitorSmartphone,
+    title: "Software y actualizaciones",
+    text: "Diagnóstico de lentitud, reinicios, errores y actualizaciones en Android o iOS. Te explicamos si el proceso requiere borrar datos antes de intervenir.",
+    time: "Alcance y tiempo después del diagnóstico",
+    problem: "Software",
+    guideHref: "/guias/software-celulares-quito/",
+    guideLabel: "Guía de software"
+  },
+  {
+    icon: TabletSmartphone,
+    title: "Reparación de tablets y iPad",
+    text: "Revisión de pantalla, batería, carga y funcionamiento en tablets Android y iPad. Confirmamos la reparación según el modelo y el repuesto disponible.",
+    time: "Viabilidad y repuesto por confirmar",
+    problem: "Tablet / iWatch",
+    guideHref: "/guias/reparacion-tablets-ipad-quito/",
+    guideLabel: "Guía de tablets y iPad"
+  },
+  {
+    icon: Watch,
+    title: "Smartwatches y Apple Watch",
+    text: "Diagnóstico de problemas de batería, carga y funcionamiento en relojes inteligentes. Revisamos las opciones de reparación para tu modelo.",
+    time: "Viabilidad y repuesto por confirmar",
+    problem: "Tablet / iWatch",
+    guideHref: "/guias/reparacion-smartwatch-apple-watch-quito/",
+    guideLabel: "Guía de relojes inteligentes"
   }
 ];
 
