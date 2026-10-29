@@ -301,5 +301,35 @@
     "hours": true,
     "store": true
   },
-  "pass": true
+  "pass": true,
+  "browser": {
+    "desktopHeroVisible": true,
+    "mobile": {
+      "requestedViewport": {
+        "width": 390,
+        "height": 844
+      },
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "horizontalOverflow": false,
+      "menuOpens": true,
+      "storeNavigationWorks": true
+    },
+    "form": {
+      "nameRequired": true,
+      "phoneRequired": true,
+      "problemRequired": true,
+      "consentRequired": true,
+      "consentCheckedByDefault": false,
+      "optionalFields": [
+        "brand",
+        "model",
+        "branch"
+      ],
+      "productionLeadCreated": false
+    },
+    "raffleRepeatedOnReturn": false,
+    "consoleWarnings": 0,
+    "consoleErrors": 0
+  }
 }
