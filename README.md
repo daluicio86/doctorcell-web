@@ -14,14 +14,10 @@ citas, seguimiento, sucursales y tienda comparten la paleta oscura.
 `dist/index.html`. Las rutas secundarias conservan su contenido estático inicial.
 Los metadatos de la home están en `index.html` y `src/App.jsx`.
 
-La home presenta WhatsApp como acción principal, enlaces a reseñas por sucursal
-y la rifa con sus fechas existentes. El popup se abre automáticamente una sola
-vez por sesión de pestaña, excepto en citas y seguimiento, y puede reabrirse desde «Ver promoción» en
-el bloque de la rifa. Se desactiva automáticamente al finalizar el 31 de octubre
-de 2026 (UTC−5), incluso si la página permanece abierta. El contador usa UTC−5, cierra la participación
-al terminar el 31 de octubre y cambia el mensaje el día del sorteo, sin inventar
-una hora. Antes de publicar la promoción, el negocio debe completar su revisión
-legal y confirmar la mecánica anunciada.
+La home presenta WhatsApp como acción principal y enlaces a reseñas por sucursal.
+La promoción finalizada el 31 de octubre de 2026 fue retirada de la portada,
+los avisos emergentes y el sitemap. La antigua ruta `/terminos-rifa/` redirige
+al inicio en IIS, Netlify y el servidor Node.
 
 Las imágenes del catálogo se sirven en WebP; se conservan los originales.
 No se publican precios nuevos por modelo ni cifras de reseñas sin confirmación.

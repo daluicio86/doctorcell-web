@@ -185,7 +185,7 @@ const cards = pages.map((p) => `<a href="/guias/${p.slug}/"><strong>${esc(p.titl
 const indexPage = { title: "Guías de reparación de celulares, tablets y relojes", description: "Guías sobre pantallas, baterías, carga, humedad, software y reparación de celulares, tablets y relojes inteligentes en Quito." };
 await writeFile(resolve("public/guias/index.html"), withFavicon(head(indexPage, `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · Guías</div><h1>Guías para cuidar y reparar tus equipos</h1><p>Celulares, tablets y relojes inteligentes: información práctica para actuar ante una falla y llegar mejor preparado al diagnóstico.</p></div></header><section class="content"><div class="wrap"><div class="grid index">${cards}</div></div></section></main>`)));
 const paths = [
-  "/", "/tienda/", "/agendar/", "/seguimiento/", "/sucursales/", "/preguntas/", "/terminos-rifa/", "/conviene-reparar/",
+  "/", "/tienda/", "/agendar/", "/seguimiento/", "/sucursales/", "/preguntas/", "/conviene-reparar/",
   "/sucursales/matriz-prensa-rio-arajuno/", "/sucursales/colon-juan-leon-mera/",
   "/sucursales/shyris-tomas-de-berlanga/", "/sucursales/prensa-vaca-de-castro/",
   "/guias/", ...pages.map((p) => `/guias/${p.slug}/`)

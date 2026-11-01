@@ -9,3 +9,5 @@ http://doctorcell.com.ec/* https://doctorcell.com.ec/:splat 301!
 /curso/           /  301
 /courses          /  301
 /courses/         /  301
+/terminos-rifa    /  301!
+/terminos-rifa/   /  301!

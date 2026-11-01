@@ -232,15 +232,6 @@ section[id] { scroll-margin-top: 120px; }
 .futurist-home .reviews-proof strong { font-size: 14px; font-weight: 500; }
 .futurist-home .reviews-proof span { font-size: 11px; line-height: 1.7; }
 .futurist-home .google-reviews-link { border: 1px solid #3a4c2d; border-radius: 5px; color: #c1dfaa; background: #b7f76b05; font-size: 11px; font-weight: 500; box-shadow: none; }
-.futurist-home .raffle-home.section { grid-template-columns: 180px 1fr; max-width: 1280px; width: calc(100% - 48px); margin: 0 auto; padding: 35px 50px; gap: 45px; border: 1px solid #414d2b; border-radius: 12px; background: radial-gradient(ellipse at 10% 100%, #b7f76b13, transparent 65%), #141b10; }
-.futurist-home .raffle-home h2 { max-width: 660px; font-size: clamp(28px, 3.2vw, 42px); }
-.futurist-home .raffle-home p:not(.eyebrow) { color: #abb99f; font-size: 12px; line-height: 1.8; }
-.futurist-home .raffle-home-countdown { color: #b7f76b !important; }
-.futurist-home .raffle-home figure { margin: 0; }
-.futurist-home .raffle-home figure img { border-radius: 9px; }
-.futurist-home .raffle-home figcaption { color: #8e9a85; }
-.raffle-home-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-.raffle-home-actions .raffle-reopen { cursor: pointer; font-family: inherit; }
 :is(.futurist-home, .future-utility) .branches { background: transparent; }
 :is(.futurist-home, .future-utility) .branch-shortcuts button { padding: 11px 20px; border-color: #34462c; border-radius: 5px; color: #a8b99b; background: transparent; font-size: 11px; font-weight: 450; }
 :is(.futurist-home, .future-utility) .branch-shortcuts button.is-active { color: #14200c; background: #b7f76b; border-color: #b7f76b; box-shadow: none; }
@@ -457,8 +448,6 @@ section[id] { scroll-margin-top: 120px; }
   :is(.futurist-home, .future-utility) .branch-review-links strong { font-size: 12px; }
   :is(.futurist-home, .future-utility) .branch-review-links span { font-size: 10px; }
   .futurist-home .reviews-proof { gap: 18px; }
-  .futurist-home .raffle-home.section { width: calc(100% - 32px); padding: 25px; grid-template-columns: 1fr; gap: 24px; }
-  .futurist-home .raffle-home figure { max-width: 150px; margin: auto; }
   :is(.futurist-home, .future-utility) .branch-shortcuts { gap: 7px; }
   :is(.futurist-home, .future-utility) .branch-shortcuts button { padding: 11px 13px; font-size: 10px; }
   :is(.futurist-home, .future-utility) .branch-map-copy { padding: 25px; }

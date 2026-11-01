@@ -12,9 +12,6 @@ import ServiceProcess from "./components/ServiceProcess.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import QuoteFinder from "./components/QuoteFinder.jsx";
-import RafflePopup from "./components/RafflePopup.jsx";
-import RaffleBanner from "./components/RaffleBanner.jsx";
-import RaffleTerms from "./components/RaffleTerms.jsx";
 import RepairTracking from "./components/RepairTracking.jsx";
 import RepairDecision, { RepairDecisionTeaser } from "./components/RepairDecision.jsx";
 import Services from "./components/Services.jsx";
@@ -35,18 +32,17 @@ const pages = {
   "/seguimiento": ["Seguimiento de reparación | DoctorCell Quito", "Consulta el estado de una reparación DoctorCell mediante el número de orden."],
   "/sucursales": ["Sucursales DoctorCell en Quito", "Direcciones, horarios, rutas y contacto de las cuatro sucursales DoctorCell en Quito."],
   "/preguntas": ["Preguntas frecuentes | DoctorCell Quito", "Respuestas sobre tiempos, repuestos, diagnóstico y visita a las sucursales DoctorCell."],
-  "/conviene-reparar": ["¿Conviene reparar mi celular? | DoctorCell Quito", "Evalúa el estado de tu celular, compara reparar o reemplazar, comparte tu resultado y cotiza por WhatsApp con DoctorCell Quito."],
-  "/terminos-rifa": ["Términos de la rifa | DoctorCell Quito", "Conoce el registro automático, la vigencia hasta el 31 de octubre y el sorteo del Samsung A07 el 7 de noviembre de 2026."]
+  "/conviene-reparar": ["¿Conviene reparar mi celular? | DoctorCell Quito", "Evalúa el estado de tu celular, compara reparar o reemplazar, comparte tu resultado y cotiza por WhatsApp con DoctorCell Quito."]
 };
 
-function PageFrame({ children, pageRoute, schema, showRafflePopup = true }) {
+function PageFrame({ children, pageRoute, schema }) {
   const serializedSchema = schema ? JSON.stringify(schema) : "";
   useEffect(() => {
     const [title, description] = pages[pageRoute];
     setPageMetadata({ title, description, path: pageRoute, schema });
   }, [pageRoute, serializedSchema]);
-  const themeClass = pageRoute === "/terminos-rifa" ? "" : pageRoute === "/tienda" ? " future-store" : " future-utility";
-  return <><Header /><main className={`utility-page${themeClass}`}>{children}</main>{showRafflePopup ? <RafflePopup autoOpen={!["/agendar", "/seguimiento"].includes(pageRoute)} /> : null}<Chatbot /><AnalyticsConsent /><Footer /></>;
+  const themeClass = pageRoute === "/tienda" ? " future-store" : " future-utility";
+  return <><Header /><main className={`utility-page${themeClass}`}>{children}</main><Chatbot /><AnalyticsConsent /><Footer /></>;
 }
 
 function StorePage() {
@@ -71,14 +67,13 @@ export default function App() {
     }
   }, []);
   const branch = branches.find((item) => route === `/sucursales/${item.slug}`);
-  if (branch) return <><Header /><main className="utility-page future-utility"><BranchDetail branch={branch} /></main><RafflePopup /><Chatbot /><AnalyticsConsent /><Footer /></>;
+  if (branch) return <><Header /><main className="utility-page future-utility"><BranchDetail branch={branch} /></main><Chatbot /><AnalyticsConsent /><Footer /></>;
   if (route === "/tienda") return <StorePage />;
   if (route === "/seguimiento") return <PageFrame pageRoute="/seguimiento"><RepairTracking /></PageFrame>;
   if (route === "/agendar") return <PageFrame pageRoute="/agendar"><AppointmentBooking /></PageFrame>;
   if (route === "/sucursales") return <PageFrame pageRoute="/sucursales"><Branches /></PageFrame>;
   if (route === "/preguntas") return <PageFrame pageRoute="/preguntas"><Faq /></PageFrame>;
-  if (route === "/conviene-reparar") return <PageFrame pageRoute="/conviene-reparar" showRafflePopup={false}><RepairDecision /></PageFrame>;
-  if (route === "/terminos-rifa") return <PageFrame pageRoute="/terminos-rifa" showRafflePopup={false}><RaffleTerms /></PageFrame>;
+  if (route === "/conviene-reparar") return <PageFrame pageRoute="/conviene-reparar"><RepairDecision /></PageFrame>;
 
   return (
     <>
@@ -92,11 +87,9 @@ export default function App() {
         <BeforeAfter />
         <ServiceProcess />
         <Testimonials />
-        <RaffleBanner />
         <Branches />
         <FinalCta />
       </main>
-      <RafflePopup />
       <Chatbot />
       <AnalyticsConsent />
       <Footer />

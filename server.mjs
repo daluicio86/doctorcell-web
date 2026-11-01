@@ -10,7 +10,7 @@ import { canonicalRedirect } from "./server/canonicalRedirect.js";
 const PORT = Number(process.env.PORT || 4173);
 const DIST = resolve("dist");
 const types = { ".css": "text/css", ".html": "text/html", ".ico": "image/x-icon", ".jpg": "image/jpeg", ".js": "text/javascript", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml", ".txt": "text/plain", ".webp": "image/webp", ".xml": "application/xml" };
-const retiredPaths = new Set(["/lead-generation", "/lead-generation/", "/cursos", "/cursos/", "/curso", "/curso/", "/courses", "/courses/"]);
+const retiredPaths = new Set(["/lead-generation", "/lead-generation/", "/cursos", "/cursos/", "/curso", "/curso/", "/courses", "/courses/", "/terminos-rifa", "/terminos-rifa/"]);
 
 function json(response, status, body) {
   response.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });

@@ -4,8 +4,6 @@ import App from "./App.jsx";
 import "./styles/global.css";
 import "./styles/enhancements.css";
 import "./styles/clinic-refresh.css";
-import "./styles/raffle-popup.css";
-import "./styles/raffle-terms.css";
 import "./styles/future.css";
 
 createRoot(document.getElementById("root")).render(
