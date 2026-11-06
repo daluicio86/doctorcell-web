@@ -15,6 +15,14 @@ citas, seguimiento, sucursales y tienda comparten la paleta oscura.
 Los metadatos de la home están en `index.html` y `src/App.jsx`.
 
 La home presenta WhatsApp como acción principal y enlaces a reseñas por sucursal.
+La portada móvil usa una cabecera compacta, texto legible y controles amplios.
+Destaca cuatro servicios; un desplegable nativo permite consultar los cinco
+restantes con sus guías y enlaces de cotización. El cotizador aparece justo
+después de los servicios y la herramienta de evaluación queda como alternativa
+secundaria. El proceso de reparación se explica en una sola sección.
+La escena decorativa del teléfono se reserva para escritorio y tablet.
+La galería se activa automáticamente al añadir fotografías propias autorizadas
+a `galleryItems`; no se presentan ilustraciones como fotografías del negocio.
 La promoción finalizada el 31 de octubre de 2026 fue retirada de la portada,
 los avisos emergentes y el sitemap. La antigua ruta `/terminos-rifa/` redirige
 al inicio en IIS, Netlify y el servidor Node.

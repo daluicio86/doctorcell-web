@@ -11,8 +11,8 @@ const comparisons = [
 export default function BeforeAfter() {
   return (
     <section className="section before-after" id="casos-reales">
-      <SectionHeading eyebrow="03 / ASÍ LO HACEMOS" title="De la falla a la solución. Contigo en cada paso.">
-        Un proceso claro: revisamos, te explicamos y reparamos con tu autorización. Estas ilustraciones muestran cómo cuidamos tu equipo.
+      <SectionHeading eyebrow="03 / ASÍ LO HACEMOS" title="Tu reparación, paso a paso.">
+        Diagnóstico, autorización y pruebas finales. Así cuidamos tu equipo, de principio a fin.
       </SectionHeading>
       <div className="comparison-grid">
         {comparisons.map((item, index) => (

@@ -1,5 +1,5 @@
-import { Clock3, Mail, MapPin, Menu, MessageCircle, Phone, ShoppingBag, Sparkles, X } from "lucide-react";
-import React, { useState } from "react";
+import { Clock3, Mail, MapPin, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
+import React, { useRef, useState } from "react";
 import { contactInfo, navItems } from "../data/siteData.js";
 import Brand from "./Brand.jsx";
 import { whatsappUrl } from "../utils/whatsapp.js";
@@ -9,12 +9,15 @@ const resolveHref = (href) => href.startsWith("#") && path() !== "/" ? `/${href}
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuButton = useRef(null);
   const closeMenu = () => setIsOpen(false);
   const currentPath = path();
 
   return (
     <>
-    <header className="site-header">
+    <header className="site-header" onKeyDown={(event) => {
+      if (event.key === "Escape" && isOpen) { closeMenu(); menuButton.current?.focus(); }
+    }}>
       <div className="header-topline">
         <div>
           <span className="branches-pulse"><MapPin size={14} /> 4 sucursales en Quito</span>
@@ -27,6 +30,7 @@ export default function Header() {
         <Brand />
         <button
           className="menu-button"
+          ref={menuButton}
           type="button"
           aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={isOpen}
@@ -41,7 +45,7 @@ export default function Header() {
             const isCurrent = item.href === currentPath;
             return <a key={item.href} className={isStoreLink ? "nav-store" : undefined} href={resolveHref(item.href)} onClick={closeMenu} aria-current={isCurrent ? "page" : undefined}>
               {isStoreLink && <ShoppingBag size={17} />}
-              {isStoreLink ? <span><small><Sparkles size={10} /> Descubre</small>{item.label}</span> : item.label}
+              {item.label}
             </a>;
           })}
           <a className="nav-cta" href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} target="_blank" rel="noopener noreferrer" data-analytics-placement="header" onClick={closeMenu}>
@@ -52,7 +56,7 @@ export default function Header() {
       </div>
     </header>
       <nav className="mobile-dock" aria-label="Acciones principales">
-        <a className="is-active" href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} target="_blank" rel="noopener noreferrer" data-analytics-placement="mobile_dock"><MessageCircle size={21} /><span>Cotiza por WhatsApp</span></a>
+        <a className="dock-whatsapp" href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} target="_blank" rel="noopener noreferrer" data-analytics-placement="mobile_dock"><MessageCircle size={21} /><span>Cotizar</span></a>
         <a className={currentPath.startsWith("/sucursales") ? "is-active" : ""} href="/sucursales"><MapPin size={21} /><span>Sucursales</span></a>
       </nav>
     </>

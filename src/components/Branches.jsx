@@ -19,7 +19,7 @@ export default function Branches() {
       </SectionHeading>
       <nav className="branch-shortcuts" aria-label="Selecciona una sucursal">
         {branches.map(({ name }, index) => (
-          <button className={activeBranch === index ? "is-active" : ""} type="button" key={name} onClick={() => setActiveBranch(index)}>
+          <button className={activeBranch === index ? "is-active" : ""} aria-pressed={activeBranch === index} type="button" key={name} onClick={() => setActiveBranch(index)}>
             {name.replace("Sucursal ", "")}
           </button>
         ))}

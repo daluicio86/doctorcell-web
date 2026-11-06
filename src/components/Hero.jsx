@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Smartphone, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
 import ButtonLink from "./ButtonLink.jsx";
 import { whatsappUrl } from "../utils/whatsapp.js";
 
@@ -47,28 +47,21 @@ export default function Hero() {
       <div className="hero-ambient ambient-two" aria-hidden="true" />
       <div className="hero-content">
         <a className="hero-location" href="/sucursales"><span className="live-dot" /> QUITO, ECUADOR <span className="location-separator">/</span> 4 SUCURSALES <ArrowUpRight size={14} /></a>
-        <p className="eyebrow">SERVICIO TÉCNICO. SIGUIENTE NIVEL.</p>
-        <h1 id="hero-title">¿Pantalla rota?<br />¿Batería que no dura?<em>Reparamos tu celular en&nbsp;Quito.</em></h1>
-        <p className="hero-copy">Vuelve a disfrutar tu equipo con DoctorCell. Tenemos <strong>4 sucursales</strong>, diagnóstico claro y una cotización que tú apruebas antes de reparar.</p>
+        <p className="eyebrow">TU EQUIPO, EN BUENAS MANOS</p>
+        <h1 id="hero-title">Tu celular.<br /><em>De vuelta a tu mundo.</em></h1>
+        <p className="hero-copy">Reparación de celulares en <strong>Quito</strong>. Pantallas, baterías y más, con diagnóstico claro y precio aprobado por ti.</p>
         <div className="hero-actions">
-          <ButtonLink href={quoteUrl} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero">Cotizar mi reparación por WhatsApp <ArrowUpRight size={17} /></ButtonLink>
+          <ButtonLink href={quoteUrl} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero">Cotizar por WhatsApp <ArrowUpRight size={17} /></ButtonLink>
           <ButtonLink href="#servicios" variant="ghost" icon={ArrowDown}>Explorar servicios</ButtonLink>
         </div>
         <p className="hero-assurance"><ShieldCheck size={15} /> Conoces y autorizas el precio antes de reparar.</p>
-        <a className="hero-decision-link" href="/conviene-reparar/">
-          <span className="hero-decision-icon" aria-hidden="true"><Smartphone size={25} /></span>
-          <span className="hero-decision-copy"><small>HERRAMIENTA GRATIS</small><strong>¿Conviene reparar<br />mi celular?</strong></span>
-          <span className="hero-decision-action">Evalúalo aquí <ArrowUpRight size={18} aria-hidden="true" /></span>
-        </a>
         <div className="hero-proof-points" aria-label="Experiencia DoctorCell">
           <span><strong>15+</strong><small>Años de experiencia</small></span>
-          <span><strong>04</strong><small>Sucursales en Quito</small></span>
+          <span><strong>4</strong><small>Sucursales en Quito</small></span>
           <span className="specialist-proof"><Sparkles size={22} /><small>Especialistas en<br /><b>productos Apple</b></small></span>
         </div>
       </div>
       <DeviceScene />
-      <a className="hero-scroll-cue" href="#servicios"><span /> DESLIZA PARA DESCUBRIR <ArrowDown size={13} /></a>
-      <span className="hero-edition" aria-hidden="true">TECNOLOGÍA QUE VUELVE A CONECTAR.</span>
     </section>
   );
 }

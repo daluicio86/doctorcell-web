@@ -10,7 +10,7 @@ export function RepairDecisionTeaser() {
   return <section className="decision-teaser" aria-labelledby="decision-teaser-title">
     <div className="decision-teaser-icon" aria-hidden="true"><Smartphone size={38} /><span><GitCompareArrows size={20} /></span></div>
     <div><p className="eyebrow">ANTES DE DECIDIR</p><h2 id="decision-teaser-title">¿Conviene reparar mi celular?</h2><p>Compara tus opciones en un minuto. Obtén una orientación, compártela y cotiza con nuestro equipo.</p></div>
-    <a className="decision-primary" href={decisionPath}>Evaluar mi celular <ArrowUpRight size={19} /></a>
+    <a className="decision-primary decision-secondary" href={decisionPath}>Evaluar mi celular <ArrowUpRight size={19} /></a>
   </section>;
 }
 

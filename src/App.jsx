@@ -8,7 +8,7 @@ import Chatbot from "./components/Chatbot.jsx";
 import FinalCta from "./components/FinalCta.jsx";
 import Faq from "./components/Faq.jsx";
 import Footer from "./components/Footer.jsx";
-import ServiceProcess from "./components/ServiceProcess.jsx";
+import Gallery from "./components/Gallery.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import QuoteFinder from "./components/QuoteFinder.jsx";
@@ -82,10 +82,10 @@ export default function App() {
         <Hero />
         <TechMarquee />
         <Services />
-        <RepairDecisionTeaser />
         <QuoteFinder />
+        <RepairDecisionTeaser />
         <BeforeAfter />
-        <ServiceProcess />
+        <Gallery />
         <Testimonials />
         <Branches />
         <FinalCta />

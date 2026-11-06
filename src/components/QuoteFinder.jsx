@@ -94,8 +94,8 @@ export default function QuoteFinder() {
     <section className="quote-finder" id="cotizador" aria-labelledby="quote-title">
       <div className="quote-intro">
         <p className="eyebrow">02 / CONECTEMOS</p>
-        <h2 id="quote-title">Cuéntanos qué le pasa a tu equipo.</h2>
-        <p>Solo necesitamos tu nombre, WhatsApp y la falla. Con tu autorización, guardamos la consulta antes de abrir el chat para poder contactarte aunque no envíes el mensaje.</p>
+        <h2 id="quote-title">Empecemos por tu equipo.</h2>
+        <p>Déjanos tu nombre, WhatsApp y la falla. Con tu autorización, guardamos la consulta para contactarte aunque no envíes el mensaje de WhatsApp.</p>
         <div className="quote-route" aria-label="Cómo enviar tu consulta">
           <span>Tu contacto</span><ArrowRight size={14} /><span>Consulta guardada</span><ArrowRight size={14} /><span>WhatsApp</span>
         </div>
