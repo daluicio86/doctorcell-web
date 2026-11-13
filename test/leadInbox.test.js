@@ -43,3 +43,8 @@ test("expired sessions and provider failures never return stored contacts", asyn
   assert.equal(read, false);
   assert.deepEqual(sessionHeaders({ cookie: "unrelated=secret" }), {});
 });
+
+test("Prensa includes consultations whose visitor did not select a branch", async () => {
+  const result = await readLeadInbox(auth, new URLSearchParams({ branch: "Sucursal Prensa" }), { fetcher: mock(["Admin"], ["DOCTORCELL MATRIZ"]), readRows: async () => leads });
+  assert.deepEqual(result.body.items.map((row) => row.caseId), ["DC-C"]);
+});

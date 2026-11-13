@@ -62,7 +62,7 @@ export async function readLeadInbox(headers, query, { fetcher = fetch, readRows 
       const location = normalize(lead.location);
       // Unassigned consultations belong to the main branch. Unknown historical labels remain SuperAdmin-only.
       const scopeAllowed = !location ? allowedBranches.has(normalize("Sucursal Prensa")) : allowedBranches.has(location) || (superAdmin && !branch);
-      return scopeAllowed && (!branch || location === normalize(branch)) && (!search || normalize([lead.name, lead.contact, lead.caseId, lead.brand, lead.model].join(" ")).includes(normalize(search)));
+      return scopeAllowed && (!branch || location === normalize(branch) || (!location && branch === "Sucursal Prensa")) && (!search || normalize([lead.name, lead.contact, lead.caseId, lead.brand, lead.model].join(" ")).includes(normalize(search)));
     }).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
     const fields = ["caseId", "createdAt", "name", "contact", "problem", "detail", "service", "brand", "model", "device", "location", "schedule", "source", "consent", "consentedAt"];
     const pageSize = 25;
