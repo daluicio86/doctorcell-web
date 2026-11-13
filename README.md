@@ -159,3 +159,11 @@ Se admiten `appointment_confirmed`, `service_completed`, `lead_won` y
 `lead_lost`. Una cita confirmada programa un aviso dos horas antes; un servicio
 completado solicita una reseña a las 24 horas. El recordatorio de mantenimiento
 a 90 días solo se crea cuando el evento incluye `marketingConsent: true`.
+
+## Bandeja privada en Zentra
+
+Las consultas se leen desde Zentra en **Clientes → Consultas web Doctorcell** (`/doctorcell/consultas`). La web conserva el registro duradero en `data/leads.ndjson`; no crea una orden de reparación ni una ficha de cliente automáticamente. Respaldar ese directorio y conservarlo en cada despliegue. No publicar archivos NDJSON ni incluirlos en paquetes.
+
+`GET /api/admin/leads` valida en vivo la sesión existente de Zentra con su API, exige Admin/SuperAdmin y limita los resultados a las sucursales que la API permite. Las consultas sin sucursal corresponden a recepción en Prensa. No concede acceso a un administrador de BWS sin sucursales Doctorcell. La ruta de servidor de Zentra reenvía únicamente sus cookies de autenticación a la web Doctorcell; no introduce claves administrativas nuevas ni las entrega al navegador. Todos los resultados son privados y no se almacenan en caché.
+
+El servidor Node debe estar instalado junto con `server/`, `src/utils/contact.js` y los archivos estáticos. IIS necesita `httpPlatformHandler`, el puerto `%HTTP_PLATFORM_PORT%` y el comando `node server.mjs`. `DOCTORCELL_STATIC_DIR` selecciona `dist` en paquetes completos o `.` al restaurar una web estática existente sin cambiar sus assets. El servidor solo entrega rutas públicas permitidas y nunca sirve su código ni sus datos. El registro confirma la escritura y sincronización del archivo antes de responder; los reintentos simultáneos en la instancia Node se serializan y una referencia reutilizada con otros datos devuelve 409.

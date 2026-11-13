@@ -1,19 +1,22 @@
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
-import { extname, join, normalize, resolve } from "node:path";
+import { extname, join, normalize, resolve, relative, isAbsolute } from "node:path";
+import { readLeadInbox } from "./server/leadInbox.js";
 import { createLead, readJsonBody } from "./server/leadService.js";
 import { dispatchDueFollowups, recordLifecycleEvent } from "./server/followupService.js";
 import { isRepairStatusAvailable, queryRepairStatus } from "./server/repairStatusService.js";
 import { canonicalRedirect } from "./server/canonicalRedirect.js";
 
 const PORT = Number(process.env.PORT || 4173);
-const DIST = resolve("dist");
+const DIST = resolve(process.env.DOCTORCELL_STATIC_DIR || "dist");
+const publicRoots = new Set(["assets", "images", "agendar", "conviene-reparar", "guias", "preguntas", "seguimiento", "sucursales", "tienda"]);
+const publicFiles = new Set(["index.html", "favicon.ico", "logo.jpg", "logo.png", "logo1.jpg", "robots.txt", "sitemap.xml"]);
 const types = { ".css": "text/css", ".html": "text/html", ".ico": "image/x-icon", ".jpg": "image/jpeg", ".js": "text/javascript", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml", ".txt": "text/plain", ".webp": "image/webp", ".xml": "application/xml" };
 const retiredPaths = new Set(["/lead-generation", "/lead-generation/", "/cursos", "/cursos/", "/curso", "/curso/", "/courses", "/courses/", "/terminos-rifa", "/terminos-rifa/"]);
 
 function json(response, status, body) {
-  response.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
+  response.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "private, no-store", "x-content-type-options": "nosniff" });
   response.end(JSON.stringify(body));
 }
 
@@ -58,7 +61,10 @@ async function serveStatic(request, response) {
   const requested = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
   const safePath = normalize(requested).replace(/^(\.\.[/\\])+/, "");
   let file = join(DIST, safePath === "/" ? "index.html" : safePath);
-  if (!file.startsWith(DIST)) return json(response, 403, { error: "Ruta no permitida." });
+  const within = relative(DIST, file);
+  if (within.startsWith("..") || isAbsolute(within)) return json(response, 403, { error: "Ruta no permitida." });
+  const segments = within.split(/[\\/]/);
+  if (!(segments.length === 1 && publicFiles.has(segments[0])) && !publicRoots.has(segments[0])) return json(response, 404, { error: "Ruta no encontrada." });
   try {
     if ((await stat(file)).isDirectory()) file = join(file, "index.html");
   } catch {
@@ -79,12 +85,19 @@ createServer((request, response) => {
     response.writeHead(301, { location: "/", "cache-control": "public, max-age=86400" });
     return void response.end();
   }
+  if (pathname === "/api/admin/leads") {
+    if (request.method !== "GET") return void json(response, 405, { error: "Método no permitido." });
+    return void readLeadInbox(request.headers, new URL(request.url, "http://localhost").searchParams)
+      .then((result) => json(response, result.status, result.body))
+      .catch(() => json(response, 503, { error: "Bandeja no disponible." }));
+  }
   const eventMatch = pathname.match(/^\/api\/leads\/([^/]+)\/events$/);
   if (eventMatch) return void handleLeadEvent(request, response, eventMatch[1]);
   if (pathname === "/api/repair-status/availability") return void handleRepairStatusAvailability(request, response);
   if (pathname === "/api/repair-status") return void handleRepairStatus(request, response);
-  if (request.url?.startsWith("/api/leads")) return void handleLead(request, response);
-  return void serveStatic(request, response);
+  if (pathname === "/api/leads") return void handleLead(request, response);
+  if (pathname.startsWith("/api/")) return void json(response, 404, { error: "Ruta no encontrada." });
+  return void serveStatic(request, response).catch(() => json(response, 404, { error: "Ruta no encontrada." }));
 }).listen(PORT, "0.0.0.0", () => console.log(`DoctorCell Quito listo en http://localhost:${PORT}`));
 
 const followupTimer = setInterval(() => dispatchDueFollowups().catch((error) => console.error("Error en seguimientos:", error.message)), 60_000);

@@ -75,4 +75,11 @@ test("quote server saves the contact before any WhatsApp interaction and dedupli
   const chatbot = await createLead({ contact: "chatbot-test@example.com", sessionId: "chatbot-request", consent: true });
   assert.equal(chatbot.status, 201);
   assert.notEqual(chatbot.body.caseId, result.body.caseId);
+  const concurrentPayload = { ...payload, sessionId: "concurrent-quote-request" };
+  const concurrent = await Promise.all(Array.from({ length: 8 }, () => createLead(concurrentPayload)));
+  assert.equal(new Set(concurrent.map((item) => item.body.caseId)).size, 1);
+  assert.equal(concurrent.filter((item) => item.status === 201).length, 1);
+  assert.equal((await createLead({ ...concurrentPayload, name: "Otro contacto" })).status, 409);
+  assert.equal((await readFile(process.env.LEADS_FILE, "utf8")).trim().split("\n").length, 3);
+
 });

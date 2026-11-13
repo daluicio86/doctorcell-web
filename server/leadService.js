@@ -1,4 +1,4 @@
-import { appendFile, mkdir, readFile } from "node:fs/promises";
+import { open, mkdir, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 import { scheduleNewLeadFollowups } from "./followupService.js";
@@ -40,7 +40,14 @@ async function forwardToWebhook(lead) {
   if (!response.ok) throw new Error(`Webhook respondió ${response.status}`);
 }
 
-export async function createLead(payload, metadata = {}) {
+// Serialize journal writes so simultaneous retries cannot append duplicates.
+let pendingWrite = Promise.resolve();
+export function createLead(payload, metadata = {}) {
+  const operation = pendingWrite.then(() => storeLead(payload, metadata));
+  pendingWrite = operation.catch(() => {});
+  return operation;
+}
+async function storeLead(payload, metadata = {}) {
   if (!payload || payload.consent !== true) {
     return { status: 400, body: { error: "Se requiere autorización para guardar los datos." } };
   }
@@ -55,8 +62,12 @@ export async function createLead(payload, metadata = {}) {
     return { status: 400, body: { error: "El teléfono o correo no es válido." } };
   }
 
+  if (!/^[A-Za-z0-9-]{1,128}$/.test(lead.sessionId)) return { status: 400, body: { error: "Referencia de solicitud inválida." } };
   const existing = await findExisting(lead.sessionId);
-  if (existing) return { status: 200, body: { ok: true, caseId: existing.caseId, duplicate: true } };
+  if (existing) {
+    if (allowedFields.some((field) => clean(existing[field], field === "detail" ? 500 : 160) !== lead[field]) || existing.source !== (payload.source === "quote-finder-web" ? "quote-finder-web" : "chatbot-web")) return { status: 409, body: { error: "Esta referencia ya corresponde a otra consulta. Inicia una nueva solicitud." } };
+    return { status: 200, body: { ok: true, caseId: existing.caseId, duplicate: true } };
+  }
 
   lead.caseId = `DC-${randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase()}`;
   lead.createdAt = new Date().toISOString();
@@ -67,8 +78,11 @@ export async function createLead(payload, metadata = {}) {
   lead.userAgent = clean(metadata.userAgent, 240);
 
   await mkdir(dirname(DATA_FILE), { recursive: true });
-  await appendFile(DATA_FILE, `${JSON.stringify(lead)}\n`, { encoding: "utf8", mode: 0o600 });
-  await scheduleNewLeadFollowups(lead);
+  const file = await open(DATA_FILE, "a", 0o600);
+  try { await file.writeFile(`${JSON.stringify(lead)}\n`, "utf8"); await file.sync(); }
+  finally { await file.close(); }
+  try { await scheduleNewLeadFollowups(lead); }
+  catch { console.error("Consulta guardada; programación de seguimiento pendiente."); }
 
   try {
     await forwardToWebhook(lead);
