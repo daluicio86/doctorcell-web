@@ -63,7 +63,7 @@ async function serveStatic(request, response) {
   let file = join(DIST, safePath === "/" ? "index.html" : safePath);
   const within = relative(DIST, file);
   if (within.startsWith("..") || isAbsolute(within)) return json(response, 403, { error: "Ruta no permitida." });
-  const segments = within.split(/[\\/]/);
+  const segments = within ? within.split(/[\\/]/) : ["index.html"];
   if (!(segments.length === 1 && publicFiles.has(segments[0])) && !publicRoots.has(segments[0])) return json(response, 404, { error: "Ruta no encontrada." });
   try {
     if ((await stat(file)).isDirectory()) file = join(file, "index.html");
