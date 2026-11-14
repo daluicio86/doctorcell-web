@@ -7,10 +7,10 @@ import { servicePages } from '../data/conversionContent.js';
 
 const featuredTitles = ["Pantallas", "Baterías", "Puerto de carga", "Equipos mojados"];
 const featuredCopy = [
-  "¿Vidrio roto, manchas o fallas del táctil? Revisamos tu pantalla y las opciones para tu modelo.",
-  "Recupera la autonomía de tu equipo. Revisamos consumo, temperatura y estado de la batería.",
-  "¿Carga intermitente o un conector que falla? Identificamos la causa antes de intervenir.",
-  "Evaluamos los daños por humedad y te explicamos las alternativas para tu equipo."
+  "Que una caída no decida el próximo equipo que compras. Revisamos tu pantalla y las opciones de repuesto para tu modelo.",
+  "¿Buscando un enchufe a mitad del día? Revisamos la batería, el consumo y la temperatura antes de recomendar un cambio.",
+  "¿Tienes que mover el cable para cargar? Identificamos si la falla está en el puerto, la batería u otro componente.",
+  "¿Terminó en el agua? Evita cargarlo y solicita una revisión. Evaluamos el daño y te explicamos si es viable repararlo."
 ];
 
 function ServiceCard({ service, index, featured = false }) {
@@ -35,8 +35,8 @@ function ServiceCard({ service, index, featured = false }) {
 export default function Services() {
   return (
     <section className="section services" id="servicios" aria-labelledby="services-title">
-      <SectionHeading eyebrow="01 / QUÉ NECESITA TU EQUIPO" title={<span id="services-title">Una solución para cada falla.</span>}>
-        Elige lo que le ocurre a tu equipo. Confirmamos precio, tiempo y repuesto después del diagnóstico.
+      <SectionHeading eyebrow="QUÉ LE PASA A TU CELULAR" title={<span id="services-title">Menos fallas. Más planes.</span>}>
+        Empieza por lo que notas. Te explicamos las opciones, el repuesto y el tiempo estimado antes de que decidas.
       </SectionHeading>
       <div className="service-grid featured-services">
         {services.slice(0, 4).map((service, index) => <ServiceCard key={service.title} service={service} index={index} featured />)}

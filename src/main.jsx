@@ -6,6 +6,7 @@ import "./styles/enhancements.css";
 import "./styles/clinic-refresh.css";
 import "./styles/future.css";
 import './styles/conversion.css';
+import './styles/everyday.css';
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

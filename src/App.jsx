@@ -18,6 +18,7 @@ import Services from "./components/Services.jsx";
 import Store, { products } from "./components/Store.jsx";
 import Testimonials from "./components/Testimonials.jsx";
 import TechMarquee from "./components/TechMarquee.jsx";
+import { EverydayUse, AccessoryEdit, ConfidenceLinks } from "./components/EverydayUse.jsx";
 import useSiteMotion from "./hooks/useSiteMotion.js";
 import { branches } from "./data/siteData.js";
 import { SITE_ORIGIN } from "./data/siteConfig.js";
@@ -29,7 +30,7 @@ import { legalPages, servicePages } from './data/conversionContent.js';
 import { homeBusinessSchema } from './utils/pageMetadata.js';
 
 const pages = {
-  "/": ["Cambio de pantalla y reparación de celulares en Quito | DoctorCell", "¿Pantalla rota? Cotiza por WhatsApp. Confirmamos el precio antes de reparar. Encuéntranos en cuatro sucursales de Quito."],
+  "/": ["Reparación de celulares en Quito | Sigue a tu ritmo · DoctorCell", "Tu celular, tus planes. Cotiza pantallas, baterías, cámara y más por WhatsApp. Diagnóstico claro y precio autorizado por ti en cuatro sucursales de Quito."],
   "/tienda": ["Tienda de accesorios | DoctorCell Quito", "Estuches, audífonos, cables y cargadores con fotografías, precios y compatibilidad por modelo."],
   "/agendar": ["Solicitar una cita | DoctorCell Quito", "Solicita un horario de revisión en una de las cuatro sucursales DoctorCell de Quito."],
   "/seguimiento": ["Seguimiento de reparación | DoctorCell Quito", "Consulta el estado de una reparación DoctorCell mediante el número de orden."],
@@ -95,11 +96,13 @@ export default function App({ path }) {
         <TechMarquee />
         <Services />
         <QuoteFinder />
-        <Prices />
+        <EverydayUse />
         <RepairDecisionTeaser />
+        <ConfidenceLinks />
         <BeforeAfter />
         <Gallery />
         <DocumentedRepairs />
+        <AccessoryEdit products={products} />
         <Testimonials />
         <Branches />
         <FinalCta />

@@ -7,9 +7,9 @@ import { VerifiedTestimonials } from './ConversionPages.jsx';
 
 export default function Testimonials() {
   return (
-    <section className="section testimonials">
-      <SectionHeading eyebrow="Reseñas verificables" title="Consulta opiniones reales por sucursal.">
-        Abre el perfil público de cada local y revisa directamente las experiencias publicadas en Google Maps.
+    <section className="section testimonials" id="opiniones">
+      <SectionHeading eyebrow="LA CONFIANZA SE COMPRUEBA" title="Antes de dejarnos tu celular, conócenos.">
+        Lee las experiencias de otros clientes en Google Maps y elige dónde traer tu equipo.
       </SectionHeading>
       <VerifiedTestimonials />
       <div className="testimonial-track branch-review-links">

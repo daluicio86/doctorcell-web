@@ -9,6 +9,20 @@ valide el contacto; configurar solo la URL mantiene la consulta asistida.
 
 ## Home comercial
 
+La portada está orientada a clientes de 18–35 años con el mensaje «Tu celular.
+Tus planes. Sigue a tu ritmo.». `EverydayUse.jsx` conecta las reparaciones con
+estudio, trabajo y creación de contenido; `everyday.css` adapta esas secciones
+a móvil y escritorio, conservando la identidad oscura y verde de DoctorCell.
+Los accesos por falla abren WhatsApp con contexto y registran su ubicación
+con la analítica existente, solo con consentimiento. El cotizador ofrece
+también acceso directo al chat, sin exigir completar el formulario.
+
+La portada destaca tres accesorios del catálogo y enlaza a su tienda. Los
+precios detallados siguen disponibles en `/precios/`; se sustituyó la tabla
+general de la home por contenido que ayuda a elegir y consultar. Las fotos
+reales y los casos siguen sujetos a los campos de autorización existentes.
+No se añadieron descuentos, plazos ni garantías comerciales sin validar.
+
 El diseño de laboratorio digital está en `src/styles/future.css`, cargado después
 de los estilos base. La portada incluye un teléfono construido con CSS, luz
 animada y una franja continua de marcas. `useSiteMotion` añade entradas al
