@@ -35,6 +35,7 @@ export default function BeforeAfter() {
         <span><ShieldCheck size={23} /> Autorización antes de reparar</span>
         <span><Clock3 size={18} /> Tiempo informado según cada caso</span>
       </div>
+      <ol className="repair-six-steps">{['Cotización inicial', 'Diagnóstico técnico', 'Autorización del cliente', 'Reparación', 'Pruebas finales', 'Entrega y condiciones de garantía por escrito'].map((step) => <li key={step}>{step}</li>)}</ol>
     </section>
   );
 }

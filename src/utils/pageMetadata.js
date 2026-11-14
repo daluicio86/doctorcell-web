@@ -1,5 +1,6 @@
 import { SITE_ORIGIN } from "../data/siteConfig.js";
 import { contactInfo, openingHours } from "../data/businessInfo.js";
+import { branchMedia, legalPages } from '../data/conversionContent.js';
 
 const origin = SITE_ORIGIN;
 
@@ -16,6 +17,7 @@ function ensureMeta(selector, attributes) {
 export function setPageMetadata({ title, description, path = "/", image = "/logo.jpg", schema }) {
   const url = `${origin}${path === "/" ? "/" : `${path.replace(/\/$/, "")}/`}`;
   document.title = title;
+  ensureMeta('meta[name="robots"]', { name: 'robots', content: legalPages[path]?.draft ? 'noindex,follow' : 'index,follow,max-image-preview:large' });
   ensureMeta('meta[name="description"]', { name: "description", content: description });
   ensureMeta('link[rel="canonical"]', { rel: "canonical", href: url });
   ensureMeta('meta[property="og:title"]', { property: "og:title", content: title });
@@ -40,20 +42,25 @@ export function setPageMetadata({ title, description, path = "/", image = "/logo
 export function localBusinessSchema(branch) {
   return {
     "@context": "https://schema.org",
-    "@type": "CellPhoneStore",
+    "@type": "LocalBusiness",
+    '@id': `${origin}/sucursales/${branch.slug}/#business`,
     name: `DoctorCell Quito — ${branch.name}`,
     url: `${origin}/sucursales/${branch.slug}/`,
     telephone: contactInfo.phoneHref,
     email: contactInfo.email,
-    priceRange: "$",
     image: `${origin}/logo.jpg`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: branch.address,
+      streetAddress: branchMedia[branch.slug]?.fullAddress || branch.address,
       addressLocality: "Quito",
       addressRegion: "Pichincha",
       addressCountry: "EC"
     },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Quito, Pichincha, Ecuador' },
+    hasMap: branchMedia[branch.slug]?.googleProfileUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`DoctorCell ${branch.address} Quito Ecuador`)}`,
+    ...(branchMedia[branch.slug]?.googleProfileUrl ? { sameAs: [branchMedia[branch.slug].googleProfileUrl] } : {}),
+    ...(branch.geoVerified ? { geo: { '@type': 'GeoCoordinates', latitude: branch.latitude, longitude: branch.longitude } } : {}),
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Reparación de equipos', itemListElement: ['Pantallas', 'Baterías', 'Carga', 'Humedad', 'Cámara y audio', 'Microsoldadura', 'Software', 'Tablets', 'MacBook', 'Smartwatches'].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })) },
     openingHoursSpecification: [{
       "@type": "OpeningHoursSpecification",
       dayOfWeek: openingHours.dayOfWeek,
@@ -61,4 +68,11 @@ export function localBusinessSchema(branch) {
       closes: openingHours.closes
     }]
   };
+}
+
+export function homeBusinessSchema(branches) {
+  return { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'Organization', '@id': `${origin}/#organization`, name: contactInfo.businessName, url: `${origin}/`, logo: `${origin}/logo.jpg`, telephone: contactInfo.phoneHref, email: contactInfo.email },
+    ...branches.map(localBusinessSchema).map(({ '@context': context, ...item }) => item)
+  ] };
 }

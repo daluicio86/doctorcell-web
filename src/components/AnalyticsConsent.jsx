@@ -23,6 +23,7 @@ export default function AnalyticsConsent() {
       const link = event.target.closest("a");
       if (!link || link.dataset.analyticsIntent === "share") return;
       const href = link.getAttribute("href") || "";
+      const intent = link.dataset.analyticsEvent;
       const outboundPartner = link.dataset.analyticsPartner;
       if (outboundPartner) {
         trackEvent("partner_outbound_click", {
@@ -38,6 +39,9 @@ export default function AnalyticsConsent() {
         branch: link.dataset.analyticsBranch || "general",
         page_path: window.location.pathname
       }, "Contact");
+      else if (intent === 'reviews_click' || (/google\./.test(href) && /reseñas|opiniones/i.test(link.textContent))) trackEvent('reviews_click', { page_path: window.location.pathname });
+      else if (/google\./.test(href) && /maps/.test(href)) trackEvent('directions_click', { page_path: window.location.pathname });
+      else if (href.startsWith('/agendar')) trackEvent('appointment_click', { page_path: window.location.pathname });
       else if (href.startsWith("tel:")) trackEvent("phone_click", {}, "Contact");
       else if (href.startsWith("mailto:")) trackEvent("email_click", {}, "Contact");
       else if (href.includes("/guias/")) trackEvent("guide_open", { destination: href });

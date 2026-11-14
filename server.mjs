@@ -10,7 +10,7 @@ import { canonicalRedirect } from "./server/canonicalRedirect.js";
 
 const PORT = Number(process.env.PORT || 4173);
 const DIST = resolve(process.env.DOCTORCELL_STATIC_DIR || "dist");
-const publicRoots = new Set(["assets", "images", "agendar", "conviene-reparar", "guias", "preguntas", "seguimiento", "sucursales", "tienda"]);
+const publicRoots = new Set(["assets", "images", "agendar", "conviene-reparar", "guias", "preguntas", "seguimiento", "sucursales", "tienda", 'cotizar', 'precios', 'preguntas-frecuentes', 'sobre-nosotros', 'servicios', 'politica-privacidad', 'terminos-y-condiciones', 'garantia']);
 const publicFiles = new Set(["index.html", "favicon.ico", "logo.jpg", "logo.png", "logo1.jpg", "robots.txt", "sitemap.xml"]);
 const types = { ".css": "text/css", ".html": "text/html", ".ico": "image/x-icon", ".jpg": "image/jpeg", ".js": "text/javascript", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml", ".txt": "text/plain", ".webp": "image/webp", ".xml": "application/xml" };
 const retiredPaths = new Set(["/lead-generation", "/lead-generation/", "/cursos", "/cursos/", "/curso", "/curso/", "/courses", "/courses/", "/terminos-rifa", "/terminos-rifa/"]);
@@ -45,12 +45,20 @@ async function handleLeadEvent(request, response, caseId) {
 }
 
 async function handleRepairStatus(request, response) {
-  if (request.method !== "GET") return json(response, 405, { error: "Método no permitido." });
-  const order = new URL(request.url, "http://localhost").searchParams.get("order")?.trim();
-  if (!order) return json(response, 400, { error: "Ingresa un número de orden válido." });
-  const result = await queryRepairStatus(order);
-  return json(response, result.status, result.body);
+  if (request.method !== 'POST') return json(response, 405, { error: 'Método no permitido.' });
+  const key = request.socket.remoteAddress || 'unknown';
+  const now = Date.now();
+  for (const [ip, entry] of statusAttempts) if (now - entry.start > 60000) statusAttempts.delete(ip);
+  const entry = statusAttempts.get(key) || { start: now, count: 0 };
+  entry.count++; statusAttempts.set(key, entry);
+  if (entry.count > 10) return json(response, 429, { error: 'Espera un minuto antes de intentar de nuevo.' });
+  try {
+    const { order, contact } = await readJsonBody(request);
+    const result = await queryRepairStatus(order, { contact });
+    return json(response, result.status, result.body);
+  } catch { return json(response, 400, { error: 'Solicitud inválida.' }); }
 }
+const statusAttempts = new Map();
 
 function handleRepairStatusAvailability(request, response) {
   if (request.method !== "GET") return json(response, 405, { error: "Método no permitido." });
@@ -98,7 +106,7 @@ createServer((request, response) => {
   if (pathname === "/api/leads") return void handleLead(request, response);
   if (pathname.startsWith("/api/")) return void json(response, 404, { error: "Ruta no encontrada." });
   return void serveStatic(request, response).catch(() => json(response, 404, { error: "Ruta no encontrada." }));
-}).listen(PORT, "0.0.0.0", () => console.log(`DoctorCell Quito listo en http://localhost:${PORT}`));
+}).listen(PORT, process.env.HOST || "0.0.0.0", () => console.log(`DoctorCell Quito listo en http://localhost:${PORT}`));
 
 const followupTimer = setInterval(() => dispatchDueFollowups().catch((error) => console.error("Error en seguimientos:", error.message)), 60_000);
 followupTimer.unref();

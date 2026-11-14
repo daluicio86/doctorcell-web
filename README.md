@@ -1,5 +1,12 @@
 # DoctorCell web app
 
+La implementación de conversión de noviembre de 2026, sus variables, contenido
+editable, pendientes y plan de pruebas están en [IMPLEMENTACION.md](IMPLEMENTACION.md).
+El cotizador ahora ofrece equipo, modelo y descripción, confirma el registro antes
+de continuar por WhatsApp y conserva los datos solo con autorización. El seguimiento
+automático requiere también `ZENTRA_STATUS_VERIFY_CONTACT=true` y un proveedor que
+valide el contacto; configurar solo la URL mantiene la consulta asistida.
+
 ## Home comercial
 
 El diseño de laboratorio digital está en `src/styles/future.css`, cargado después

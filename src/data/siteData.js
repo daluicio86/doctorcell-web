@@ -50,12 +50,12 @@ export const diagnostics = [
   { icon: MessageCircle, title: "Otro problema", text: "Cuéntanos qué ocurre con tu equipo.", price: "Diagnóstico desde $20", startingPrice: "20", keywords: "otro diagnóstico revisión celular equipo todas las marcas" }
 ];
 
-export const brands = ["Apple", "Samsung", "Xiaomi", "Huawei", "Motorola", "Honor", "Oppo", "Infinix", "Tecno", "Nokia", "Google", "Otra"];
+export const brands = ["Apple", "Samsung", "Xiaomi", "Huawei", "Motorola", "Honor", "Oppo", "Infinix", "Tecno", "Nokia", "Google", "Lenovo", "Otra"];
 
 export const services = [
   {
     icon: Smartphone,
-    title: "Cambio de pantallas certificado",
+    title: "Cambio de pantallas",
     text: "Pantallas compatibles y originales según disponibilidad, instalación técnica y prueba final.",
     time: "Tiempo estimado: confirmar por modelo",
     price: "Desde $35",

@@ -10,7 +10,7 @@ export default function FinalCta() {
       <h2>Volvamos a<br /><em>conectar tu mundo.</em></h2>
       <p>Recibe una orientación preliminar y elige la sucursal que te quede más cerca.</p>
       <ButtonLink href={whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación.")} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="final_cta">
-        Cotiza por WhatsApp
+        Cotiza tu reparación por WhatsApp
       </ButtonLink>
     </section>
   );

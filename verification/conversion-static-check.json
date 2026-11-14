@@ -1,0 +1,191 @@
+{
+  "htmlPages": 37,
+  "sitemapUrls": 34,
+  "results": [
+    {
+      "path": "agendar/index.html",
+      "schemas": 0,
+      "h1": 1
+    },
+    {
+      "path": "conviene-reparar/index.html",
+      "schemas": 0,
+      "h1": 1
+    },
+    {
+      "path": "cotizar/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "garantia/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/cambio-bateria-celular-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/cambio-pantalla-iphone-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/cambio-pantalla-samsung-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/celular-mojado-que-hacer/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/celular-no-carga-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/index.html",
+      "schemas": 0,
+      "h1": 1
+    },
+    {
+      "path": "guias/microsoldadura-celulares-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/reparacion-camaras-audio-perifericos-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/reparacion-macbook-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/reparacion-smartwatch-apple-watch-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/reparacion-tablets-ipad-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/reparacion-xiaomi-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "guias/software-celulares-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "politica-privacidad/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "precios/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "preguntas/index.html",
+      "schemas": 0,
+      "h1": 1
+    },
+    {
+      "path": "preguntas-frecuentes/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "seguimiento/index.html",
+      "schemas": 0,
+      "h1": 1
+    },
+    {
+      "path": "servicios/cambio-bateria-samsung-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "servicios/cambio-pantalla-iphone-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "servicios/reparacion-apple-watch-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "servicios/reparacion-celular-mojado-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "servicios/reparacion-macbook-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "servicios/reparacion-puerto-carga-xiaomi-quito/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "sobre-nosotros/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "sucursales/colon-juan-leon-mera/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "sucursales/index.html",
+      "schemas": 0,
+      "h1": 1
+    },
+    {
+      "path": "sucursales/matriz-prensa-rio-arajuno/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "sucursales/prensa-vaca-de-castro/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "sucursales/shyris-tomas-de-berlanga/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "terminos-y-condiciones/index.html",
+      "schemas": 1,
+      "h1": 1
+    },
+    {
+      "path": "tienda/index.html",
+      "schemas": 0,
+      "h1": 1
+    }
+  ]
+}

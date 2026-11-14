@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { CheckCircle2, ClipboardCheck, LoaderCircle, MessageCircle, Phone, Search, Wrench } from "lucide-react";
+import { LoaderCircle, MessageCircle, Phone, Search } from "lucide-react";
 import { contactInfo } from "../data/siteData";
 import { whatsappUrl } from "../utils/whatsapp";
+const stages = ['Recibido', 'En diagnóstico', 'Esperando autorización', 'En reparación', 'Esperando repuesto', 'Listo para entrega', 'Entregado'];
 
 export default function RepairTracking() {
   const [orderNumber, setOrderNumber] = useState("");
+  const [contact, setContact] = useState('');
+  const [demo, setDemo] = useState(false);
   const [status, setStatus] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +30,7 @@ export default function RepairTracking() {
     setError("");
     setStatus(null);
     try {
-      const response = await fetch(`/api/repair-status?order=${encodeURIComponent(cleanOrder)}`);
+      const response = await fetch('/api/repair-status', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ order: cleanOrder, contact: contact.trim() }), signal: AbortSignal.timeout(10000) });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "No pudimos consultar la orden.");
       setStatus(payload);
@@ -45,10 +48,7 @@ export default function RepairTracking() {
         <h2>¿Ya dejaste tu equipo?</h2>
         <p>Ten a mano el número de tu orden para revisar el avance de tu reparación con DoctorCell Quito.</p>
         <div className="tracking-steps" aria-label="Etapas de una reparación">
-          <span><ClipboardCheck size={20} /><b>1</b>Recibido</span>
-          <span><Search size={20} /><b>2</b>Diagnóstico</span>
-          <span><Wrench size={20} /><b>3</b>Reparación</span>
-          <span><CheckCircle2 size={20} /><b>4</b>Listo</span>
+          {stages.map((stage, index) => <span key={stage}><b>{index + 1}</b>{stage}</span>)}
         </div>
       </div>
       {availability === "available" && <form className="tracking-card" onSubmit={consultOrder}>
@@ -59,11 +59,14 @@ export default function RepairTracking() {
           onChange={(event) => setOrderNumber(event.target.value)}
           placeholder="Ej. DC-10428"
           autoComplete="off"
+          required maxLength={80}
         />
+        <label htmlFor="tracking-contact">Teléfono o correo registrado en la orden</label>
+        <input id="tracking-contact" value={contact} required maxLength={160} autoComplete="off" onChange={(event) => setContact(event.target.value)} />
         <button
           className={`button tracking-submit ${cleanOrder ? "" : "is-disabled"}`}
           type="submit"
-          disabled={!cleanOrder || loading}
+          disabled={!cleanOrder || !contact.trim() || loading}
         >
           {loading ? <LoaderCircle className="spin" size={19} /> : <Search size={19} />} {loading ? "Consultando…" : "Consultar estado"}
         </button>
@@ -76,6 +79,7 @@ export default function RepairTracking() {
         <strong>Preparando tu opción de seguimiento…</strong>
         <small>En un momento te indicaremos cómo consultar tu reparación.</small>
       </div>}
+      <div className="tracking-card tracking-demo"><button type="button" onClick={() => setDemo((value) => !value)} aria-expanded={demo}>Ver ejemplo de seguimiento</button>{demo && <div><strong>Demostración: no corresponde a una reparación real.</strong><p>Orden de ejemplo: DEMO-001 · Contacto: ejemplo@invalid.test</p><label>Estado de ejemplo<select defaultValue="En diagnóstico">{stages.map((stage) => <option key={stage}>{stage}</option>)}</select></label><p>Los datos de esta demostración no se envían al servidor.</p></div>}</div>
       {availability === "unavailable" && <div className="tracking-card tracking-fallback">
         <span className="tracking-fallback-icon"><MessageCircle size={24} /></span>
         <strong>Consulta tu reparación con nuestro equipo</strong>

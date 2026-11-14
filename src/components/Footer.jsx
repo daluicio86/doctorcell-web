@@ -27,6 +27,12 @@ export default function Footer() {
         <a href="/preguntas">Preguntas frecuentes</a>
         <a href="/conviene-reparar/">¿Conviene reparar mi celular?</a>
         <a href="/guias/">Guías de reparación</a>
+        <a href="/cotizar/">Cotizador</a>
+        <a href="/precios/">Precios orientativos</a>
+        <a href="/politica-privacidad/">Política de privacidad</a>
+        <a href="/terminos-y-condiciones/">Términos y condiciones</a>
+        <a href="/garantia/">Garantía</a>
+        <a href="/sobre-nosotros/">Sobre nosotros</a>
         <button className="footer-cookie-settings" type="button" onClick={() => window.dispatchEvent(new Event("doctorcell:cookie-settings"))}>Preferencias de medición</button>
       </div>
     </footer>

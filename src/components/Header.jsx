@@ -15,6 +15,7 @@ export default function Header() {
 
   return (
     <>
+    <a className="skip-link" href="#main-content">Saltar al contenido</a>
     <header className="site-header" onKeyDown={(event) => {
       if (event.key === "Escape" && isOpen) { closeMenu(); menuButton.current?.focus(); }
     }}>

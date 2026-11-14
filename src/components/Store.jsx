@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Check, HelpCircle, Maximize2, MessageCircle, Minus, Plus, Search, ShieldCheck, ShoppingBag, ShoppingCart, Sparkles, Trash2, Truck, X, Zap } from "lucide-react";
 import { whatsappUrl } from "../utils/whatsapp.js";
 import "../styles/store.css";
+import { catalogOverrides } from '../data/catalogOverrides.js';
+import { branches } from '../data/siteData.js';
 
 const productData = [
   ["iPhone 16 Pro Max", "Transparente", "Case transparente antigolpes"],
@@ -135,7 +137,8 @@ export const products = productData.map(([sourceModel, type, name], index) => {
     type,
     category: isAccessory ? sourceModel : "Estuches",
     price: getProductPrice(sourceModel, type, name),
-    badge: index % 4 === 0 ? "Nuevo" : index % 5 === 0 ? "Popular" : null
+    badge: index % 4 === 0 ? "Nuevo" : index % 5 === 0 ? "Popular" : null,
+    availableBranches: null, warranty: null, ...catalogOverrides[index + 1]
   };
 });
 
@@ -144,6 +147,8 @@ export default function Store({ standalone = false }) {
   const [category, setCategory] = useState("Todos");
   const [brand, setBrand] = useState("Todos");
   const [model, setModel] = useState("Todos");
+  const [productType, setProductType] = useState('Todos');
+  const [availability, setAvailability] = useState('Todos');
   const [cart, setCart] = useState({});
   const [cartOpen, setCartOpen] = useState(false);
   const [zoomedProduct, setZoomedProduct] = useState(null);
@@ -155,11 +160,13 @@ export default function Store({ standalone = false }) {
     (brand === "Todos" || product.brand === brand)
   ).map((product) => product.model))];
   const visible = useMemo(() => products.filter((product) =>
+    (productType === 'Todos' || product.type === productType) &&
+    (availability === 'Todos' || (availability === 'consultar' ? product.availableBranches === null : product.availableBranches?.includes(availability))) &&
     (category === "Todos" || product.category === category) &&
     (brand === "Todos" || product.brand === brand) &&
     (model === "Todos" || product.model === model) &&
     `${product.name} ${product.category} ${product.brand} ${product.model} ${product.type}`.toLowerCase().includes(query.trim().toLowerCase())
-  ), [category, brand, model, query]);
+  ), [category, brand, model, query, productType, availability]);
   const cartItems = products.filter(({ id }) => cart[id]).map((product) => ({ ...product, quantity: cart[product.id] }));
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const changeQuantity = (id, amount) => setCart((current) => {
@@ -183,7 +190,17 @@ export default function Store({ standalone = false }) {
   useEffect(() => {
     const overlayOpen = cartOpen || Boolean(zoomedProduct);
     document.body.classList.toggle("store-overlay-open", overlayOpen);
-    return () => document.body.classList.remove("store-overlay-open");
+    if (!overlayOpen) return () => document.body.classList.remove('store-overlay-open');
+    const previousFocus = document.activeElement;
+    const dialog = document.querySelector('.product-zoom, .cart-panel');
+    const elements = () => [...dialog.querySelectorAll('button:not(:disabled), a[href], input, select, [tabindex="0"]')].filter((item) => item.getClientRects().length);
+    elements()[0]?.focus();
+    const onKey = (event) => {
+      if (event.key === 'Escape') { setCartOpen(false); setZoomedProduct(null); }
+      if (event.key === 'Tab') { const items = elements(); const first = items[0]; const last = items.at(-1); if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); } else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); } }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => { document.body.classList.remove('store-overlay-open'); document.removeEventListener('keydown', onKey); previousFocus?.focus(); };
   }, [cartOpen, zoomedProduct]);
 
   return (
@@ -216,6 +233,8 @@ export default function Store({ standalone = false }) {
           <label><span>Categoría</span><select value={category} onChange={(event) => { setCategory(event.target.value); setBrand("Todos"); setModel("Todos"); }}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span>Marca</span><select value={brand} onChange={(event) => { setBrand(event.target.value); setModel("Todos"); }}>{brands.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label><span>Modelo</span><select value={model} onChange={(event) => setModel(event.target.value)}>{models.map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label><span>Tipo de producto</span><select value={productType} onChange={(event) => setProductType(event.target.value)}>{['Todos', ...new Set(products.map((p) => p.type))].map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label><span>Disponibilidad</span><select value={availability} onChange={(event) => setAvailability(event.target.value)}><option value="Todos">Todas</option><option value="consultar">Por confirmar</option>{branches.map((b) => <option key={b.slug} value={b.slug}>{b.name}</option>)}</select></label>
         </div>
       </div>
 
@@ -223,15 +242,15 @@ export default function Store({ standalone = false }) {
         {visible.map((product) => {
           const inCart = Boolean(cart[product.id]);
           return <article className="product-card" key={product.id}>
-            <button className="product-image" type="button" onClick={() => setZoomedProduct(product)} aria-label={`Ampliar imagen de ${product.name}`}><img src={product.image} alt={product.name} loading="lazy" />{product.badge && <span>{product.badge}</span>}<i><Maximize2 size={17} /> Ver imagen</i><em className="product-flirt"><span className="flirt-wink" aria-hidden="true">😉</span><span><b>¿Nos vamos juntos?</b><small>Tu equipo y yo hacemos buen match</small></span></em></button>
-            <div className="product-copy"><small>{product.brand} · {product.category}</small><h3>{product.name}</h3><div className="product-meta"><span className="product-type">{product.type}</span><span className="product-stock"><i /> Disponible</span></div><strong className="product-price">{product.price}</strong><p><ShieldCheck size={14} /> Modelo verificado · Confirma disponibilidad</p>
+            <button className="product-image" type="button" onClick={() => setZoomedProduct(product)} aria-label={`Ampliar imagen de ${product.name}`}><img src={product.image} alt={product.name} width="720" height="720" loading="lazy" />{product.badge && <span>{product.badge}</span>}<i><Maximize2 size={17} /> Ver imagen</i><em className="product-flirt"><span className="flirt-wink" aria-hidden="true">😉</span><span><b>¿Nos vamos juntos?</b><small>Tu equipo y yo hacemos buen match</small></span></em></button>
+            <div className="product-copy"><small>{product.brand} · {product.category}</small><h3>{product.name}</h3><div className="product-meta"><span className="product-type">{product.type}</span><span className="product-stock">{product.availableBranches?.length ? 'Consultar sucursal' : 'Disponibilidad por confirmar'}</span></div><strong className="product-price">{product.price}</strong><p>Compatibilidad: {product.model}. Garantía: {product.warranty || 'confirmar condiciones por escrito'}.</p><p>Sucursales: {product.availableBranches === null ? 'consultar disponibilidad' : product.availableBranches.length ? branches.filter((b) => product.availableBranches.includes(b.slug)).map((b) => b.name).join(', ') : 'sin disponibilidad confirmada'}.</p>
               <button type="button" className={inCart ? "is-added" : ""} onClick={() => changeQuantity(product.id, 1)}>{inCart ? <Check size={18} /> : <Plus size={18} />}{inCart ? `En pedido (${cart[product.id]})` : "Agregar al pedido"}</button>
-              <a className="product-buy" href={whatsappUrl(`Hola DoctorCell Quito, quiero comprar ${product.name}, con precio publicado de ${product.price}. Quiero confirmar el modelo, color, valor final y coordinar el pago y la entrega.`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} /> Comprar ahora <ArrowRight size={16} /></a>
+              <a className="product-buy" href={whatsappUrl(`Hola DoctorCell Quito, quiero reservar ${product.name}, con precio publicado de ${product.price}. Quiero confirmar compatibilidad, garantía, disponibilidad por sucursal y valor final.`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} /> Consultar o reservar <ArrowRight size={16} /></a>
             </div>
           </article>;
         })}
       </div>
-      {!visible.length && <div className="store-empty"><ShoppingBag size={28} /><strong>No encontramos productos con esos filtros.</strong><p>Es posible que tengamos tu modelo aunque todavía no aparezca en la tienda.</p><a href={whatsappUrl(`Hola DoctorCell Quito, estoy buscando ${query.trim() || model !== "Todos" && model || "otro producto"}. ¿Me ayudan a confirmar disponibilidad?`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} /> Consultar disponibilidad</a><button type="button" onClick={() => { setQuery(""); setCategory("Todos"); setBrand("Todos"); setModel("Todos"); }}>Ver todo el catálogo</button></div>}
+      {!visible.length && <div className="store-empty"><ShoppingBag size={28} /><strong>No encontramos productos con esos filtros.</strong><p>Es posible que tengamos tu modelo aunque todavía no aparezca en la tienda.</p><a href={whatsappUrl(`Hola DoctorCell Quito, estoy buscando ${query.trim() || model !== "Todos" && model || "otro producto"}. ¿Me ayudan a confirmar disponibilidad?`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} /> Consultar disponibilidad</a><button type="button" onClick={() => { setQuery(""); setCategory("Todos"); setBrand("Todos"); setModel("Todos"); setProductType("Todos"); setAvailability("Todos"); }}>Ver todo el catálogo</button></div>}
 
       <section className="store-help" aria-labelledby="store-help-title">
         <div className="store-help-intro">
@@ -260,7 +279,7 @@ export default function Store({ standalone = false }) {
       </aside></div>}
       {zoomedProduct && <div className="product-zoom" role="dialog" aria-modal="true" aria-label={`Imagen ampliada de ${zoomedProduct.name}`} onClick={() => setZoomedProduct(null)}><button className="zoom-close" type="button" onClick={() => setZoomedProduct(null)} aria-label="Cerrar imagen"><X /></button><div className="zoom-card" onClick={(event) => event.stopPropagation()}>
         <div className="zoom-visual"><span className="zoom-kicker"><Sparkles size={14} /> Selección DoctorCell Quito</span><img src={zoomedProduct.image} alt={zoomedProduct.name} /><div className="zoom-visual-note"><ShieldCheck size={17} /><span><b>Protección confiable</b><small>Modelo revisado en empaque</small></span></div></div>
-        <div className="zoom-info"><span className="zoom-model">{zoomedProduct.category} · {zoomedProduct.brand}</span><strong>{zoomedProduct.name}</strong><div className="zoom-rating"><span>★★★★★</span> Producto recomendado</div><b className="zoom-price">{zoomedProduct.price}</b><div className="zoom-benefits"><span><ShieldCheck size={18} /><b>Compatibilidad verificada</b></span><span><Zap size={18} /><b>Confirmación inmediata</b></span><span><Truck size={18} /><b>Coordina tu entrega</b></span></div><a href={whatsappUrl(`Hola DoctorCell Quito, quiero comprar ${zoomedProduct.name}, con precio publicado de ${zoomedProduct.price}. Quiero confirmar modelo, color, valor final y entrega.`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /><span>Lo quiero por WhatsApp<small>Confirmamos modelo y color</small></span><ArrowRight size={18} /></a><p className="zoom-reassurance"><span /> Atención directa, sin pagos dentro de la web</p></div>
+        <div className="zoom-info"><span className="zoom-model">{zoomedProduct.category} · {zoomedProduct.brand}</span><strong>{zoomedProduct.name}</strong><b className="zoom-price">{zoomedProduct.price}</b><div className="zoom-benefits"><span><ShieldCheck size={18} /><b>Compatibilidad verificada</b></span><span><Zap size={18} /><b>Disponibilidad por confirmar</b></span><span><Truck size={18} /><b>Coordina tu entrega</b></span></div><a href={whatsappUrl(`Hola DoctorCell Quito, quiero comprar ${zoomedProduct.name}, con precio publicado de ${zoomedProduct.price}. Quiero confirmar modelo, color, valor final y entrega.`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /><span>Lo quiero por WhatsApp<small>Confirmamos modelo y color</small></span><ArrowRight size={18} /></a><p className="zoom-reassurance"><span /> Atención directa, sin pagos dentro de la web</p></div>
       </div></div>}
     </section>
   );

@@ -22,8 +22,11 @@ import useSiteMotion from "./hooks/useSiteMotion.js";
 import { branches } from "./data/siteData.js";
 import { SITE_ORIGIN } from "./data/siteConfig.js";
 import { setPageMetadata } from "./utils/pageMetadata.js";
-
-const route = typeof window === "undefined" ? "/" : window.location.pathname.replace(/\/+$/, "") || "/";
+import FloatingWhatsApp from './components/FloatingWhatsApp.jsx';
+import { Promotions, Prices, InformationPage, ServiceLanding, DocumentedRepairs } from './components/ConversionPages.jsx';
+import { pageRegistry } from './data/pageRegistry.js';
+import { legalPages, servicePages } from './data/conversionContent.js';
+import { homeBusinessSchema } from './utils/pageMetadata.js';
 
 const pages = {
   "/": ["Cambio de pantalla y reparación de celulares en Quito | DoctorCell", "¿Pantalla rota? Cotiza por WhatsApp. Confirmamos el precio antes de reparar. Encuéntranos en cuatro sucursales de Quito."],
@@ -36,13 +39,14 @@ const pages = {
 };
 
 function PageFrame({ children, pageRoute, schema }) {
+  schema = schema || pageRegistry[pageRoute]?.schema;
   const serializedSchema = schema ? JSON.stringify(schema) : "";
   useEffect(() => {
-    const [title, description] = pages[pageRoute];
+    const [title, description] = pages[pageRoute] || [pageRegistry[pageRoute].title, pageRegistry[pageRoute].description];
     setPageMetadata({ title, description, path: pageRoute, schema });
   }, [pageRoute, serializedSchema]);
   const themeClass = pageRoute === "/tienda" ? " future-store" : " future-utility";
-  return <><Header /><main className={`utility-page${themeClass}`}>{children}</main><Chatbot /><AnalyticsConsent /><Footer /></>;
+  return <><Header /><main id="main-content" className={`utility-page${themeClass}`}>{children}</main><Chatbot /><FloatingWhatsApp /><AnalyticsConsent /><Footer /></>;
 }
 
 function StorePage() {
@@ -58,39 +62,50 @@ function StorePage() {
   return <PageFrame pageRoute="/tienda" schema={itemList}><Store standalone /></PageFrame>;
 }
 
-export default function App() {
+export default function App({ path }) {
+  const route = (path || (typeof window === 'undefined' ? '/' : window.location.pathname)).replace(/\/+$/, '') || '/';
   useSiteMotion();
   useEffect(() => {
     if (route === "/") {
       const [title, description] = pages["/"];
-      setPageMetadata({ title, description, path: "/" });
+      setPageMetadata({ title, description, path: "/", schema: homeBusinessSchema(branches) });
     }
   }, []);
   const branch = branches.find((item) => route === `/sucursales/${item.slug}`);
-  if (branch) return <><Header /><main className="utility-page future-utility"><BranchDetail branch={branch} /></main><Chatbot /><AnalyticsConsent /><Footer /></>;
+  if (branch) return <><Header /><main id="main-content" className="utility-page future-utility"><BranchDetail branch={branch} /></main><Chatbot /><FloatingWhatsApp /><AnalyticsConsent /><Footer /></>;
+  if (route === '/cotizar') return <PageFrame pageRoute={route}><h1 className="utility-heading">Cotiza tu reparación en Quito</h1><QuoteFinder /></PageFrame>;
+  if (route === '/precios') return <PageFrame pageRoute={route}><Prices standalone /></PageFrame>;
+  if (route === '/preguntas-frecuentes') return <PageFrame pageRoute={route} schema={pageRegistry[route].schema}><Faq standalone /></PageFrame>;
+  if (legalPages[route]) return <PageFrame pageRoute={route}><InformationPage path={route} /></PageFrame>;
+  const service = servicePages.find((item) => route === `/servicios/${item.slug}`);
+  if (service) return <PageFrame pageRoute={route}><ServiceLanding service={service} /></PageFrame>;
   if (route === "/tienda") return <StorePage />;
-  if (route === "/seguimiento") return <PageFrame pageRoute="/seguimiento"><RepairTracking /></PageFrame>;
-  if (route === "/agendar") return <PageFrame pageRoute="/agendar"><AppointmentBooking /></PageFrame>;
-  if (route === "/sucursales") return <PageFrame pageRoute="/sucursales"><Branches /></PageFrame>;
-  if (route === "/preguntas") return <PageFrame pageRoute="/preguntas"><Faq /></PageFrame>;
+  if (route === "/seguimiento") return <PageFrame pageRoute="/seguimiento"><h1 className="utility-heading">Seguimiento de reparación</h1><RepairTracking /></PageFrame>;
+  if (route === "/agendar") return <PageFrame pageRoute="/agendar"><h1 className="utility-heading">Agendar revisión</h1><AppointmentBooking /></PageFrame>;
+  if (route === "/sucursales") return <PageFrame pageRoute="/sucursales"><h1 className="utility-heading">Sucursales DoctorCell en Quito</h1><Branches /></PageFrame>;
+  if (route === "/preguntas") return <PageFrame pageRoute="/preguntas" schema={pageRegistry['/preguntas-frecuentes'].schema}><Faq standalone /></PageFrame>;
   if (route === "/conviene-reparar") return <PageFrame pageRoute="/conviene-reparar"><RepairDecision /></PageFrame>;
 
   return (
     <>
       <Header />
-      <main id="inicio" className="futurist-home">
+      <main id="main-content" className="futurist-home">
         <Hero />
+        <Promotions />
         <TechMarquee />
         <Services />
         <QuoteFinder />
+        <Prices />
         <RepairDecisionTeaser />
         <BeforeAfter />
         <Gallery />
+        <DocumentedRepairs />
         <Testimonials />
         <Branches />
         <FinalCta />
       </main>
       <Chatbot />
+      <FloatingWhatsApp />
       <AnalyticsConsent />
       <Footer />
     </>

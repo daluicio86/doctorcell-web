@@ -66,6 +66,7 @@ test("quote server saves the contact before any WhatsApp interaction and dedupli
   assert.equal(rows[0].contact, quote.contact);
   assert.equal(rows[0].source, "quote-finder-web");
   assert.equal(rows[0].consent, true);
+  assert.equal(rows[0].status, 'nuevo');
   assert.ok(Number.isFinite(Date.parse(rows[0].consentedAt)));
   const retry = await createLead(payload);
   assert.equal(retry.body.duplicate, true);

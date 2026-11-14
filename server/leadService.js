@@ -71,6 +71,7 @@ async function storeLead(payload, metadata = {}) {
 
   lead.caseId = `DC-${randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase()}`;
   lead.createdAt = new Date().toISOString();
+  lead.status = 'nuevo';
   lead.source = payload.source === "quote-finder-web" ? "quote-finder-web" : "chatbot-web";
   lead.consent = true;
   lead.consentedAt = lead.createdAt;

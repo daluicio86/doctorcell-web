@@ -4,6 +4,7 @@ import { branches, diagnostics } from "../data/siteData.js";
 import { whatsappUrl } from "../utils/whatsapp.js";
 import SectionHeading from "./SectionHeading.jsx";
 import { appointmentTimeSlots, isAppointmentSlotAvailable, quitoDate, validateAppointment } from "../utils/appointments.js";
+import { trackEvent } from '../utils/analytics.js';
 
 export default function AppointmentBooking() {
   const [form, setForm] = useState({ branch: "", date: "", time: "", name: "", phone: "", issue: "" });
@@ -11,6 +12,9 @@ export default function AppointmentBooking() {
   const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
   useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get('sucursal');
+    const selected = branches.find((branch) => branch.slug === slug);
+    if (selected) setForm((current) => ({ ...current, branch: selected.name }));
     const timer = window.setInterval(() => setNow(Date.now()), 30000);
     return () => window.clearInterval(timer);
   }, []);
@@ -46,6 +50,7 @@ export default function AppointmentBooking() {
       return;
     }
     window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+    trackEvent('appointment_submit', { branch: branches.find((b) => b.name === form.branch)?.slug || 'general' });
   };
 
   return (

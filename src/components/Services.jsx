@@ -3,6 +3,7 @@ import { ArrowUpRight, ChevronDown, MessageCircle } from "lucide-react";
 import { services } from "../data/siteData.js";
 import SectionHeading from "./SectionHeading.jsx";
 import { whatsappUrl } from "../utils/whatsapp.js";
+import { servicePages } from '../data/conversionContent.js';
 
 const featuredTitles = ["Pantallas", "Baterías", "Puerto de carga", "Equipos mojados"];
 const featuredCopy = [
@@ -46,6 +47,7 @@ export default function Services() {
           {services.slice(4).map((service, index) => <ServiceCard key={service.title} service={service} index={index + 4} />)}
         </div>
       </details>
+      <nav className="content-links" aria-label="Servicios por equipo en Quito">{servicePages.map((service) => <a key={service.slug} href={`/servicios/${service.slug}/`}>{service.heading}</a>)}</nav>
     </section>
   );
 }

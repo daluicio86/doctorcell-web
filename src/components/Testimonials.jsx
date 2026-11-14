@@ -3,6 +3,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 import { branches, googleReviewSummary } from "../data/siteData.js";
 import { mapsUrl } from "../utils/whatsapp.js";
 import SectionHeading from "./SectionHeading.jsx";
+import { VerifiedTestimonials } from './ConversionPages.jsx';
 
 export default function Testimonials() {
   return (
@@ -10,6 +11,7 @@ export default function Testimonials() {
       <SectionHeading eyebrow="Reseñas verificables" title="Consulta opiniones reales por sucursal.">
         Abre el perfil público de cada local y revisa directamente las experiencias publicadas en Google Maps.
       </SectionHeading>
+      <VerifiedTestimonials />
       <div className="testimonial-track branch-review-links">
         {branches.map((branch) => (
           <a key={branch.name} href={mapsUrl(`DoctorCell Quito ${branch.address} reseñas`)} target="_blank" rel="noopener noreferrer">

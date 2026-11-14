@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { loadEnv } from "vite";
 import { SITE_ORIGIN } from "../src/data/siteConfig.js";
 import { whatsappNumber } from "../src/data/businessInfo.js";
+import { pageRegistry } from '../src/data/pageRegistry.js';
 
 const origin = SITE_ORIGIN;
 const buildEnv = loadEnv(process.env.NODE_ENV || "production", process.cwd(), "VITE_");
@@ -140,6 +141,12 @@ const pages = [
   }
 ];
 
+pages.push({ slug: 'reparacion-macbook-quito', title: 'Diagnóstico de MacBook en Quito', description: 'Qué datos llevar al solicitar revisión de pantalla, batería o carga de un MacBook en Quito.', intro: 'El modelo, el año y los antecedentes ayudan a orientar la revisión de tu MacBook. Consulta qué evaluación está disponible antes de llevarlo.', sections: [
+  ['Identifica el modelo', 'Comparte el nombre y año del modelo. No publiques números de serie, contraseñas ni información de tu cuenta. Describe si el problema ocurre conectado al cargador o al usar batería.'],
+  ['Describe los síntomas', 'Indica si no enciende, se reinicia, no carga o presenta fallas de pantalla. Comunica si hubo golpes, líquido o una intervención anterior; un mismo síntoma puede tener distintas causas.'],
+  ['Confirma el alcance', 'Pregunta por la viabilidad, el tipo de repuesto, el presupuesto y las pruebas finales. Indica si conservar tus archivos es una prioridad y acuerda cómo se realizarán las pruebas sin compartir contraseñas por formularios.']
+], faqs: [['¿Puedo cotizar sin el modelo?', 'Podemos orientar la consulta, pero el modelo es necesario para confirmar componentes y presupuesto.'], ['¿Hay un tiempo fijo de reparación?', 'El plazo requiere diagnóstico y confirmación de disponibilidad.']] });
+
 const esc = (s) => s.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 const withFavicon = (html) => html
   .replace("<head>", '<head><link rel="icon" href="/favicon.ico" sizes="any">')
@@ -174,6 +181,7 @@ for (const page of pages) {
     "reparacion-tablets-ipad-quito": ["software-celulares-quito", "reparacion-smartwatch-apple-watch-quito", "celular-no-carga-quito"],
     "reparacion-smartwatch-apple-watch-quito": ["reparacion-tablets-ipad-quito", "cambio-bateria-celular-quito", "celular-no-carga-quito"],
     "microsoldadura-celulares-quito": ["celular-no-carga-quito", "celular-mojado-que-hacer", "reparacion-camaras-audio-perifericos-quito"],
+    'reparacion-macbook-quito': ['software-celulares-quito', 'reparacion-tablets-ipad-quito', 'reparacion-smartwatch-apple-watch-quito'],
     "reparacion-camaras-audio-perifericos-quito": ["software-celulares-quito", "microsoldadura-celulares-quito", "celular-no-carga-quito"]
   };
   const related = relatedBySlug[page.slug].map((slug) => pages.find((x) => x.slug === slug)).map((x) => `<a href="/guias/${x.slug}/">${esc(x.title)}</a>`).join("");
@@ -185,6 +193,7 @@ const cards = pages.map((p) => `<a href="/guias/${p.slug}/"><strong>${esc(p.titl
 const indexPage = { title: "Guías de reparación de celulares, tablets y relojes", description: "Guías sobre pantallas, baterías, carga, humedad, software y reparación de celulares, tablets y relojes inteligentes en Quito." };
 await writeFile(resolve("public/guias/index.html"), withFavicon(head(indexPage, `<main><header class="hero"><div class="wrap"><div class="crumbs"><a href="/">Inicio</a> · Guías</div><h1>Guías para cuidar y reparar tus equipos</h1><p>Celulares, tablets y relojes inteligentes: información práctica para actuar ante una falla y llegar mejor preparado al diagnóstico.</p></div></header><section class="content"><div class="wrap"><div class="grid index">${cards}</div></div></section></main>`)));
 const paths = [
+  ...Object.entries(pageRegistry).filter(([, page]) => !page.draft).map(([path]) => `${path}/`),
   "/", "/tienda/", "/agendar/", "/seguimiento/", "/sucursales/", "/preguntas/", "/conviene-reparar/",
   "/sucursales/matriz-prensa-rio-arajuno/", "/sucursales/colon-juan-leon-mera/",
   "/sucursales/shyris-tomas-de-berlanga/", "/sucursales/prensa-vaca-de-castro/",

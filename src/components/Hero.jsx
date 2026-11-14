@@ -1,9 +1,9 @@
 import React from "react";
-import { ArrowDown, ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowUpRight, BatteryCharging, Cpu, MessageCircle, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
 import ButtonLink from "./ButtonLink.jsx";
 import { whatsappUrl } from "../utils/whatsapp.js";
 
-const quoteUrl = whatsappUrl("Hola DoctorCell Quito, quiero cotizar una reparación. Mi equipo es: ");
+const quoteUrl = whatsappUrl("Hola DoctorCell, necesito reparar mi [marca] [modelo]. La falla es: [describir falla]. Prefiero la sucursal de [sucursal].");
 
 function DeviceScene() {
   return (
@@ -48,11 +48,12 @@ export default function Hero() {
       <div className="hero-content">
         <a className="hero-location" href="/sucursales"><span className="live-dot" /> QUITO, ECUADOR <span className="location-separator">/</span> 4 SUCURSALES <ArrowUpRight size={14} /></a>
         <p className="eyebrow">TU EQUIPO, EN BUENAS MANOS</p>
-        <h1 id="hero-title">Tu celular.<br /><em>De vuelta a tu mundo.</em></h1>
+        <h1 id="hero-title">¿Pantalla rota?<br /><em>Vuelve a tu mundo.</em></h1>
         <p className="hero-copy">Reparación de celulares en <strong>Quito</strong>. Pantallas, baterías y más, con diagnóstico claro y precio aprobado por ti.</p>
         <div className="hero-actions">
           <ButtonLink href={quoteUrl} icon={MessageCircle} target="_blank" rel="noopener noreferrer" data-analytics-placement="hero">Cotizar por WhatsApp <ArrowUpRight size={17} /></ButtonLink>
-          <ButtonLink href="#servicios" variant="ghost" icon={ArrowDown}>Explorar servicios</ButtonLink>
+          <ButtonLink href="/agendar/" variant="ghost">Agendar revisión</ButtonLink>
+          <ButtonLink href="/precios/" variant="ghost">Ver precios orientativos</ButtonLink>
         </div>
         <p className="hero-assurance"><ShieldCheck size={15} /> Conoces y autorizas el precio antes de reparar.</p>
         <div className="hero-proof-points" aria-label="Experiencia DoctorCell">

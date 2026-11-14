@@ -1,0 +1,75 @@
+ M .env.example
+ M README.md
+ M dist/agendar/index.html
+ D dist/assets/index-BWCK7NoN.js
+ D dist/assets/index-DLC_eYXr.css
+ M dist/conviene-reparar/index.html
+ M dist/guias/index.html
+ M dist/index.html
+ M dist/preguntas/index.html
+ M dist/seguimiento/index.html
+ M dist/sitemap.xml
+ M dist/sucursales/colon-juan-leon-mera/index.html
+ M dist/sucursales/index.html
+ M dist/sucursales/matriz-prensa-rio-arajuno/index.html
+ M dist/sucursales/prensa-vaca-de-castro/index.html
+ M dist/sucursales/shyris-tomas-de-berlanga/index.html
+ M dist/tienda/index.html
+ M dist/web.config
+ M public/guias/index.html
+ M public/sitemap.xml
+ M scripts/generateSeoPages.mjs
+ M scripts/generateStaticRoutes.mjs
+ M server.mjs
+ M server/leadService.js
+ M server/repairStatusService.js
+ M src/App.jsx
+ M src/components/AnalyticsConsent.jsx
+ M src/components/AppointmentBooking.jsx
+ M src/components/BeforeAfter.jsx
+ M src/components/BranchDetail.jsx
+ M src/components/Faq.jsx
+ M src/components/FinalCta.jsx
+ M src/components/FloatingWhatsApp.jsx
+ M src/components/Footer.jsx
+ M src/components/Header.jsx
+ M src/components/Hero.jsx
+ M src/components/QuoteFinder.jsx
+ M src/components/RepairTracking.jsx
+ M src/components/Services.jsx
+ M src/components/Store.jsx
+ M src/components/Testimonials.jsx
+ M src/data/siteData.js
+ M src/entry-server.jsx
+ M src/main.jsx
+ M src/utils/analytics.js
+ M src/utils/pageMetadata.js
+ M test/quoteLead.test.js
+ M test/repairStatusService.test.js
+?? IMPLEMENTACION.md
+?? dist/assets/index-CaNRFtiw.css
+?? dist/assets/index-j9MgnmQW.js
+?? dist/cotizar/index.html
+?? dist/garantia/index.html
+?? dist/guias/reparacion-macbook-quito/index.html
+?? dist/politica-privacidad/index.html
+?? dist/precios/index.html
+?? dist/preguntas-frecuentes/index.html
+?? dist/servicios/cambio-bateria-samsung-quito/index.html
+?? dist/servicios/cambio-pantalla-iphone-quito/index.html
+?? dist/servicios/reparacion-apple-watch-quito/index.html
+?? dist/servicios/reparacion-celular-mojado-quito/index.html
+?? dist/servicios/reparacion-macbook-quito/index.html
+?? dist/servicios/reparacion-puerto-carga-xiaomi-quito/index.html
+?? dist/sobre-nosotros/index.html
+?? dist/terminos-y-condiciones/index.html
+?? public/guias/reparacion-macbook-quito/index.html
+?? scripts/verifyStaticSite.mjs
+?? src/components/ConversionPages.jsx
+?? src/data/catalogOverrides.js
+?? src/data/conversionContent.js
+?? src/data/pageRegistry.js
+?? src/styles/conversion.css
+?? test/conversionContent.test.js
+?? verification/conversion-changed-files.txt
+?? verification/conversion-static-check.json
