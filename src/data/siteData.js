@@ -26,7 +26,6 @@ export { contactInfo, whatsappNumber } from "./businessInfo.js";
 export const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Tienda", href: "/tienda" },
   { label: "Citas", href: "/agendar" },
   { label: "Sucursales", href: "/sucursales" },
   { label: "Seguimiento", href: "/seguimiento" }

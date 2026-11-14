@@ -1,4 +1,4 @@
-import { Clock3, Mail, MapPin, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
+import { Clock3, Mail, MapPin, Menu, MessageCircle, Phone, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { contactInfo, navItems } from "../data/siteData.js";
 import Brand from "./Brand.jsx";
@@ -42,10 +42,8 @@ export default function Header() {
         </button>
         <nav className={`site-nav ${isOpen ? "is-open" : ""}`} id="site-nav">
           {navItems.map((item) => {
-            const isStoreLink = item.href === "/tienda";
             const isCurrent = item.href === currentPath;
-            return <a key={item.href} className={isStoreLink ? "nav-store" : undefined} href={resolveHref(item.href)} onClick={closeMenu} aria-current={isCurrent ? "page" : undefined}>
-              {isStoreLink && <ShoppingBag size={17} />}
+            return <a key={item.href} href={resolveHref(item.href)} onClick={closeMenu} aria-current={isCurrent ? "page" : undefined}>
               {item.label}
             </a>;
           })}
