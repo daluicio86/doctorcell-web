@@ -37,12 +37,12 @@ export const branchMedia = {};
 export const faqItems = [
   ['¿Cuánto tarda una reparación?', 'El plazo se confirma después del diagnóstico, según el modelo, la falla, la disponibilidad del repuesto y las pruebas necesarias. Solicita una estimación para tu caso.'],
   ['¿Usan repuestos originales?', 'Consulta las opciones para tu modelo. El tipo de repuesto y su disponibilidad se deben confirmar antes de autorizar la reparación.'],
-  ['¿Qué garantía tienen las reparaciones?', 'Borrador para validación: la duración, cobertura y exclusiones por servicio deben constar en la orden. Consulta las condiciones aplicables antes de autorizar.'],
-  ['¿Puedo enviar mi equipo desde otra ciudad?', 'Borrador para validación: consulta primero si se recibe tu equipo y cómo se coordinarían transporte, costos y devolución. No lo envíes sin confirmación.'],
-  ['¿Hacen respaldo de información?', 'Borrador para validación: solicita y confirma el alcance del respaldo antes de entregar tu equipo. No se promete recuperación ni conservación de datos sin evaluar el caso.'],
-  ['¿Qué pasa si el equipo no se puede reparar?', 'Borrador para validación: confirma previamente las condiciones del diagnóstico, sus posibles costos y la devolución del equipo.'],
+  ['¿Qué garantía tienen las reparaciones?', 'Consulta la duración, cobertura y exclusiones de la garantía para tu servicio antes de autorizar. Solicita que las condiciones aplicables consten por escrito en tu orden.'],
+  ['¿Puedo enviar mi equipo desde otra ciudad?', 'Consulta primero si se recibe tu equipo y cómo se coordinarían transporte, costos y devolución. No lo envíes sin confirmación.'],
+  ['¿Hacen respaldo de información?', 'Solicita y confirma el alcance del respaldo antes de entregar tu equipo. La recuperación o conservación de datos requiere evaluar el caso.'],
+  ['¿Qué pasa si el equipo no se puede reparar?', 'Confirma previamente las condiciones del diagnóstico, sus posibles costos y la devolución del equipo.'],
   ['¿Necesito cita previa?', 'Puedes solicitar una revisión en /agendar/. La sucursal debe confirmar la disponibilidad; enviar la solicitud no reserva automáticamente un turno.'],
-  ['¿Aceptan tarjetas o transferencias?', 'Borrador para validación: confirma los medios de pago habilitados con la sucursal. La web no procesa pagos.'],
+  ['¿Aceptan tarjetas o transferencias?', 'Confirma los medios de pago habilitados con la sucursal antes de comprar o autorizar el servicio. La web no procesa pagos.'],
   ['¿Cuánto cuesta reparar una pantalla en Quito?', 'Depende de la marca, modelo, repuesto y diagnóstico. Usa el cotizador o consulta los precios orientativos; el valor final requiere confirmación.'],
   ['¿Qué hago si mi celular se mojó?', 'Evita cargarlo y solicita una evaluación técnica. Comunica qué líquido lo afectó y cuándo ocurrió para orientar la revisión.']
 ];

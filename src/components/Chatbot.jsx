@@ -13,7 +13,7 @@ import "../styles/chatbot.css";
 const STORAGE_KEY = "doctorcell-diagnostic-v2";
 const initialAnswers = { device: "", brand: "", model: "", problem: "", detail: "", service: "", location: "", schedule: "", contact: "", consent: false };
 const welcome = [
-  { id: 1, from: "bot", text: "¡Hola! Soy el asistente de DoctorCell Quito. Haré un diagnóstico preliminar de tu equipo." },
+  { id: 1, from: "bot", text: "¡Hola! Soy el asistente automático de DoctorCell Quito. Te ayudaré a describir la falla y orientar la revisión de tu equipo." },
   { id: 2, from: "bot", text: "¿Qué tipo de equipo necesitas revisar?" }
 ];
 const flow = ["device", "brand", "model", "problem", "detail", "diagnosis", "service", "location", "schedule", "contact", "consent", "complete"];
@@ -23,7 +23,7 @@ const optionSets = {
   problem: [...diagnostics.map(({ title }) => title).filter((title) => title !== "Otro problema"), "No sé", "Otro"],
   detail: ["Empezó hoy", "Hace varios días", "Es intermitente", "No sé"],
   service: ["Ver cotización", "Hablar con un asesor"],
-  location: [...branches.map(({ name }) => name), "Atención a domicilio", "No sé todavía"],
+  location: [...branches.map(({ name }) => name), "Consultar opciones de entrega", "No sé todavía"],
   schedule: ["Hoy", "Mañana", "Esta semana", "Coordinar con asesor"],
   consent: ["Acepto y crear caso", "No guardar mis datos"]
 };
@@ -42,15 +42,15 @@ function detectProblem(value) {
 }
 
 const estimates = {
-  "Pantalla rota": { service: "Revisión y posible cambio de pantalla", time: "1–3 horas" },
-  "No carga": { service: "Diagnóstico de batería y sistema de carga", time: "1–2 horas" },
-  "Cámara": { service: "Revisión de cámara, enfoque o sensores", time: "1–3 horas" },
-  "Audio": { service: "Revisión de parlante, auricular o micrófono", time: "1–3 horas" },
-  "Se mojó": { service: "Limpieza técnica y diagnóstico por humedad", time: "24–72 horas" },
-  "Batería": { service: "Prueba y posible cambio de batería", time: "1–2 horas" },
-  "Software": { service: "Diagnóstico y servicio de software", time: "1–4 horas" },
-  "Tablet / iWatch": { service: "Diagnóstico especializado", time: "1–3 días" },
-  "Otro problema": { service: "Diagnóstico técnico completo", time: "Según revisión" }
+  "Pantalla rota": { service: "Revisión y posible cambio de pantalla" },
+  "No carga": { service: "Diagnóstico de batería y sistema de carga" },
+  "Cámara": { service: "Revisión de cámara, enfoque o sensores" },
+  "Audio": { service: "Revisión de parlante, auricular o micrófono" },
+  "Se mojó": { service: "Limpieza técnica y diagnóstico por humedad" },
+  "Batería": { service: "Prueba y posible cambio de batería" },
+  "Software": { service: "Diagnóstico y servicio de software" },
+  "Tablet / iWatch": { service: "Diagnóstico especializado" },
+  "Otro problema": { service: "Diagnóstico técnico completo" }
 };
 
 export default function Chatbot() {
@@ -83,7 +83,7 @@ export default function Chatbot() {
   const diagnosis = useMemo(() => {
     const inferred = detectProblem(`${answers.problem} ${answers.detail}`);
     const problem = answers.problem && !["No sé", "Otro"].includes(answers.problem) ? answers.problem : inferred[0];
-    return { problem, confidence: problem === inferred[0] ? inferred[1] : 82, ...(estimates[problem] || estimates["Otro problema"]) };
+    return { problem, ...(estimates[problem] || estimates["Otro problema"]), time: "Se confirma después del diagnóstico" };
   }, [answers]);
 
   const advance = (value) => {
@@ -98,14 +98,14 @@ export default function Chatbot() {
     if (step === "brand") { setAnswers((a) => ({ ...a, brand: value })); setStep("model"); botReply("Escribe el modelo exacto si lo conoces. También puedes responder “No sé”."); }
     if (step === "model") { setAnswers((a) => ({ ...a, model: value })); setStep("problem"); botReply("¿Cuál es el problema principal?"); }
     if (step === "problem") { setAnswers((a) => ({ ...a, problem: value })); setStep("detail"); botReply("Cuéntame qué sucede, cuándo empezó y si el equipo sufrió un golpe o contacto con líquido."); }
-    if (step === "detail") { setAnswers((a) => ({ ...a, detail: value })); setStep("diagnosis"); botReply("Preparé un diagnóstico preliminar con la información disponible.", { result: true }); }
+    if (step === "detail") { setAnswers((a) => ({ ...a, detail: value })); setStep("diagnosis"); botReply("Preparé una orientación inicial. La causa y el trabajo necesario se confirman en la revisión técnica.", { result: true }); }
     if (step === "service") {
       setAnswers((a) => ({ ...a, service: value }));
-      if (value.includes("asesor")) { setStep("contact"); botReply("Transferiré el historial completo. Déjame un teléfono o correo para contactarte."); }
+      if (value.includes("asesor")) { setStep("contact"); botReply("Puedes registrar tu solicitud y compartir el resumen por WhatsApp. Déjame un teléfono o correo para continuar."); }
       else { setStep("location"); botReply("La disponibilidad del repuesto debe confirmarse con la sucursal. ¿Dónde prefieres recibir atención?"); }
     }
     if (step === "location") { setAnswers((a) => ({ ...a, location: value })); setStep("schedule"); botReply("¿Cuándo te gustaría agendar?"); }
-    if (step === "schedule") { setAnswers((a) => ({ ...a, schedule: value })); setStep("contact"); botReply("Escribe tu WhatsApp o correo para enviarte la confirmación."); }
+    if (step === "schedule") { setAnswers((a) => ({ ...a, schedule: value })); setStep("contact"); botReply("Escribe tu WhatsApp o correo para gestionar tu solicitud. La sucursal debe confirmar la disponibilidad."); }
     if (step === "contact") { setAnswers((a) => ({ ...a, contact: value })); setStep("consent"); botReply("Antes de continuar: ¿autorizas guardar estos datos para gestionar tu caso y contactarte?"); }
     if (step === "consent") {
       const accepted = value === "Acepto y crear caso";
@@ -161,17 +161,17 @@ export default function Chatbot() {
     const files = [...event.target.files].filter((file) => file.type.startsWith("image/")).slice(0, 3 - photos.length);
     if (!files.length) { setError("Selecciona una imagen JPG, PNG o WebP."); return; }
     setPhotos((current) => [...current, ...files.map((file) => ({ name: file.name, url: URL.createObjectURL(file) }))]);
-    add({ from: "user", text: `${files.length} foto(s) adjunta(s) al diagnóstico.` }); event.target.value = "";
+    add({ from: "user", text: `${files.length} foto(s) seleccionada(s) en este dispositivo. Debes adjuntarlas manualmente al continuar por WhatsApp.` }); event.target.value = "";
   };
 
-  const summary = `Hola DoctorCell Quito. Caso: ${answers.caseId || "por crear"}. Equipo: ${answers.device} ${answers.brand} ${answers.model}. Problema: ${diagnosis.problem}. Detalle: ${answers.detail}. Diagnóstico preliminar (${diagnosis.confidence}%): ${diagnosis.service}. Tiempo estimado: ${diagnosis.time}. Atención: ${answers.location || "por definir"}. Fecha: ${answers.schedule || "por definir"}. Contacto: ${answers.contact || "por definir"}.`;
+  const summary = `Hola DoctorCell Quito. Caso: ${answers.caseId || "por crear"}. Equipo: ${answers.device} ${answers.brand} ${answers.model}. Problema: ${diagnosis.problem}. Detalle: ${answers.detail}. Orientación inicial: ${diagnosis.service}. Tiempo: ${diagnosis.time}. Atención solicitada: ${answers.location || "por definir"}. Fecha solicitada: ${answers.schedule || "por definir"}. Contacto: ${answers.contact || "por definir"}.`;
   const progress = `${Math.max(8, Math.round(((flow.indexOf(step) + 1) / flow.length) * 100))}%`;
 
   return <>
     <button className="chatbot-launcher" type="button" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="doctorcell-chatbot"><Sparkles size={18} /><span>Asistente de reparación</span></button>
     {open && <aside className="chatbot-panel" id="doctorcell-chatbot" aria-label="Asistente de diagnóstico">
       <header className="chatbot-header">
-        <span className="chatbot-avatar"><Bot size={22} /></span><div><strong>Asistente DoctorCell Quito</strong><small><i /> En línea · diagnóstico guiado</small></div>
+        <span className="chatbot-avatar"><Bot size={22} /></span><div><strong>Asistente DoctorCell Quito</strong><small><i /> Asistente automático · revisión guiada</small></div>
         <button type="button" onClick={() => setOpen(false)} aria-label="Cerrar asistente"><X size={21} /></button>
       </header>
       <div className="chatbot-toolbar">
@@ -184,7 +184,7 @@ export default function Chatbot() {
       <div className="chatbot-messages" ref={messageBox} role="log" aria-live="polite">
         {messages.map((message) => <div className={`chatbot-message is-${message.from}`} key={message.id}><div className={message.result ? "is-result" : ""}>{message.result && <CheckCircle2 size={18} />}<span>{message.text}</span></div></div>)}
         {step === "diagnosis" && <div className="chatbot-diagnosis">
-          <div><strong>Diagnóstico preliminar</strong><b>{diagnosis.confidence}% confianza</b></div>
+          <div><strong>Orientación inicial</strong><b>Requiere revisión técnica</b></div>
           <h3>{diagnosis.problem}</h3><p>{diagnosis.service}</p>
           <dl><div><dt>Tiempo estimado</dt><dd>{diagnosis.time}</dd></div><div><dt>Repuesto</dt><dd>Por confirmar</dd></div></dl>
           <small>No sustituye la revisión física del equipo.</small>

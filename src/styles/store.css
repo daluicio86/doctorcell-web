@@ -57,6 +57,6 @@
 .store-cart-button.has-items{border-color:var(--dc-green-deep);background:var(--dc-brand-gradient);box-shadow:0 18px 38px rgba(62,152,42,.27)}.store-cart-button.has-items b{color:var(--dc-green-deep)}.flirt-wink{background:linear-gradient(145deg,#edf7e9,#e7f2fb);box-shadow:inset 0 0 0 1px rgba(103,189,50,.13)}
 .store-help{border-color:#bcdba8;background:linear-gradient(135deg,#073b69 0%,#146a65 55%,#3f982a 100%)}.store-model-fab{background:linear-gradient(135deg,#0b477e,#397e42)}
 
-/* Free delivery campaign badge */
+/* Delivery coordination notice */
 .store-delivery-badge{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:10px 15px;border:1px solid rgba(255,255,255,.65);border-radius:999px;color:#fff;background:linear-gradient(120deg,#3b8e2c 0%,#62b83c 58%,#1767b7 100%);box-shadow:0 12px 28px rgba(55,143,42,.28),inset 0 1px 0 rgba(255,255,255,.3);font-size:14px;line-height:1;text-transform:uppercase;letter-spacing:.025em;transform:rotate(-1deg)}.store-delivery-badge svg{flex:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}.store-delivery-badge strong{font-weight:950}.store-delivery-badge small{padding-left:8px;border-left:1px solid rgba(255,255,255,.45);color:#fff;font-size:11px;font-weight:850;letter-spacing:.06em}
 @media(max-width:760px){.store-delivery-badge{margin-bottom:15px;padding:9px 12px;font-size:12px;transform:none}.store-delivery-badge small{font-size:9px}}

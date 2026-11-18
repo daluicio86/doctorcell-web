@@ -137,7 +137,7 @@ export const products = productData.map(([sourceModel, type, name], index) => {
     type,
     category: isAccessory ? sourceModel : "Estuches",
     price: getProductPrice(sourceModel, type, name),
-    badge: index % 4 === 0 ? "Nuevo" : index % 5 === 0 ? "Popular" : null,
+    badge: null,
     availableBranches: null, warranty: null, ...catalogOverrides[index + 1]
   };
 });
@@ -177,7 +177,7 @@ export default function Store({ standalone = false }) {
   const orderMessage = [
     "Hola DoctorCell Quito, quiero consultar precio y disponibilidad de estos productos:",
     ...cartItems.map((item) => `• ${item.quantity} × ${item.name} (${item.price} c/u)`),
-    "Quiero confirmar el modelo, color, valor final y coordinar el pago y la entrega."
+    "Quiero confirmar el modelo, color, valor final, cobertura y costo de entrega antes de coordinar el pago."
   ].join("\n");
 
   useEffect(() => {
@@ -209,16 +209,16 @@ export default function Store({ standalone = false }) {
       <div className="store-orb store-orb-two" aria-hidden="true" />
       <div className="store-heading">
         <div>
-          <p className="eyebrow"><Sparkles size={15} /> Nueva colección</p>
-          <span className="store-delivery-badge"><Truck size={19} aria-hidden="true" /><strong>Delivery gratis</strong><small>en Quito</small></span>
+          <p className="eyebrow"><Sparkles size={15} /> Accesorios para tu día a día</p>
+          <span className="store-delivery-badge"><Truck size={19} aria-hidden="true" /><strong>Entrega a coordinar</strong><small>Costo por confirmar</small></span>
           {standalone
             ? <h1>Todo para tu equipo.<br /><em>Diseñado para destacar.</em></h1>
             : <h2>Todo para tu equipo.<br /><em>Diseñado para destacar.</em></h2>}
-          <p>Cases y accesorios seleccionados para proteger, cargar y disfrutar tu equipo. Elige tu favorito y confirma disponibilidad al instante.</p>
+          <p>Cases y accesorios seleccionados para proteger, cargar y disfrutar tu equipo. Consulta por WhatsApp el modelo, la disponibilidad y el costo de entrega.</p>
           <div className="store-trust">
-            <span><ShieldCheck size={17} /> Compatibilidad verificada</span>
-            <span><Zap size={17} /> Respuesta rápida</span>
-            <span><Truck size={17} /> Entrega en Quito</span>
+            <span><ShieldCheck size={17} /> Confirma compatibilidad</span>
+            <span><Zap size={17} /> Atención por WhatsApp</span>
+            <span><Truck size={17} /> Consulta cobertura</span>
           </div>
         </div>
         <button className={`store-cart-button ${itemCount ? "has-items" : ""}`} type="button" onClick={() => setCartOpen(true)} aria-label={`Abrir carrito, ${itemCount} productos`}>
@@ -258,7 +258,7 @@ export default function Store({ standalone = false }) {
           <p className="eyebrow">Te ayudamos a encontrarlo</p>
           <h2 id="store-help-title">¿Buscas un case para otro modelo?</h2>
           <p>Cuéntanos la marca y el modelo exacto de tu celular. Revisamos disponibilidad y te enviamos las opciones compatibles por WhatsApp.</p>
-          <a href={whatsappUrl("Hola DoctorCell Quito, estoy buscando un case para otro modelo de celular. La marca y el modelo exacto son: ")} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /><span>Consultar otro modelo<small>Respuesta rápida por WhatsApp</small></span><ArrowRight size={18} /></a>
+          <a href={whatsappUrl("Hola DoctorCell Quito, estoy buscando un case para otro modelo de celular. La marca y el modelo exacto son: ")} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /><span>Consultar otro modelo<small>Consulta por WhatsApp</small></span><ArrowRight size={18} /></a>
         </div>
         <div className="store-faq">
           <details open><summary>¿Qué información debo enviar?<Plus size={18} /></summary><p>La marca y el modelo exacto del celular. Puedes encontrarlo en Ajustes › Acerca del teléfono o enviarnos una foto de esa pantalla.</p></details>
@@ -275,11 +275,11 @@ export default function Store({ standalone = false }) {
         <div className="cart-content">
           {!cartItems.length ? <div className="cart-empty"><ShoppingCart size={38} /><strong>Tu pedido está vacío</strong><p>Agrega los cases que te gusten para consultar disponibilidad.</p></div> : cartItems.map((item) => <article className="cart-item" key={item.id}><img src={item.image} alt="" /><div><strong>{item.name}</strong><small>{item.price} c/u · Precio final por confirmar</small><div className="quantity"><button type="button" onClick={() => changeQuantity(item.id, -1)} aria-label="Quitar uno"><Minus size={15} /></button><span>{item.quantity}</span><button type="button" onClick={() => changeQuantity(item.id, 1)} aria-label="Agregar uno"><Plus size={15} /></button><button className="remove" type="button" onClick={() => setCart((current) => { const next = { ...current }; delete next[item.id]; return next; })} aria-label="Eliminar"><Trash2 size={16} /></button></div></div></article>)}
         </div>
-        {cartItems.length > 0 && <div className="cart-footer"><p>El precio final se confirma según modelo y disponibilidad.</p><a href={whatsappUrl(orderMessage)} target="_blank" rel="noopener noreferrer">Solicitar por WhatsApp <span>{itemCount}</span></a></div>}
+        {cartItems.length > 0 && <div className="cart-footer"><p>El precio final, la disponibilidad y el costo de entrega se confirman por WhatsApp.</p><a href={whatsappUrl(orderMessage)} target="_blank" rel="noopener noreferrer">Solicitar por WhatsApp <span>{itemCount}</span></a></div>}
       </aside></div>}
       {zoomedProduct && <div className="product-zoom" role="dialog" aria-modal="true" aria-label={`Imagen ampliada de ${zoomedProduct.name}`} onClick={() => setZoomedProduct(null)}><button className="zoom-close" type="button" onClick={() => setZoomedProduct(null)} aria-label="Cerrar imagen"><X /></button><div className="zoom-card" onClick={(event) => event.stopPropagation()}>
-        <div className="zoom-visual"><span className="zoom-kicker"><Sparkles size={14} /> Selección DoctorCell Quito</span><img src={zoomedProduct.image} alt={zoomedProduct.name} /><div className="zoom-visual-note"><ShieldCheck size={17} /><span><b>Protección confiable</b><small>Modelo revisado en empaque</small></span></div></div>
-        <div className="zoom-info"><span className="zoom-model">{zoomedProduct.category} · {zoomedProduct.brand}</span><strong>{zoomedProduct.name}</strong><b className="zoom-price">{zoomedProduct.price}</b><div className="zoom-benefits"><span><ShieldCheck size={18} /><b>Compatibilidad verificada</b></span><span><Zap size={18} /><b>Disponibilidad por confirmar</b></span><span><Truck size={18} /><b>Coordina tu entrega</b></span></div><a href={whatsappUrl(`Hola DoctorCell Quito, quiero comprar ${zoomedProduct.name}, con precio publicado de ${zoomedProduct.price}. Quiero confirmar modelo, color, valor final y entrega.`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /><span>Lo quiero por WhatsApp<small>Confirmamos modelo y color</small></span><ArrowRight size={18} /></a><p className="zoom-reassurance"><span /> Atención directa, sin pagos dentro de la web</p></div>
+        <div className="zoom-visual"><span className="zoom-kicker"><Sparkles size={14} /> Selección DoctorCell Quito</span><img src={zoomedProduct.image} alt={zoomedProduct.name} /><div className="zoom-visual-note"><ShieldCheck size={17} /><span><b>Revisa compatibilidad</b><small>Confirma marca y modelo</small></span></div></div>
+        <div className="zoom-info"><span className="zoom-model">{zoomedProduct.category} · {zoomedProduct.brand}</span><strong>{zoomedProduct.name}</strong><b className="zoom-price">{zoomedProduct.price}</b><div className="zoom-benefits"><span><ShieldCheck size={18} /><b>Confirma compatibilidad</b></span><span><Zap size={18} /><b>Disponibilidad por confirmar</b></span><span><Truck size={18} /><b>Consulta costo de entrega</b></span></div><a href={whatsappUrl(`Hola DoctorCell Quito, quiero comprar ${zoomedProduct.name}, con precio publicado de ${zoomedProduct.price}. Quiero confirmar modelo, color, valor final, cobertura y costo de entrega.`)} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /><span>Lo quiero por WhatsApp<small>Confirmamos modelo y color</small></span><ArrowRight size={18} /></a><p className="zoom-reassurance"><span /> Atención directa, sin pagos dentro de la web</p></div>
       </div></div>}
     </section>
   );
